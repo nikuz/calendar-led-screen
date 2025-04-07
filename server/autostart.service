@@ -23,3 +23,8 @@ RestartSec=2
 [Install]
 # Start the service during multi-user boot
 WantedBy=multi-user.target
+
+# sudo systemctl daemon-reload
+# sudo systemctl start calendar-led-screen.service
+# systemctl status calendar-led-screen.service
+# sudo journalctl -u calendar-led-screen.service
