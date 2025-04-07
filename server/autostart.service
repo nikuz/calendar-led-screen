@@ -1,0 +1,24 @@
+[Unit]
+Description=Calendar Led Screen NodeJS process
+After=network.target
+
+User=dietpi
+Group=dietpi
+
+WorkingDirectory=/home/dietpi/calendar-led-screen
+
+Environment=NODE_ENV=production
+Environment=PORT=8080
+
+ExecStart=/usr/local/bin/node /home/dietpi/calendar-led-screen/server/server-build/index.js 
+
+Restart=on-failure
+
+StandardOutput=journal
+StandardError=journal
+
+RestartSec=2
+
+[Install]
+# Start the service during multi-user boot
+WantedBy=multi-user.target
