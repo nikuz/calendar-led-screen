@@ -22,3 +22,6 @@ server-build
 *.njsproj
 *.sln
 *.sw?
+
+server/calendar-gcloud-service-account.json
+server/calendar-id.ts
