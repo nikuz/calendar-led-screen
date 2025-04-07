@@ -2,6 +2,7 @@
 Description=Calendar Led Screen NodeJS process
 After=network.target
 
+[Service]
 User=dietpi
 Group=dietpi
 
