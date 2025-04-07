@@ -12,7 +12,7 @@ const auth = new GoogleAuth({
 
 const calendar = google.calendar({
     version: 'v3',
-    auth: auth,
+    auth,
 });
 
 export async function getCalendarEvents(request: Request, res: Response) {
