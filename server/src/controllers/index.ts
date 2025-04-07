@@ -1,1 +1,1 @@
-export * as calendarControllers from './calendar';
+export * as calendarControllers from './calendar.ts';

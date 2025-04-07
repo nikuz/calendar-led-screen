@@ -4,7 +4,10 @@
     "esModuleInterop": true,
     "target": "ESNext",
     "skipLibCheck": true,
-    "outDir": "server-build",
+
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
 
     /* Linting */
     "strict": true,

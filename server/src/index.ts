@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import routes from './routes';
+import routes from './routes.ts';
 
 const port = process.env.PORT ?? '8080';
 

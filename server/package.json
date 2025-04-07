@@ -1,10 +1,10 @@
 {
     "name": "calendar-led-screen-server",
     "version": "0.0.1",
+    "type": "module",
     "scripts": {
-        "dev": "NODE_ENV=development nodemon --exec vite-node src/index.ts",
-        "start": "vite-node src/index.ts",
-        "build": "tsc",
+        "dev": "NODE_ENV=development nodemon --exec node --experimental-transform-types src/index.ts",
+        "start": "node --experimental-transform-types src/index.ts",
         "lint": "eslint ."
     },
     "dependencies": {
@@ -20,8 +20,6 @@
         "@typescript-eslint/eslint-plugin": "^8.29.0",
         "@typescript-eslint/parser": "^8.29.0",
         "eslint": "^9.20.1",
-        "nodemon": "^3.1.9",
-        "typescript": "^5.8.3",
-        "vite-node": "^3.1.1"
+        "nodemon": "^3.1.9"
     }
 }

@@ -11,7 +11,7 @@ WorkingDirectory=/home/dietpi/calendar-led-screen
 Environment=NODE_ENV=production
 Environment=PORT=8080
 
-ExecStart=/usr/local/bin/node /home/dietpi/calendar-led-screen/server/server-build/index.js 
+ExecStart=/usr/local/bin/node --experimental-transform-types /home/dietpi/calendar-led-screen/server/src/index.ts
 
 Restart=on-failure
 

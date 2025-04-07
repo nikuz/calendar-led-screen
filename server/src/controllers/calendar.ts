@@ -1,12 +1,13 @@
 import path from 'path';
 import { google } from 'googleapis';
 import { GoogleAuth } from 'google-auth-library';
-import { Request, Response } from 'express';
-import { CALENDAR_ID } from '../../calendar-id';
+import type { Request, Response } from 'express';
+import { CALENDAR_ID } from '../calendar-id.ts';
+import { __DIRNAME } from '../constants.ts';
 
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 const auth = new GoogleAuth({
-    keyFile: path.join(__dirname, '../../calendar-gcloud-service-account.json'),
+    keyFile: path.join(__DIRNAME, 'calendar-gcloud-service-account.json'),
     scopes: SCOPES,
 });
 
@@ -21,12 +22,11 @@ export async function getCalendarEvents(request: Request, res: Response) {
     const tomorrowStartTime = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
     const from = request.params.from ?? todayStartTime.toISOString();
     const to = request.params.to ?? tomorrowStartTime.toISOString();
-    
+
     const calendarResponse = await calendar.events.list({
         calendarId: CALENDAR_ID,
         timeMin: from,
         timeMax: to,
-        orderBy: 'startTime',
     });
 
     res.status(200).send(calendarResponse.data.items);

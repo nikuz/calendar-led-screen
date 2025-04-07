@@ -7,9 +7,6 @@ import globals from 'globals';
 export default [
     js.configs.recommended,
     {
-        ignores: ['**/server-build/'],
-    },
-    {
         files: ['**/*.{ts,tsx}'],
         plugins: {
             ...solid.plugins,
@@ -32,6 +29,7 @@ export default [
             'quotes': ['error', 'single'],
             'quote-props': ['error', 'as-needed'],
             'no-param-reassign': 'error',
+            'semi': 'error',
         },
     }
 ];

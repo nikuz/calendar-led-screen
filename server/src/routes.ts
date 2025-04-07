@@ -1,8 +1,9 @@
 import path from 'node:path';
-import { Express } from 'express';
-import { calendarControllers } from './controllers';
+import type { Express } from 'express';
+import { calendarControllers } from './controllers/index.ts';
+import { __DIRNAME } from './constants.ts';
 
-const UIBuildPath = path.resolve(__dirname, '../../dist');
+const UIBuildPath = path.resolve(__DIRNAME, '../../dist');
 
 export default function routes(app: Express) {
     app.use('/assets', (req, res) => {
@@ -16,5 +17,5 @@ export default function routes(app: Express) {
         res.sendFile(path.resolve(UIBuildPath, 'index.html'));
     });
 
-    app.get('/calendar-events', calendarControllers.getCalendarEvents)
+    app.get('/calendar-events', calendarControllers.getCalendarEvents);
 }

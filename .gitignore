@@ -9,7 +9,6 @@ lerna-debug.log*
 
 node_modules
 dist
-server-build
 *.local
 
 # Editor directories and files
@@ -23,5 +22,5 @@ server-build
 *.sln
 *.sw?
 
-server/calendar-gcloud-service-account.json
-server/calendar-id.ts
+server/**/calendar-gcloud-service-account.json
+server/**/calendar-id.ts
