@@ -20,8 +20,8 @@ export async function getCalendarEvents(request: Request, res: Response) {
     const now = new Date();
     const todayStartTime = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const tomorrowStartTime = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-    const from = request.params.from ?? todayStartTime.toISOString();
-    const to = request.params.to ?? tomorrowStartTime.toISOString();
+    const from = request.query.from?.toString() ?? todayStartTime.toISOString();
+    const to = request.query.to?.toString() ?? tomorrowStartTime.toISOString();
 
     const calendarResponse = await calendar.events.list({
         calendarId: CALENDAR_ID,
