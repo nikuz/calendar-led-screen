@@ -11,7 +11,7 @@ export default function routes(app: Express) {
         res.sendFile(path.resolve(UIBuildPath, req.url));
     });
 
-    app.use('/', (_, res) => {
+    app.use(['/', '/index.html'], (_, res) => {
         res.sendFile(path.resolve(UIBuildPath, 'index.html'));
     });
 }
