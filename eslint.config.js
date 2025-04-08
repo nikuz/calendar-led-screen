@@ -7,7 +7,7 @@ import globals from 'globals';
 export default [
     js.configs.recommended,
     {
-        ignores: ['**/dist/'],
+        ignores: ['**/dist/', '**/server/'],
     },
     {
         files: ['**/*.{ts,tsx}'],
@@ -19,6 +19,13 @@ export default [
             ...solid.rules,
             '@typescript-eslint/no-unused-vars': ['error'],
             'no-unused-vars': 'off',
+            'indent': ['error', 4, { 'SwitchCase': 1 }],
+            'object-shorthand': 'error',
+            'quotes': ['error', 'single'],
+            'quote-props': ['error', 'as-needed'],
+            'no-param-reassign': 'error',
+            'semi': 'error',
+            'solid/reactivity': 'off',
         },
         languageOptions: {
             parser: tsParser,

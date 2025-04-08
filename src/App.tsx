@@ -1,7 +1,18 @@
+import { Time, Events } from 'src/components';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
+import './App.css';
+
 export default function App() {
-  return (
-    <div style={{ "text-align": 'center', "font-size": '100px' }}>
-      {new Date().toString()}
-    </div>
-  );
+    return (
+        <div
+            id="app-container"
+            style={{
+                width: `${SCREEN_WIDTH}px`,
+                height: `${SCREEN_HEIGHT}px`,
+            }}
+        >
+            <Time />
+            <Events />
+        </div>
+    );
 }

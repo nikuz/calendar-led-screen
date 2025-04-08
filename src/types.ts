@@ -1,8 +1,10 @@
 export interface CalendarEvent {
     summary: string,
-    startTime: number,
-    endTime: number,
-    startLedIndex: number,
-    endLedIndex: number,
-    color: string,
+    start: CalendarTime,
+    end: CalendarTime,
+}
+
+export interface CalendarTime {
+    dateTime: string,
+    timeZone: string,
 }
