@@ -8,6 +8,7 @@
     "rewriteRelativeImportExtensions": true,
     "erasableSyntaxOnly": true,
     "verbatimModuleSyntax": true,
+    "noEmit": true,
 
     /* Linting */
     "strict": true,

@@ -24,6 +24,7 @@ export default [
         },
         rules: {
             '@typescript-eslint/no-unused-vars': ['error'],
+            'no-unused-vars': 'off',
             'indent': ['error', 4, { 'SwitchCase': 1 }],
             'object-shorthand': 'error',
             'quotes': ['error', 'single'],
