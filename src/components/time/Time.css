@@ -1,4 +1,18 @@
 #time-container {
+    position: relative;
+    height: 70px;
     font-size: 50px;
     text-align: center;
+}
+
+#time-value {
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+#tc-time-pointer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: red;
 }
