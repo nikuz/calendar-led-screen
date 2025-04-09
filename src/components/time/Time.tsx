@@ -1,24 +1,28 @@
-import { createEffect, createMemo, onCleanup, on } from 'solid-js';
+import { createEffect, createMemo, onCleanup, Show, on} from 'solid-js';
 import { calendarStateActor, useCalendarStateSelect } from 'src/state';
-import { remapValue } from 'src/utils';
+import { remapValue, timeUtils } from 'src/utils';
 import {
     SCREEN_WIDTH,
     TIME_COLOR,
     TIME_POINTER_WIDTH,
     TIME_POINTER_HEIGHT,
+    TIME_FONT_SIZE,
+    TIME_FONT_SIZE_NIGHT_TIME,
 } from 'src/constants';
 import './Time.css';
 
 export function Time() {
     const hour = useCalendarStateSelect('hour');
     const minute = useCalendarStateSelect('minute');
+    const brightness = useCalendarStateSelect('brightness');
     const timePointerPosition = createMemo(() => Math.round(remapValue({
         value: hour() * 60 + minute(),
         inMin: 0,
-        inMax: 60 * 24,
+        inMax: 24 * 60,
         outMin: 0,
         outMax: SCREEN_WIDTH - TIME_POINTER_WIDTH,
     })));
+    const isNightTime = createMemo(() => timeUtils.isNightTime(hour()));
     let timeValueRef: HTMLDivElement | undefined;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
@@ -59,25 +63,30 @@ export function Time() {
     });
 
     return (
-        <div id="time-container">
+        <div id="time-container" style={{ opacity: brightness() / 100 }}>
             <div
                 id="time-value"
                 ref={timeValueRef}
-                style={{ color: TIME_COLOR }}
+                style={{
+                    color: TIME_COLOR,
+                    'font-size': `${isNightTime() ? TIME_FONT_SIZE_NIGHT_TIME : TIME_FONT_SIZE}px`,
+                }}
             >
                 {padTimeNumber(hour())}
                 :
                 {padTimeNumber(minute())}
             </div>
             
-            <div
-                id="tc-time-pointer"
-                style={{
-                    width: `${TIME_POINTER_WIDTH}px`,
-                    height: `${TIME_POINTER_HEIGHT}px`,
-                    left: `${timePointerPosition()}px`,
-                }}
-            />
+            <Show when={!isNightTime()}>
+                <div
+                    id="tc-time-pointer"
+                    style={{
+                        width: `${TIME_POINTER_WIDTH}px`,
+                        height: `${TIME_POINTER_HEIGHT}px`,
+                        left: `${timePointerPosition()}px`,
+                    }}
+                />
+            </Show>
         </div>
     );
 }

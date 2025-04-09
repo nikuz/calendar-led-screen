@@ -1,3 +1,5 @@
 #app-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
     background: #000;
 }

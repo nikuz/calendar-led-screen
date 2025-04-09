@@ -1,10 +1,16 @@
-import { createResource, For, createEffect } from 'solid-js';
+import { createResource, createEffect, createMemo, For, Show, on } from 'solid-js';
 import { getTodaysCalendarEvents } from 'src/services';
 import { calendarStateActor, useCalendarStateSelect } from 'src/state';
+import { timeUtils } from 'src/utils';
+import EventItem from './EventItem';
+import './Events.css';
 
 export function Events() {
-    const [eventsResource] = createResource(getTodaysCalendarEvents);
+    const [eventsResource, { refetch }] = createResource(getTodaysCalendarEvents);
     const events = useCalendarStateSelect('events');
+    const hour = useCalendarStateSelect('hour');
+    const minute = useCalendarStateSelect('minute');
+    const isNightTime = createMemo(() => timeUtils.isNightTime(hour()));
 
     createEffect(() => {
         const receivedEvents = eventsResource();
@@ -18,11 +24,22 @@ export function Events() {
         });
     });
 
+    createEffect(on(minute, () => {
+        if (eventsResource() && !isNightTime()) {
+            refetch();
+        }
+    }));
+
     return (
-        <div>
-            <For each={events()} fallback={<div>Loading...</div>}>
-                {(item) => <div>{item.summary}</div>}
-            </For>
-        </div>
+        <Show when={!isNightTime()}>
+            <div id="events-container">
+                <For
+                    each={events()}
+                    fallback={<div id="events-loading">Loading...</div>}
+                >
+                    {(item, index) => <EventItem {...item} index={index()} />}
+                </For>
+            </div>
+        </Show>
     );
 }

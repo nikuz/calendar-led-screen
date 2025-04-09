@@ -1,0 +1,31 @@
+#events-container {
+    position: relative;
+}
+
+#events-loading {
+    text-align: center;
+}
+
+.ec-event-item {
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    border: 1px solid;
+    border-radius: 2px 2px 0 0;
+    font-size: 8px;
+}
+
+.ecei-time-range {
+    padding: 2px;
+}
+
+.ecei-summary {
+    overflow: hidden;
+    display: -webkit-box;
+    width: calc(100% - 4px);
+    padding: 0 2px;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
+}
