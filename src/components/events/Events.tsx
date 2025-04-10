@@ -31,15 +31,24 @@ export function Events() {
     }));
 
     return (
-        <Show when={!isNightTime()}>
-            <div id="events-container">
+        <div id="events-container">
+            <Show when={!isNightTime() && !eventsResource.error}>
                 <For
                     each={events()}
-                    fallback={<div id="events-loading">Loading...</div>}
+                    fallback={<div id="events-loading">Events Loading...</div>}
                 >
                     {(item, index) => <EventItem {...item} index={index()} />}
                 </For>
-            </div>
-        </Show>
+            </Show>
+
+            <Show when={!isNightTime() && eventsResource.error}>
+                <div id="ec-error">
+                    Can't load events
+                    <pre>
+                        {eventsResource.error.toString()}
+                    </pre>
+                </div>
+            </Show>
+        </div>
     );
 }

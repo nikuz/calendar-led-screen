@@ -6,6 +6,11 @@
     text-align: center;
 }
 
+#ec-error {
+    text-align: center;
+    color: red;
+}
+
 .ec-event-item {
     position: absolute;
     bottom: 0;
