@@ -9,6 +9,7 @@ export function Events() {
     const [eventsResource, { refetch }] = createResource(getTodaysCalendarEvents);
     const events = useCalendarStateSelect('events');
     const time = useCalendarStateSelect('time');
+    const timeIsHovered = useCalendarStateSelect('timeIsHovered');
     const isNightTime = createMemo(() => timeUtils.isNightTime(time()));
 
     createEffect(() => {
@@ -23,8 +24,8 @@ export function Events() {
         });
     });
 
-    createEffect(on(time, () => {
-        if (eventsResource() && !isNightTime()) {
+    createEffect(on([time, timeIsHovered, isNightTime], () => {
+        if (eventsResource() && !timeIsHovered() && !isNightTime()) {
             refetch();
         }
     }));

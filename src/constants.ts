@@ -3,7 +3,8 @@ export const SCREEN_HEIGHT = 128; // px
 export const IGNORE_EVENTS_SUMMARY = ['busy'];
 
 // time
-export const TIME_COLOR = '#F00';
+export const TIME_COLOR = '#FFF';
+export const TIME_NIGHT_COLOR = '#F00';
 export const TIME_FONT_SIZE = 50; // px
 export const TIME_FONT_SIZE_NIGHT_TIME = 100; // px
 export const TIME_POINTER_WIDTH = 2; // px

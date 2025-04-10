@@ -13,6 +13,7 @@ import './Time.css';
 
 export function Time() {
     const time = useCalendarStateSelect('time');
+    const timeIsHovered = useCalendarStateSelect('timeIsHovered');
     const brightness = useCalendarStateSelect('brightness');
     const timePointerPosition = createMemo(() => Math.round(remapValue({
         value: time().getHours() * 60 + time().getMinutes(),
@@ -21,7 +22,9 @@ export function Time() {
         outMin: 0,
         outMax: SCREEN_WIDTH - TIME_POINTER_WIDTH,
     })));
-    let timeValueRef: HTMLDivElement | undefined;
+    let timeValueElRef: HTMLDivElement | undefined;
+    let hoursElRef: HTMLDivElement | undefined;
+    let minutesElRef: HTMLDivElement | undefined;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
     const isNightTime = createMemo(() => timeUtils.isNightTime(time()));
@@ -35,7 +38,7 @@ export function Time() {
 
         return hours;
     });
-    
+
     const updateTime = () => {
         calendarStateActor.send({
             type: 'SET_TIME',
@@ -43,41 +46,49 @@ export function Time() {
         });
     };
 
-    createEffect(on([time], () => {
+    createEffect(on([time, timeIsHovered], () => {
+        clearTimeout(timer);
+        if (timeIsHovered()) {
+            return;
+        }
         const now = new Date();
         timer = setTimeout(updateTime, (60 - now.getSeconds()) * 1000);
     }));
 
     createEffect(() => {
-        if (timeValueRef) {
-            const elementHalfSize = timeValueRef.getBoundingClientRect().width / 2;
+        if (timeValueElRef && hoursElRef && minutesElRef) {
+            const timeValueHalfSize = timeValueElRef.getBoundingClientRect().width / 2;
+            const hoursSize = hoursElRef.getBoundingClientRect().width;
+            const minutesSize = minutesElRef.getBoundingClientRect().width;
             let left = timePointerPosition();
 
-            if (left - elementHalfSize < 0) {
-                left = elementHalfSize;
-            } else if (left + elementHalfSize > SCREEN_WIDTH) {
-                left = SCREEN_WIDTH - elementHalfSize;
+            if (left - timeValueHalfSize - hoursSize < 0) {
+                left = timeValueHalfSize + hoursSize;
+            } else if (left + timeValueHalfSize + minutesSize > SCREEN_WIDTH) {
+                left = SCREEN_WIDTH - timeValueHalfSize - minutesSize;
             }
 
-            timeValueRef.style.left = `${left + 1}px`;
+            timeValueElRef.style.left = `${left + 1}px`;
         }
     });
 
     onCleanup(() => {
-        clearInterval(timer);
+        clearTimeout(timer);
     });
 
     return (
         <div id="time-container" style={{ opacity: brightness() / 100 }}>
             <div
                 id="tc-clock"
-                ref={timeValueRef}
+                ref={timeValueElRef}
                 style={{
                     color: TIME_COLOR,
                     'font-size': `${isNightTime() ? TIME_FONT_SIZE_NIGHT_TIME : TIME_FONT_SIZE}px`,
                 }}
             >
-                {hours()}
+                <span id="tcc-hours" ref={hoursElRef}>
+                    {hours()}
+                </span>
                 
                 <span id="tcc-divider">
                     :
@@ -103,7 +114,9 @@ export function Time() {
                     </Show>
                 </span>
 
-                {timeUtils.padTimeNumber(time().getMinutes())}
+                <span id="tcc-minutes" ref={minutesElRef}>
+                    {timeUtils.padTimeNumber(time().getMinutes())}
+                </span>
             </div>
         </div>
     );

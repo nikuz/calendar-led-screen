@@ -2,17 +2,29 @@
     position: relative;
     height: 70px;
     text-align: center;
-    z-index: 10;
 }
 
 #tc-clock {
     position: absolute;
     transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+#tcc-hours {
+    position: absolute;
+    top: 0;
+    right: 100%;
 }
 
 #tcc-divider {
     position: relative;
     margin: 0 2px;
+}
+
+#tcc-minutes {
+    position: absolute;
+    top: 0;
+    left: 100%;
 }
 
 #tc-time-pointer {
