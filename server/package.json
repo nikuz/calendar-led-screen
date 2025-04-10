@@ -13,7 +13,8 @@
         "dotenv": "^16.4.7",
         "express": "^5.1.0",
         "google-auth-library": "^9.15.1",
-        "googleapis": "^148.0.0"
+        "googleapis": "^148.0.0",
+        "wiring-pi": "^2.2.1"
     },
     "devDependencies": {
         "@types/cors": "^2.8.17",
