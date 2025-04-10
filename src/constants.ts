@@ -7,7 +7,6 @@ export const TIME_COLOR = '#F00';
 export const TIME_FONT_SIZE = 50; // px
 export const TIME_FONT_SIZE_NIGHT_TIME = 100; // px
 export const TIME_POINTER_WIDTH = 2; // px
-export const TIME_POINTER_HEIGHT = 30; // px
 export const TIME_NIGHT_TIME_LOW = 7;
 export const TIME_NIGHT_TIME_HIGH = 18;
 

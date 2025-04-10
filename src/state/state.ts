@@ -3,11 +3,9 @@ import { createStore } from 'solid-js/store';
 import { CalendarStateContext, CalendarStateEvents } from './types';
 
 const calendarState = () => {
-    const now = new Date();
     const [context, setContext] = createStore<CalendarStateContext>({
-        hour: now.getHours(),
-        minute: now.getMinutes(),
-
+        time: new Date(),
+        
         events: [],
 
         brightness: 100,
@@ -16,8 +14,7 @@ const calendarState = () => {
     const send = (event: CalendarStateEvents) => {
         switch (event.type) {
             case 'SET_TIME':
-                setContext('hour', event.hour);
-                setContext('minute', event.minute);
+                setContext('time', event.time);
                 break;
             
             case 'SET_EVENTS':

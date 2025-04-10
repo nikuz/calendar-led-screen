@@ -8,9 +8,8 @@ import './Events.css';
 export function Events() {
     const [eventsResource, { refetch }] = createResource(getTodaysCalendarEvents);
     const events = useCalendarStateSelect('events');
-    const hour = useCalendarStateSelect('hour');
-    const minute = useCalendarStateSelect('minute');
-    const isNightTime = createMemo(() => timeUtils.isNightTime(hour()));
+    const time = useCalendarStateSelect('time');
+    const isNightTime = createMemo(() => timeUtils.isNightTime(time()));
 
     createEffect(() => {
         const receivedEvents = eventsResource();
@@ -24,7 +23,7 @@ export function Events() {
         });
     });
 
-    createEffect(on(minute, () => {
+    createEffect(on(time, () => {
         if (eventsResource() && !isNightTime()) {
             refetch();
         }

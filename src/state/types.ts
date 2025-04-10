@@ -1,8 +1,7 @@
 import { CalendarEvent } from 'src/types';
 
 export interface CalendarStateContext {
-    hour: number,
-    minute: number,
+    time: Date,
 
     events: CalendarEvent[],
     activeEvent?: number,
@@ -12,8 +11,7 @@ export interface CalendarStateContext {
 
 export interface SetTimeEvent {
     type: 'SET_TIME',
-    hour: number,
-    minute: number,
+    time: Date,
 }
 
 export interface SetEventsEvent {

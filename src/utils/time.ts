@@ -36,6 +36,11 @@ export function formatTimeRange(minutesFrom: number, minutesTo: number) {
     return `${from.time}${from.period} - ${to.time}${to.period}`;
 }
 
-export function isNightTime(hour: number) {
-    return hour < TIME_NIGHT_TIME_LOW || hour > TIME_NIGHT_TIME_HIGH;
+export function padTimeNumber(value: number | string) {
+    return String(value).padStart(2, '0');
+}
+
+export function isNightTime(time: Date) {
+    const hours = time.getHours();
+    return hours < TIME_NIGHT_TIME_LOW || hours > TIME_NIGHT_TIME_HIGH;
 }

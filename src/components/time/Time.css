@@ -5,14 +5,26 @@
     z-index: 10;
 }
 
-#time-value {
+#tc-clock {
     position: absolute;
     transform: translateX(-50%);
 }
 
+#tcc-divider {
+    position: relative;
+    margin: 0 2px;
+}
+
 #tc-time-pointer {
     position: absolute;
-    left: 0;
-    bottom: 0;
-    background: red;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#tc-time-pointer.tctp-top {
+    bottom: 100%;
+}
+
+#tc-time-pointer.tctp-bottom {
+    top: 100%;
 }
