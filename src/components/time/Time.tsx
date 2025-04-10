@@ -5,9 +5,11 @@ import {
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     TIME_COLOR,
+    TIME_NIGHT_COLOR,
     TIME_POINTER_WIDTH,
     TIME_FONT_SIZE,
     TIME_FONT_SIZE_NIGHT_TIME,
+    EVENT_COLORS,
 } from 'src/constants';
 import './Time.css';
 
@@ -15,6 +17,7 @@ export function Time() {
     const time = useCalendarStateSelect('time');
     const timeIsHovered = useCalendarStateSelect('timeIsHovered');
     const brightness = useCalendarStateSelect('brightness');
+    const activeEventIndex = useCalendarStateSelect('activeEventIndex');
     const timePointerPosition = createMemo(() => Math.round(remapValue({
         value: time().getHours() * 60 + time().getMinutes(),
         inMin: 0,
@@ -37,6 +40,19 @@ export function Time() {
         }
 
         return hours;
+    });
+
+    const color = createMemo(() => {
+        if (isNightTime()) {
+            return TIME_NIGHT_COLOR;
+        }
+
+        const eventIndex = activeEventIndex();
+        if (eventIndex !== undefined) {
+            return EVENT_COLORS[eventIndex];
+        }
+
+        return TIME_COLOR;
     });
 
     const updateTime = () => {
@@ -68,7 +84,7 @@ export function Time() {
                 left = SCREEN_WIDTH - timeValueHalfSize - minutesSize;
             }
 
-            timeValueElRef.style.left = `${left + 1}px`;
+            timeValueElRef.style.left = `${left}px`;
         }
     });
 
@@ -82,8 +98,9 @@ export function Time() {
                 id="tc-clock"
                 ref={timeValueElRef}
                 style={{
-                    color: TIME_COLOR,
+                    color: color(),
                     'font-size': `${isNightTime() ? TIME_FONT_SIZE_NIGHT_TIME : TIME_FONT_SIZE}px`,
+                    transition: timeIsHovered() ? 'none' : 'left 100ms linear',
                 }}
             >
                 <span id="tcc-hours" ref={hoursElRef}>
@@ -97,7 +114,7 @@ export function Time() {
                             id="tc-time-pointer"
                             class="tctp-top"
                             style={{
-                                background: TIME_COLOR,
+                                background: color(),
                                 width: `${TIME_POINTER_WIDTH}px`,
                                 height: `${SCREEN_HEIGHT}px`,
                             }}
@@ -106,7 +123,7 @@ export function Time() {
                             id="tc-time-pointer"
                             class="tctp-bottom"
                             style={{
-                                background: TIME_COLOR,
+                                background: color(),
                                 width: `${TIME_POINTER_WIDTH}px`,
                                 height: `${SCREEN_HEIGHT}px`,
                             }}

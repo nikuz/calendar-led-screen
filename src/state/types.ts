@@ -5,7 +5,8 @@ export interface CalendarStateContext {
     timeIsHovered: boolean,
     
     events: CalendarEvent[],
-    activeEvent?: number,
+    activeEvent?: CalendarEvent,
+    activeEventIndex?: number,
 
     brightness: number,
 }

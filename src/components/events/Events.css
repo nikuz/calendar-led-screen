@@ -16,8 +16,8 @@
     bottom: 0;
     height: 100%;
     border: 1px solid;
-    border-radius: 2px 2px 0 0;
     font-size: 8px;
+    background-color: #000;
 }
 
 .ecei-time-range {
