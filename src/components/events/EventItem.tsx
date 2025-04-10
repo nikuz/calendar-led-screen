@@ -5,6 +5,8 @@ import { remapValue, timeUtils } from 'src/utils';
 import { CalendarEvent } from 'src/types';
 import {
     SCREEN_WIDTH,
+    DAY_START_TIME,
+    DAY_END_TIME,
     EVENT_COLORS,
     EVENT_MIN_BOX_SIZE,
 } from 'src/constants';
@@ -19,8 +21,8 @@ export default function EventItem(props: Props) {
     const startMinutes = startTime.getHours() * 60 + startTime.getMinutes();
     const startPosition = Math.round(remapValue({
         value: startMinutes,
-        inMin: 0,
-        inMax: 24 * 60,
+        inMin: DAY_START_TIME,
+        inMax: DAY_END_TIME,
         outMin: 0,
         outMax: SCREEN_WIDTH,
     }));
@@ -28,8 +30,8 @@ export default function EventItem(props: Props) {
     const endMinutes = endTime.getHours() * 60 + endTime.getMinutes();
     const endPosition = Math.round(remapValue({
         value: endMinutes,
-        inMin: 0,
-        inMax: 24 * 60,
+        inMin: DAY_START_TIME,
+        inMax: DAY_END_TIME,
         outMin: 0,
         outMax: SCREEN_WIDTH,
     }));

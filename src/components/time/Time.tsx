@@ -4,6 +4,8 @@ import { remapValue, timeUtils } from 'src/utils';
 import {
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
+    DAY_START_TIME,
+    DAY_END_TIME,
     TIME_COLOR,
     TIME_NIGHT_COLOR,
     TIME_POINTER_WIDTH,
@@ -20,8 +22,8 @@ export function Time() {
     const activeEventIndex = useCalendarStateSelect('activeEventIndex');
     const timePointerPosition = createMemo(() => Math.round(remapValue({
         value: time().getHours() * 60 + time().getMinutes(),
-        inMin: 0,
-        inMax: 24 * 60,
+        inMin: DAY_START_TIME,
+        inMax: DAY_END_TIME,
         outMin: 0,
         outMax: SCREEN_WIDTH - TIME_POINTER_WIDTH,
     })));

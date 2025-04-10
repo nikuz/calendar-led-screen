@@ -2,6 +2,9 @@ export const SCREEN_WIDTH = 1024; // px
 export const SCREEN_HEIGHT = 128; // px
 export const IGNORE_EVENTS_SUMMARY = ['busy'];
 
+export const DAY_START_TIME = 8 * 60;
+export const DAY_END_TIME = 18 * 60;
+
 // time
 export const TIME_COLOR = '#FFF';
 export const TIME_NIGHT_COLOR = '#F00';
