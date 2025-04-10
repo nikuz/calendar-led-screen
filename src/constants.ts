@@ -12,6 +12,7 @@ export const TIME_NIGHT_TIME_LOW = 7;
 export const TIME_NIGHT_TIME_HIGH = 18;
 
 // events
+export const EVENT_MIN_BOX_SIZE = 40; // px
 export const EVENT_COLORS = [
     '#00ffff',    // Cyan
     '#ff4500',    // Orange Red

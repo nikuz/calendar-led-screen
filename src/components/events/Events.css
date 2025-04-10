@@ -16,21 +16,31 @@
     bottom: 0;
     height: 100%;
     border: 1px solid;
-    font-size: 8px;
+    border-bottom: none;
     background-color: #000;
 }
 
-.ecei-time-range {
-    padding: 2px;
+.eceitr-svg-container {
+    margin: 2px;
+    max-width: 100px;
+    font-size: 0;
 }
 
 .ecei-summary {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 50%;
     overflow: hidden;
     display: -webkit-box;
     width: calc(100% - 4px);
     padding: 0 2px;
+    font-size: 12px;
+    line-height: 10px;
+    word-break: break-all;
     text-overflow: ellipsis;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    line-clamp: 4;
+    line-clamp: 3;
 }
