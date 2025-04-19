@@ -61,17 +61,6 @@
     text-rendering: geometricPrecision;
 }
 
-.tsc-text.font1 {
-    font-family: "zd-train-terminall";
-}
-
-.tsc-text.font2 {
-    left: 100px;
-    top: 66px;
-    font-size: 40px;
-    font-family: Pixeboy;
-}
-
 .tsc-canvas {
     position: absolute;
     left: 350px;

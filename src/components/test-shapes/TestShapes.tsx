@@ -47,13 +47,8 @@ export function TestShapes() {
 
         // text 1
         ctx.fillStyle = 'white';
-        ctx.font = '20px zd-train-terminall';
+        ctx.font = '20px DejaVu Sans Mono';
         ctx.fillText('20:56', 10, 90);
-
-        // text 2
-        ctx.fillStyle = 'white';
-        ctx.font = '40px Pixeboy';
-        ctx.fillText('20:56', 100, 90);
     };
 
     onMount(() => {
@@ -71,9 +66,7 @@ export function TestShapes() {
                 <div class="tscl-vertical" />
             </div>
 
-            <div class="tsc-text font1">20:56</div>
-
-            <div class="tsc-text font2">20:56</div>
+            <div class="tsc-text">20:56</div>
 
             <canvas
                 ref={canvasEl}
