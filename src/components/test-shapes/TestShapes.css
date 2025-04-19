@@ -58,6 +58,7 @@
     left: 10px;
     top: 70px;
     font-size: 20px;
+    text-rendering: geometricPrecision;
 }
 
 .tsc-text.font1 {
@@ -78,5 +79,6 @@
     width: 300px;
     height: 100px;
     border: 1px solid white;
-    image-rendering: pixelated;
+    text-rendering: geometricPrecision;
+    image-rendering: crisp-edges;
 }
