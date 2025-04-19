@@ -32,7 +32,7 @@ export function Events() {
 
     return (
         <div id="events-container">
-            <Show when={!isNightTime() && !eventsResource.error}>
+            <Show when={!isNightTime() && !eventsResource.error && events().length}>
                 <For
                     each={events()}
                     fallback={<div id="events-loading">Events Loading...</div>}
