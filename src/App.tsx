@@ -1,5 +1,7 @@
+import { createSignal, onMount, onCleanup, Show } from 'solid-js';
+import cl from 'classnames';
 import { calendarStateActor } from 'src/state';
-import { Time, Events } from 'src/components';
+import { Time, Events, TestShapes } from 'src/components';
 import { remapValue } from 'src/utils';
 import {
     SCREEN_WIDTH,
@@ -10,6 +12,7 @@ import {
 import './App.css';
 
 export default function App() {
+    const [testShapesVisible, setTestShapesVisible] = createSignal(false);
     const mouseMoveHandler = (event: MouseEvent) => {
         const now = new Date();
         const minutes = Math.round(remapValue({
@@ -37,9 +40,32 @@ export default function App() {
         calendarStateActor.send({ type: 'RESTORE_TIME' });
     };
 
+    const keydownHandler = (event: KeyboardEvent) => {
+        if (event.code === 'KeyT') {
+            setTestShapesVisible(true);
+        }
+    };
+
+    const keyupHandler = (event: KeyboardEvent) => {
+        if (event.code === 'KeyT') {
+            setTestShapesVisible(false);
+        }
+    };
+
+    onMount(() => {
+        document.addEventListener('keydown', keydownHandler);
+        document.addEventListener('keyup', keyupHandler);
+    });
+
+    onCleanup(() => {
+        document.removeEventListener('keydown', keydownHandler);
+        document.removeEventListener('keyup', keyupHandler);
+    });
+
     return (
         <div
             id="app-container"
+            class={cl({ 'full-screen': testShapesVisible() })}
             style={{
                 width: `${SCREEN_WIDTH}px`,
                 height: `${SCREEN_HEIGHT}px`,
@@ -47,8 +73,10 @@ export default function App() {
             onMouseMove={mouseMoveHandler}
             onMouseLeave={mouseLeaveHandler}
         >
-            <Time />
-            <Events />
+            <Show when={!testShapesVisible()} fallback={<TestShapes />}>
+                <Time />
+                <Events />
+            </Show>
         </div>
     );
 }

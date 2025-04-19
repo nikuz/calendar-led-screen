@@ -4,3 +4,7 @@
     overflow: hidden;
     background: #000;
 }
+
+#app-container.full-screen {
+    grid-template-rows: 1fr;
+}
