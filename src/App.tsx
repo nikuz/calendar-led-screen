@@ -42,24 +42,16 @@ export default function App() {
 
     const keydownHandler = (event: KeyboardEvent) => {
         if (event.code === 'KeyT') {
-            setTestShapesVisible(true);
-        }
-    };
-
-    const keyupHandler = (event: KeyboardEvent) => {
-        if (event.code === 'KeyT') {
-            setTestShapesVisible(false);
+            setTestShapesVisible(!testShapesVisible());
         }
     };
 
     onMount(() => {
         document.addEventListener('keydown', keydownHandler);
-        document.addEventListener('keyup', keyupHandler);
     });
 
     onCleanup(() => {
         document.removeEventListener('keydown', keydownHandler);
-        document.removeEventListener('keyup', keyupHandler);
     });
 
     return (
