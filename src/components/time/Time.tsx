@@ -112,18 +112,16 @@ export function Time() {
                 <span id="tcc-divider">
                     :
                     <Show when={!isNightTime()}>
-                        <div
-                            id="tc-time-pointer"
-                            class="tctp-top"
+                        <i
+                            class="tc-time-pointer tctp-top"
                             style={{
                                 background: color(),
                                 width: `${TIME_POINTER_WIDTH}px`,
                                 height: `${SCREEN_HEIGHT}px`,
                             }}
                         />
-                        <div
-                            id="tc-time-pointer"
-                            class="tctp-bottom"
+                        <i
+                            class="tc-time-pointer tctp-bottom"
                             style={{
                                 background: color(),
                                 width: `${TIME_POINTER_WIDTH}px`,

@@ -27,16 +27,16 @@
     left: 100%;
 }
 
-#tc-time-pointer {
+.tc-time-pointer {
     position: absolute;
-    left: 50%;
+    left: 35%;
     transform: translateX(-50%);
 }
 
-#tc-time-pointer.tctp-top {
-    bottom: 100%;
+.tc-time-pointer.tctp-top {
+    bottom: 80%;
 }
 
-#tc-time-pointer.tctp-bottom {
-    top: 100%;
+.tc-time-pointer.tctp-bottom {
+    top: 90%;
 }
