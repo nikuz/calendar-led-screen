@@ -1,8 +1,14 @@
 @font-face {
+  font-family: "Pixeboy";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Pixeboy"), url(/Pixeboy-font.ttf);
+}
+
+@font-face {
   font-family: "zd-train-terminall";
   font-style: normal;
   font-weight: normal;
-  /* src: local("Pixeboy"), url(/public/Pixeboy-font.ttf); */
   src: url(/zd-train-terminall.woff2) format(woff2);
 }
 
@@ -15,7 +21,8 @@ body {
 }
 
 body {
-  font-family: "zd-train-terminall", serif;
+  /* font-family: "Pixeboy", serif; */
+  font-family: "zd-train-terminall";
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;

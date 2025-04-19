@@ -33,19 +33,27 @@ export function TestShapes() {
         ctx.lineWidth = 1;
         ctx.strokeStyle = 'yellow';
         ctx.beginPath();
-        ctx.moveTo(200, 15);
-        ctx.lineTo(295, 15);
-        ctx.closePath();
+        ctx.moveTo(200, 15.5);
+        ctx.lineTo(295, 15.5);
         ctx.stroke();
 
         // vertical line
         ctx.lineWidth = 1;
         ctx.strokeStyle = 'orange';
         ctx.beginPath();
-        ctx.moveTo(200, 17);
-        ctx.lineTo(200, 70);
-        ctx.closePath();
+        ctx.moveTo(200.5, 17);
+        ctx.lineTo(200.5, 70);
         ctx.stroke();
+
+        // text 1
+        ctx.fillStyle = 'white';
+        ctx.font = '20px zd-train-terminall';
+        ctx.fillText('20:56', 10, 90);
+
+        // text 2
+        ctx.fillStyle = 'white';
+        ctx.font = '40px Pixeboy';
+        ctx.fillText('20:56', 100, 90);
     };
 
     onMount(() => {
@@ -62,6 +70,10 @@ export function TestShapes() {
                 <div class="tscl-horizontal" />
                 <div class="tscl-vertical" />
             </div>
+
+            <div class="tsc-text font1">20:56</div>
+
+            <div class="tsc-text font2">20:56</div>
 
             <canvas
                 ref={canvasEl}

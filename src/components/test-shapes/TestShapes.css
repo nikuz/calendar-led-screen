@@ -53,6 +53,24 @@
     background-color: orange;
 }
 
+.tsc-text {
+    position: absolute;
+    left: 10px;
+    top: 70px;
+    font-size: 20px;
+}
+
+.tsc-text.font1 {
+    font-family: "zd-train-terminall";
+}
+
+.tsc-text.font2 {
+    left: 100px;
+    top: 66px;
+    font-size: 40px;
+    font-family: Pixeboy;
+}
+
 .tsc-canvas {
     position: absolute;
     left: 350px;
