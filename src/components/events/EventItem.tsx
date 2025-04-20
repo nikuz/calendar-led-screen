@@ -1,5 +1,4 @@
 import { Show } from 'solid-js';
-import type { JSX } from 'solid-js';
 import { useCalendarStateSelect } from 'src/state';
 import { remapValue, timeUtils } from 'src/utils';
 import { CalendarEvent } from 'src/types';
@@ -48,43 +47,27 @@ export default function EventItem(props: Props) {
                 color: EVENT_COLORS[props.index],
             }}
         >
-            <Show when={width <= EVENT_MIN_BOX_SIZE}>
-                <EventItemTime>
-                    {timeUtils.getTimeString(startMinutes)}
-                </EventItemTime>
-                <EventItemTime>
-                    {timeUtils.getTimeString(endMinutes)}
-                </EventItemTime>
-            </Show>
-            <Show when={width > EVENT_MIN_BOX_SIZE}>
-                <EventItemTime>
-                    {timeUtils.getTimeString(startMinutes)}
-                    &nbsp;-&nbsp;
-                    {timeUtils.getTimeString(endMinutes)}
-                </EventItemTime>
-            </Show>
-            <div class="ecei-summary">
-                {props.summary}
+            <div class="ecei-time">
+                <Show when={width <= EVENT_MIN_BOX_SIZE}>
+                    <div class="ecei-time-item tiny">
+                        {timeUtils.getTimeString(startMinutes)}
+                    </div>
+                    <div class="ecei-time-item tiny">
+                        {timeUtils.getTimeString(endMinutes)}
+                    </div>
+                </Show>
+                <Show when={width > EVENT_MIN_BOX_SIZE}>
+                    <div class="ecei-time-item">
+                        {timeUtils.getTimeString(startMinutes)}
+                        &nbsp;-&nbsp;
+                        {timeUtils.getTimeString(endMinutes)}
+                    </div>
+                </Show>
             </div>
-        </div>
-    );
-}
-
-function EventItemTime(props: { children: JSX.Element }) {
-    return (
-        <div class="eceitr-svg-container">
-            <svg width="100%" height="10" viewBox="0 0 300 10" preserveAspectRatio="none">
-                <text
-                    x="0"
-                    y="10"
-                    textLength="100%"
-                    lengthAdjust="spacingAndGlyphs"
-                    font-size="15px"
-                    fill="currentColor"
-                >
-                    {props.children}
-                </text>
-            </svg>
+            <div class="ecei-summary">
+                {/* <div>{props.summary}</div> */}
+                <div class="ecei-summary-text">Public safety redaction and more</div>
+            </div>
         </div>
     );
 }

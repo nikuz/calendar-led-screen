@@ -15,9 +15,25 @@
     position: absolute;
     bottom: 0;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
     border: 1px solid;
     border-bottom: none;
     background-color: #000;
+}
+
+.ecei-time {
+    padding: 1px 2px;
+    margin-bottom: 3px;
+}
+
+.ecei-time-item {
+    font: 8px "Tiny5-8";
+}
+
+.ecei-time-item.tiny {
+    font-size: 8px;
 }
 
 .eceitr-svg-container {
@@ -27,20 +43,19 @@
 }
 
 .ecei-summary {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    max-height: 50%;
-    overflow: hidden;
-    display: -webkit-box;
-    width: calc(100% - 4px);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     padding: 0 2px;
-    font-size: 12px;
-    line-height: 10px;
+}
+
+.ecei-summary-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
+    font: 8px "unscii-8";
     word-break: break-all;
     text-overflow: ellipsis;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    line-clamp: 3;
 }
