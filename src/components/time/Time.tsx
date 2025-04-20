@@ -109,19 +109,18 @@ export function Time() {
                     {hours()}
                 </span>
                 
-                <span id="tcc-divider">
-                    &nbsp;
-                    <Show when={!isNightTime()}>
-                        <i
-                            class="tc-time-pointer"
-                            style={{
-                                background: color(),
-                                width: `${TIME_POINTER_WIDTH}px`,
-                                height: `${SCREEN_HEIGHT}px`,
-                            }}
-                        />
-                    </Show>
-                </span>
+                &nbsp;
+                
+                <Show when={!isNightTime()}>
+                    <i
+                        class="tc-time-pointer"
+                        style={{
+                            background: color(),
+                            width: `${TIME_POINTER_WIDTH}px`,
+                            height: `${SCREEN_HEIGHT}px`,
+                        }}
+                    />
+                </Show>
 
                 <span id="tcc-minutes" ref={minutesElRef}>
                     {timeUtils.padTimeNumber(time().getMinutes())}

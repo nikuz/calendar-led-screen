@@ -16,11 +16,6 @@
     right: 100%;
 }
 
-#tcc-divider {
-    position: relative;
-    margin: 0 2px;
-}
-
 #tcc-minutes {
     position: absolute;
     top: 0;
