@@ -65,7 +65,7 @@ export default function EventItem(props: Props) {
                 </Show>
             </div>
             <div class="ecei-summary">
-                <div>{props.summary}</div>
+                <div class="ecei-summary-text">{props.summary}</div>
             </div>
         </div>
     );
