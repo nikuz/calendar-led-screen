@@ -43,6 +43,11 @@ const calendarState = () => {
             
             case 'SET_EVENTS':
                 setContext('events', event.events);
+                setTimeAction({
+                    context,
+                    time: context.time,
+                    setContext,
+                });
                 break;
             
             case 'SET_BRIGHTNESS':
