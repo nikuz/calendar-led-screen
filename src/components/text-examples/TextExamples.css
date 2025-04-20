@@ -69,6 +69,29 @@
 }
 
 /* Tiny5 */
-.tsct-Tiny5 {
-    font-family: "Tiny5";
+.tsct-Tiny5-8 {
+    font: 8px "Tiny5-8";
+    color: red;
+}
+
+.tsct-Tiny5-16 {
+    font: 16px "Tiny5-8";
+    color: green;
+}
+
+.tsct-Tiny5-24 {
+    font: 24px "Tiny5-8";
+    line-height: 20px;
+    color: blue;
+}
+
+.tsct-Tiny5-32 {
+    font: 32px "Tiny5-8";
+    line-height: 30px;
+    color: red;
+}
+
+.tsct-Tiny5-40 {
+    font: 40px "Tiny5-8";
+    line-height: 34px;
 }

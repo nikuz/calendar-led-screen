@@ -46,6 +46,14 @@ export function TextExamples() {
             </div>
 
             <div>
+                <div class="tsct-Tiny5-8">20:56</div>
+                <div class="tsct-Tiny5-16">20:56</div>
+                <div class="tsct-Tiny5-24">20:56</div>
+                <div class="tsct-Tiny5-32">20:56</div>
+                <div class="tsct-Tiny5-40">20:56</div>
+            </div>
+
+            {/* <div>
                 <div
                     class="tsct-Tiny5"
                     style={{
@@ -55,7 +63,7 @@ export function TextExamples() {
                     20:56
                 </div>
                 <div class="tsct-font-size-indicator">Font size: {dynamicFontSize()}px</div>
-            </div>
+            </div> */}
         </div>
     );
 }
