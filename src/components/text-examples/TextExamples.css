@@ -21,3 +21,29 @@
 .tsct-unscii-16-large {
     font: 48px "unscii-16";
 }
+
+/* PPMondwest */
+.tsct-PPMondwest-8 {
+    font: 8px "PPMondwest";
+}
+
+.tsct-PPMondwest-16 {
+    font: 16px "PPMondwest";
+}
+
+.tsct-PPMondwest-16-large {
+    font: 48px "PPMondwest";
+}
+
+/* PPNeueBit */
+.tsct-PPNeueBit-8 {
+    font: 8px "PPNeueBit";
+}
+
+.tsct-PPNeueBit-16 {
+    font: 16px "PPNeueBit";
+}
+
+.tsct-PPNeueBit-16-large {
+    font: 48px "PPNeueBit";
+}
