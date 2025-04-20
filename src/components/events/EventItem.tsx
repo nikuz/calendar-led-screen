@@ -1,4 +1,4 @@
-import { Show } from 'solid-js';
+import cl from 'classnames';
 import { useCalendarStateSelect } from 'src/state';
 import { remapValue, timeUtils } from 'src/utils';
 import { CalendarEvent } from 'src/types';
@@ -47,24 +47,15 @@ export default function EventItem(props: Props) {
                 color: EVENT_COLORS[props.index],
             }}
         >
-            <div class="ecei-time">
-                <Show when={width <= EVENT_MIN_BOX_SIZE}>
-                    <div class="ecei-time-item tiny">
-                        {timeUtils.getTimeString(startMinutes)}
-                    </div>
-                    <div class="ecei-time-item tiny">
-                        {timeUtils.getTimeString(endMinutes)}
-                    </div>
-                </Show>
-                <Show when={width > EVENT_MIN_BOX_SIZE}>
-                    <div class="ecei-time-item">
-                        {timeUtils.getTimeString(startMinutes)}
-                        &nbsp;-&nbsp;
-                        {timeUtils.getTimeString(endMinutes)}
-                    </div>
-                </Show>
+            <div class={cl('ecei-time', { tiny: width <= EVENT_MIN_BOX_SIZE })}>
+                <div>
+                    {timeUtils.getTimeString(startMinutes)}
+                </div>
+                <div>
+                    {timeUtils.getTimeString(endMinutes)}
+                </div>
             </div>
-            <div class="ecei-summary">
+            <div class={cl('ecei-summary', { tiny: width <= EVENT_MIN_BOX_SIZE })}>
                 <div class="ecei-summary-text">{props.summary}</div>
             </div>
         </div>
