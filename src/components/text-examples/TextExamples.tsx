@@ -34,8 +34,20 @@ export function TextExamples() {
             </div>
 
             <div>
+                <div class="tsct-PPMondwest-25">20:56</div>
+                <div class="tsct-PPMondwest-50">20:56</div>
+                <div class="tsct-PPMondwest-75">20:56</div>
+            </div>
+
+            <div>
+                <div class="tsct-PPNeueBit-28">20:56</div>
+                <div class="tsct-PPNeueBit-56">20:56</div>
+                <div class="tsct-PPNeueBit-84">20:56</div>
+            </div>
+
+            <div>
                 <div
-                    class="tsct-PPMondwest"
+                    class="tsct-Terminus"
                     style={{
                         'font-size': `${dynamicFontSize()}px`,
                     }}
@@ -43,17 +55,6 @@ export function TextExamples() {
                     20:56
                 </div>
                 <div class="tsct-font-size-indicator">Font size: {dynamicFontSize()}px</div>
-            </div>
-
-            <div>
-                <div
-                    class="tsct-PPNeueBit"
-                    style={{
-                        'font-size': `${dynamicFontSize()}px`,
-                    }}
-                >
-                    20:56
-                </div>
             </div>
         </div>
     );

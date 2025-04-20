@@ -1,12 +1,12 @@
 @font-face {
-  font-family: "PPMondwest";
+  font-family: "PPMondwest-25";
   font-style: normal;
   font-weight: normal;
   src: url(/PPMondwest-Regular.otf);
 }
 
 @font-face {
-  font-family: "PPNeueBit";
+  font-family: "PPNeueBit-28";
   font-style: normal;
   font-weight: normal;
   src: url(/PPNeueBit-Bold.otf);
@@ -24,4 +24,11 @@
   font-style: normal;
   font-weight: normal;
   src: url(/unscii-16.woff) format(woff);
+}
+
+@font-face {
+  font-family: "Terminus";
+  font-style: normal;
+  font-weight: normal;
+  src: url(/Terminus.ttf);
 }
