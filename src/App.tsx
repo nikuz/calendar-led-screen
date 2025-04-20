@@ -1,7 +1,7 @@
 import { createSignal, onMount, onCleanup, Show } from 'solid-js';
 import cl from 'classnames';
 import { calendarStateActor } from 'src/state';
-import { Time, Events, TestShapes } from 'src/components';
+import { Time, Events, TextExamples } from 'src/components';
 import { remapValue } from 'src/utils';
 import {
     SCREEN_WIDTH,
@@ -12,7 +12,7 @@ import {
 import './App.css';
 
 export default function App() {
-    const [testShapesVisible, setTestShapesVisible] = createSignal(false);
+    const [testModeIsOn, setTestModeIsOn] = createSignal(false);
     const mouseMoveHandler = (event: MouseEvent) => {
         const now = new Date();
         const minutes = Math.round(remapValue({
@@ -42,7 +42,7 @@ export default function App() {
 
     const keydownHandler = (event: KeyboardEvent) => {
         if (event.code === 'KeyT') {
-            setTestShapesVisible(!testShapesVisible());
+            setTestModeIsOn(!testModeIsOn());
         }
     };
 
@@ -57,7 +57,7 @@ export default function App() {
     return (
         <div
             id="app-container"
-            class={cl({ 'full-screen': testShapesVisible() })}
+            class={cl({ 'full-screen': testModeIsOn() })}
             style={{
                 width: `${SCREEN_WIDTH}px`,
                 height: `${SCREEN_HEIGHT}px`,
@@ -65,7 +65,7 @@ export default function App() {
             onMouseMove={mouseMoveHandler}
             onMouseLeave={mouseLeaveHandler}
         >
-            <Show when={!testShapesVisible()} fallback={<TestShapes />}>
+            <Show when={!testModeIsOn()} fallback={<TextExamples />}>
                 <Time />
                 <Events />
             </Show>

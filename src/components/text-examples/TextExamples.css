@@ -1,89 +1,64 @@
-#test-shapes-container {
+#text-examples-container {
     position: relative;
-    height: calc(100% - 2px);
+    padding: 5px;
+    height: calc(100% - 12px);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 20px;
+    text-rendering: geometricPrecision;
     border: 1px solid red;
 }
 
-.tsc-square {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    width: 50px;
-    height: 50px;
-    background-color: red;
+/* unscii */
+.tsct-unscii-8 {
+    font: 8px "unscii-8";
 }
 
-.tsc-triangle {
-    position: absolute;
-    left: 70px;
-    top: 10px;
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid green;
+.tsct-unscii-16 {
+    font: 16px "unscii-16";
 }
 
-.tsc-circle {
-    position: absolute;
-    left: 120px;
-    top: 10px;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    background-color: blue;
+.tsct-unscii-16-large {
+    font: 48px "unscii-16";
 }
 
-.tsc-lines {
-    position: absolute;
-    left: 200px;
-    top: 10px;
+/* terminus */
+.terminus-12 {
+    font: 12px "Terminus"
 }
 
-.tscl-horizontal {
-    width: 100px;
-    height: 1px;
-    margin-bottom: 1px;
-    background-color: yellow;
+.terminus-14 {
+    font: 14px "Terminus"
 }
 
-.tscl-vertical {
-    width: 1px;
-    height: 50px;
-    background-color: orange;
+.terminus-16 {
+    font: 16px "Terminus"
 }
 
-.tsc-text {
-    position: absolute;
-    left: 10px;
-    top: 70px;
-    font-size: 20px;
-    text-rendering: geometricPrecision;
-    font-family: "unscii-16";
-    font-size: 16px;
+.terminus-18 {
+    font: 18px "Terminus"
 }
 
-.tsc-text.small {
-    left: 70px;
-    top: 75px;
-    font-family: "unscii-8";
-    font-size: 8px;
+.terminus-20 {
+    font: 20px "Terminus"
 }
 
-.tsc-text.blur {
-    left: 120px;
-    top: 65px;
-    font-family: "unscii-16";
-    font-size: 40px;
+.terminus-22 {
+    font: 22px "Terminus"
 }
 
-.tsc-canvas {
-    position: absolute;
-    left: 350px;
-    top: 10px;
-    width: 300px;
-    height: 100px;
-    border: 1px solid white;
-    text-rendering: geometricPrecision;
-    image-rendering: crisp-edges;
+.terminus-24 {
+    font: 24px "Terminus"
+}
+
+.terminus-28 {
+    font: 28px "Terminus"
+}
+
+.terminus-32 {
+    font: 32px "Terminus"
+}
+
+.terminus-48 {
+    font: 48px "Terminus"
 }

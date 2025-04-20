@@ -1,1 +1,1 @@
-export * from './TestShapes';
+export * from './TextExamples';

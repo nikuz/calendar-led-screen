@@ -1,8 +1,8 @@
 @font-face {
-  font-family: "DejaVu Sans Mono";
+  font-family: "Terminus";
   font-style: normal;
   font-weight: normal;
-  src: local("DejaVu Sans Mono"), url(/DejaVuSansMono.ttf);
+  src: url(/terminus.ttf);
 }
 
 @font-face {
@@ -28,7 +28,7 @@ body {
 }
 
 body {
-  font-family: "DejaVu Sans Mono";
+  font-family: "Terminus";
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;

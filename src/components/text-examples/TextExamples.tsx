@@ -1,93 +1,32 @@
-import { onMount } from 'solid-js';
-import './TestShapes.css';
+import './TextExamples.css';
 
-export function TestShapes() {
-    let canvasEl: HTMLCanvasElement | undefined;;
-
-    const canvasDrawHandler = () => {
-        const ctx = canvasEl?.getContext('2d');
-        if (!canvasEl || !ctx) {
-            return;
-        }
-        
-        // cube
-        ctx.fillStyle = 'red';
-        ctx.fillRect(10, 10, 50, 50);
-
-        // triangle
-        ctx.fillStyle = 'green';
-        ctx.beginPath();
-        ctx.moveTo(70, 15);
-        ctx.lineTo(120, 15);
-        ctx.lineTo(95, 40);
-        ctx.closePath();
-        ctx.fill();
-
-        // circle
-        ctx.beginPath();
-        ctx.fillStyle = 'blue';
-        ctx.arc(150, 40, 20, 0, 360);
-        ctx.fill();
-
-        // horizontal line
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = 'yellow';
-        ctx.beginPath();
-        ctx.moveTo(200, 15.5);
-        ctx.lineTo(295, 15.5);
-        ctx.stroke();
-
-        // vertical line
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = 'orange';
-        ctx.beginPath();
-        ctx.moveTo(200.5, 17);
-        ctx.lineTo(200.5, 70);
-        ctx.stroke();
-
-        // text 1
-        ctx.fillStyle = 'white';
-        ctx.font = '16px unscii-16';
-        ctx.fillText('20:56', 10, 90);
-
-        // text small
-        ctx.fillStyle = 'white';
-        ctx.font = '8px unscii-8';
-        ctx.fillText('20:56', 60, 85);
-
-        // text blur
-        ctx.fillStyle = 'white';
-        ctx.font = '40px unscii-16';
-        ctx.fillText('20:56', 110, 100  );
-    };
-
-    onMount(() => {
-        canvasDrawHandler();
-    });
-
+export function TextExamples() {
     return (
-        <div id="test-shapes-container">
-            <div class="tsc-square" />
-            <div class="tsc-triangle" />
-            <div class="tsc-circle" />
-
-            <div class="tsc-lines">
-                <div class="tscl-horizontal" />
-                <div class="tscl-vertical" />
+        <div id="text-examples-container">
+            <div>
+                <div class="tsct-unscii-8">20:56</div>
+                <div class="tsct-unscii-16">20:56</div>
+                <div class="tsct-unscii-16-large">20:56</div>
             </div>
 
-            <div class="tsc-text">20:56</div>
+            <div>
+                <div class="terminus-12">20:56</div>
+                <div class="terminus-14">20:56</div>
+                <div class="terminus-16">20:56</div>
+                <div class="terminus-18">20:56</div>
+                <div class="terminus-20">20:56</div>
+                <div class="terminus-22">20:56</div>
+            </div>
 
-            <div class="tsc-text small">20:56</div>
+            <div>
+                <div class="terminus-24">20:56</div>
+                <div class="terminus-28">20:56</div>
+                <div class="terminus-32">20:56</div>
+            </div>
 
-            <div class="tsc-text blur">20:56</div>
-
-            <canvas
-                ref={canvasEl}
-                class="tsc-canvas"
-                width={300}
-                height={100}
-            />
+            <div>
+                <div class="terminus-48">20:56</div>
+            </div>
         </div>
     );
 }
