@@ -29,33 +29,33 @@
 
 /* PPMondwest */
 .tsct-PPMondwest-25 {
-    font: 25px "PPMondwest";
+    font: 25px "PPMondwest-25";
     line-height: 20px;
 }
 
 .tsct-PPMondwest-50 {
-    font: 50px "PPMondwest";
+    font: 50px "PPMondwest-25";
     line-height: 40px;
 }
 
 .tsct-PPMondwest-75 {
-    font: 75px "PPMondwest";
+    font: 75px "PPMondwest-25";
     line-height: 55px;
 }
 
 /* PPNeueBit */
 .tsct-PPNeueBit-28 {
-    font: 28px "PPNeueBit";
+    font: 28px "PPNeueBit-28";
     line-height: 20px;
 }
 
 .tsct-PPNeueBit-56 {
-    font: 56px "PPNeueBit";
+    font: 56px "PPNeueBit-28";
     line-height: 45px;
 }
 
 .tsct-PPNeueBit-84 {
-    font: 84px "PPNeueBit";
+    font: 84px "PPNeueBit-28";
     line-height: 55px;
 }
 
