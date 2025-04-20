@@ -29,14 +29,7 @@
 
 .tc-time-pointer {
     position: absolute;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
-}
-
-.tc-time-pointer.tctp-top {
-    bottom: 80%;
-}
-
-.tc-time-pointer.tctp-bottom {
-    top: 100%;
 }
