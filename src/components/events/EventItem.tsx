@@ -65,8 +65,7 @@ export default function EventItem(props: Props) {
                 </Show>
             </div>
             <div class="ecei-summary">
-                {/* <div>{props.summary}</div> */}
-                <div class="ecei-summary-text">Public safety redaction and more</div>
+                <div>{props.summary}</div>
             </div>
         </div>
     );
