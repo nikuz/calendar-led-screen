@@ -1,6 +1,30 @@
+import { createSignal, onMount, onCleanup } from 'solid-js';
 import './TextExamples.css';
 
 export function TextExamples() {
+    const [terminusFontSize, setTerminusFontSize] = createSignal(5);
+
+    const keydownHandler = (event: KeyboardEvent) => {
+        const step = event.shiftKey ? 0.1 : 0.01;
+        let newFontSize = terminusFontSize();
+
+        if (event.code === 'ArrowUp') {
+            newFontSize += step;
+        } else if (event.code === 'ArrowDown') {
+            newFontSize -= step;
+        }
+
+        setTerminusFontSize(Math.max(newFontSize, 1));
+    };
+
+    onMount(() => {
+        document.addEventListener('keydown', keydownHandler);
+    });
+
+    onCleanup(() => {
+        document.removeEventListener('keydown', keydownHandler);
+    });
+
     return (
         <div id="text-examples-container">
             <div>
@@ -10,22 +34,15 @@ export function TextExamples() {
             </div>
 
             <div>
-                <div class="terminus-12">20:56</div>
-                <div class="terminus-14">20:56</div>
-                <div class="terminus-16">20:56</div>
-                <div class="terminus-18">20:56</div>
-                <div class="terminus-20">20:56</div>
-                <div class="terminus-22">20:56</div>
-            </div>
-
-            <div>
-                <div class="terminus-24">20:56</div>
-                <div class="terminus-28">20:56</div>
-                <div class="terminus-32">20:56</div>
-            </div>
-
-            <div>
-                <div class="terminus-48">20:56</div>
+                <div
+                    class="tsct-terminus"
+                    style={{
+                        'font-size': `${terminusFontSize()}pt`,
+                    }}
+                >
+                    20:56
+                </div>
+                Size: {terminusFontSize()}pt
             </div>
         </div>
     );

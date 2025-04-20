@@ -23,42 +23,6 @@
 }
 
 /* terminus */
-.terminus-12 {
-    font: 12px "Terminus"
-}
-
-.terminus-14 {
-    font: 14px "Terminus"
-}
-
-.terminus-16 {
-    font: 16px "Terminus"
-}
-
-.terminus-18 {
-    font: 18px "Terminus"
-}
-
-.terminus-20 {
-    font: 20px "Terminus"
-}
-
-.terminus-22 {
-    font: 22px "Terminus"
-}
-
-.terminus-24 {
-    font: 24px "Terminus"
-}
-
-.terminus-28 {
-    font: 28px "Terminus"
-}
-
-.terminus-32 {
-    font: 32px "Terminus"
-}
-
-.terminus-48 {
-    font: 48px "Terminus"
+.tsct-terminus {
+    font-family: "Terminus";
 }
