@@ -25,10 +25,3 @@
   font-weight: normal;
   src: url(/unscii-16.woff) format(woff);
 }
-
-@font-face {
-  font-family: "Terminus";
-  font-style: normal;
-  font-weight: normal;
-  src: url(/Terminus.ttf);
-}
