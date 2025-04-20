@@ -59,6 +59,22 @@
     top: 70px;
     font-size: 20px;
     text-rendering: geometricPrecision;
+    font-family: "unscii-16";
+    font-size: 16px;
+}
+
+.tsc-text.small {
+    left: 70px;
+    top: 75px;
+    font-family: "unscii-8";
+    font-size: 8px;
+}
+
+.tsc-text.blur {
+    left: 120px;
+    top: 65px;
+    font-family: "unscii-16";
+    font-size: 40px;
 }
 
 .tsc-canvas {

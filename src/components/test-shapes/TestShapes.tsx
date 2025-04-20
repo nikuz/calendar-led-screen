@@ -47,8 +47,18 @@ export function TestShapes() {
 
         // text 1
         ctx.fillStyle = 'white';
-        ctx.font = '20px DejaVu Sans Mono';
+        ctx.font = '16px unscii-16';
         ctx.fillText('20:56', 10, 90);
+
+        // text small
+        ctx.fillStyle = 'white';
+        ctx.font = '8px unscii-8';
+        ctx.fillText('20:56', 60, 85);
+
+        // text blur
+        ctx.fillStyle = 'white';
+        ctx.font = '40px unscii-16';
+        ctx.fillText('20:56', 110, 100  );
     };
 
     onMount(() => {
@@ -67,6 +77,10 @@ export function TestShapes() {
             </div>
 
             <div class="tsc-text">20:56</div>
+
+            <div class="tsc-text small">20:56</div>
+
+            <div class="tsc-text blur">20:56</div>
 
             <canvas
                 ref={canvasEl}

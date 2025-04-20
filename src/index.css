@@ -5,6 +5,20 @@
   src: local("DejaVu Sans Mono"), url(/DejaVuSansMono.ttf);
 }
 
+@font-face {
+  font-family: "unscii-8";
+  font-style: normal;
+  font-weight: normal;
+  src: url(/unscii-8.woff) format(woff);
+}
+
+@font-face {
+  font-family: "unscii-16";
+  font-style: normal;
+  font-weight: normal;
+  src: url(/unscii-16.woff) format(woff);
+}
+
 html,
 body {
   margin: 0;
