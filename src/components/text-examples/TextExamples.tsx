@@ -45,9 +45,9 @@ export function TextExamples() {
                 <div class="tsct-PPNeueBit-84">20:56</div>
             </div>
 
-            {/* <div>
+            <div>
                 <div
-                    class="tsct-Terminus"
+                    class="tsct-Tiny5"
                     style={{
                         'font-size': `${dynamicFontSize()}px`,
                     }}
@@ -55,7 +55,7 @@ export function TextExamples() {
                     20:56
                 </div>
                 <div class="tsct-font-size-indicator">Font size: {dynamicFontSize()}px</div>
-            </div> */}
+            </div>
         </div>
     );
 }
