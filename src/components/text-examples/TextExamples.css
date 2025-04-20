@@ -9,6 +9,10 @@
     border: 1px solid red;
 }
 
+.tsct-font-size-indicator {
+    white-space: nowrap;
+}
+
 /* unscii */
 .tsct-unscii-8 {
     font: 8px "unscii-8";
@@ -23,27 +27,11 @@
 }
 
 /* PPMondwest */
-.tsct-PPMondwest-8 {
-    font: 8px "PPMondwest";
-}
-
-.tsct-PPMondwest-16 {
-    font: 16px "PPMondwest";
-}
-
-.tsct-PPMondwest-16-large {
-    font: 48px "PPMondwest";
+.tsct-PPMondwest {
+    font-family: "PPMondwest";
 }
 
 /* PPNeueBit */
-.tsct-PPNeueBit-8 {
-    font: 8px "PPNeueBit";
-}
-
-.tsct-PPNeueBit-16 {
-    font: 16px "PPNeueBit";
-}
-
-.tsct-PPNeueBit-16-large {
-    font: 48px "PPNeueBit";
+.tsct-PPNeueBit {
+    font-family: "PPNeueBit";
 }
