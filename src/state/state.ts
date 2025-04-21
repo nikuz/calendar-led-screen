@@ -1,6 +1,6 @@
 import { createRoot } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import { setTimeAction } from './actions';
+import { getActiveEvent } from './utils';
 import { CalendarStateContext, CalendarStateEvents } from './types';
 
 const calendarState = () => {
@@ -16,37 +16,34 @@ const calendarState = () => {
     const send = (event: CalendarStateEvents) => {
         switch (event.type) {
             case 'SET_TIME':
-                setTimeAction({
-                    context,
+                setContext({
                     time: event.time,
-                    setContext,
+                    ...getActiveEvent(context.events, event.time),
                 });
                 break;
             
             case 'SET_HOVER_TIME':
-                setTimeAction({
-                    context,
+                setContext({
                     time: event.time,
                     timeIsHovered: true,
-                    setContext,
+                    ...getActiveEvent(context.events, event.time),
                 });
                 break;
             
-            case 'RESTORE_TIME':
-                setTimeAction({
-                    context,
-                    time: new Date(),
+            case 'RESTORE_TIME': {
+                const newTime = new Date();
+                setContext({
+                    time: newTime,
                     timeIsHovered: false,
-                    setContext,
+                    ...getActiveEvent(context.events, newTime),
                 });
                 break;
+            }
             
             case 'SET_EVENTS':
-                setContext('events', event.events);
-                setTimeAction({
-                    context,
-                    time: context.time,
-                    setContext,
+                setContext({
+                    events: event.events,
+                    ...getActiveEvent(event.events, context.time),
                 });
                 break;
             
