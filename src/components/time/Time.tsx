@@ -111,7 +111,7 @@ export function Time() {
                 
                 &nbsp;
                 
-                <i
+                <div
                     class="tc-time-pointer"
                     style={{
                         background: color(),
