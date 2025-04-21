@@ -10,7 +10,7 @@ export const TIME_COLOR = '#FFF';
 export const TIME_NIGHT_COLOR = '#F00';
 export const TIME_FONT_SIZE = 48; // px
 export const TIME_FONT_SIZE_NIGHT_TIME = 80; // px
-export const TIME_POINTER_WIDTH = 2; // px
+export const TIME_POINTER_WIDTH = 1; // px
 export const TIME_NIGHT_TIME_LOW = 7;
 export const TIME_NIGHT_TIME_HIGH = 18;
 

@@ -1,4 +1,4 @@
-import { createEffect, createMemo, onCleanup, Show, on} from 'solid-js';
+import { createEffect, createMemo, onCleanup, on } from 'solid-js';
 import { calendarStateActor, useCalendarStateSelect } from 'src/state';
 import { remapValue, timeUtils } from 'src/utils';
 import {
@@ -73,7 +73,7 @@ export function Time() {
         timer = setTimeout(updateTime, (60 - now.getSeconds()) * 1000);
     }));
 
-    createEffect(() => {
+    createEffect(on([timePointerPosition, isNightTime], () => {
         if (timeValueElRef && hoursElRef && minutesElRef) {
             const timeValueHalfSize = timeValueElRef.getBoundingClientRect().width / 2;
             const hoursSize = hoursElRef.getBoundingClientRect().width;
@@ -86,9 +86,9 @@ export function Time() {
                 left = SCREEN_WIDTH - timeValueHalfSize - minutesSize;
             }
 
-            timeValueElRef.style.left = `${left}px`;
+            timeValueElRef.style.left = `${Math.round(left)}px`;
         }
-    });
+    }));
 
     onCleanup(() => {
         clearTimeout(timer);
@@ -111,16 +111,14 @@ export function Time() {
                 
                 &nbsp;
                 
-                <Show when={!isNightTime()}>
-                    <i
-                        class="tc-time-pointer"
-                        style={{
-                            background: color(),
-                            width: `${TIME_POINTER_WIDTH}px`,
-                            height: `${SCREEN_HEIGHT}px`,
-                        }}
-                    />
-                </Show>
+                <i
+                    class="tc-time-pointer"
+                    style={{
+                        background: color(),
+                        width: `${TIME_POINTER_WIDTH}px`,
+                        height: `${SCREEN_HEIGHT}px`,
+                    }}
+                />
 
                 <span id="tcc-minutes" ref={minutesElRef}>
                     {timeUtils.padTimeNumber(time().getMinutes())}
