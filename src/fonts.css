@@ -1,18 +1,4 @@
 @font-face {
-  font-family: "PPMondwest-25";
-  font-style: normal;
-  font-weight: normal;
-  src: url(/PPMondwest-Regular.otf);
-}
-
-@font-face {
-  font-family: "PPNeueBit-28";
-  font-style: normal;
-  font-weight: normal;
-  src: url(/PPNeueBit-Bold.otf);
-}
-
-@font-face {
   font-family: "unscii-8";
   font-style: normal;
   font-weight: normal;

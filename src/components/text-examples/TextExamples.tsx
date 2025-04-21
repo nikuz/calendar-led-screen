@@ -34,18 +34,6 @@ export function TextExamples() {
             </div>
 
             <div>
-                <div class="tsct-PPMondwest-25">20:56</div>
-                <div class="tsct-PPMondwest-50">20:56</div>
-                <div class="tsct-PPMondwest-75">20:56</div>
-            </div>
-
-            <div>
-                <div class="tsct-PPNeueBit-28">20:56</div>
-                <div class="tsct-PPNeueBit-56">20:56</div>
-                <div class="tsct-PPNeueBit-84">20:56</div>
-            </div>
-
-            <div>
                 <div class="tsct-Tiny5-8">20:56</div>
                 <div class="tsct-Tiny5-16">20:56</div>
                 <div class="tsct-Tiny5-24">20:56</div>
