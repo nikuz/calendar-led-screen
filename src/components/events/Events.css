@@ -20,7 +20,6 @@
     box-sizing: border-box;
     border: 1px solid;
     border-bottom: none;
-    background-color: #000;
 }
 
 .ecei-time {
@@ -32,7 +31,7 @@
     font: 8px "unscii-8";
 }
 
-.ecei-time.tiny {
+.ec-event-item.tiny .ecei-time {
     font: 8px "Tiny5-8";
 }
 
@@ -51,7 +50,7 @@
     font: 8px "unscii-8";
 }
 
-.ecei-summary.tiny {
+.ec-event-item.tiny .ecei-summary {
     font: 8px "Tiny5-8";
 }
 

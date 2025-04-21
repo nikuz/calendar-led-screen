@@ -3,6 +3,7 @@ import { getTodaysCalendarEvents } from 'src/services';
 import { calendarStateActor, useCalendarStateSelect } from 'src/state';
 import { timeUtils } from 'src/utils';
 import EventItem from './EventItem';
+import EventsShortcutsManager from './EventsShortcutsManager';
 import './Events.css';
 
 export function Events() {
@@ -49,6 +50,8 @@ export function Events() {
                     </pre>
                 </div>
             </Show>
+
+            <EventsShortcutsManager />
         </div>
     );
 }

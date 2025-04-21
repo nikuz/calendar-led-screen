@@ -1,14 +1,16 @@
+import { createSignal, createMemo, createEffect, onCleanup, on } from 'solid-js';
 import cl from 'classnames';
 import { useCalendarStateSelect } from 'src/state';
 import { remapValue, timeUtils } from 'src/utils';
-import { CalendarEvent } from 'src/types';
 import {
     SCREEN_WIDTH,
     DAY_START_TIME,
     DAY_END_TIME,
     EVENT_COLORS,
     EVENT_MIN_BOX_SIZE,
+    EVENT_APPROACHING_BLINK_INTERVAL,
 } from 'src/constants';
+import { CalendarEvent } from 'src/types';
 
 interface Props extends CalendarEvent {
     index: number,
@@ -16,6 +18,10 @@ interface Props extends CalendarEvent {
 
 export default function EventItem(props: Props) {
     const brightness = useCalendarStateSelect('brightness');
+    const activeEventIndex = useCalendarStateSelect('activeEventIndex');
+    const approachingEventIndex = useCalendarStateSelect('approachingEventIndex');
+    const approachingEventConfirmedIndex = useCalendarStateSelect('approachingEventConfirmedIndex');
+    const [blinkCycle, setBlinkCycle] = createSignal<'high' | 'low'>('high');
     const startTime = new Date(props.start.dateTime);
     const startMinutes = startTime.getHours() * 60 + startTime.getMinutes();
     const startPosition = Math.round(remapValue({
@@ -35,19 +41,55 @@ export default function EventItem(props: Props) {
         outMax: SCREEN_WIDTH,
     }));
     const width = endPosition - startPosition;
+    let blinkTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const isActive = createMemo(() => activeEventIndex() === props.index);
+    const isApproaching = createMemo(() => (
+        approachingEventIndex() === props.index
+        && approachingEventIndex() !== approachingEventConfirmedIndex()
+    ));
+    const isHighlighted = createMemo(() => (isApproaching() && blinkCycle() === 'high') || (!isApproaching() && isActive()));
+
+    const flipBlinkCycle = () => {
+        setBlinkCycle(blinkCycle() === 'high' ? 'low' : 'high');
+    };
+
+    createEffect(() => {
+        if (isApproaching()) {
+            setBlinkCycle('high');
+        }
+    });
+
+    createEffect(on([blinkCycle, isApproaching], () => {
+        if (!isApproaching()) {
+            clearTimeout(blinkTimer);    
+            return;
+        }
+
+        if (isApproaching()) {
+            blinkTimer = setTimeout(flipBlinkCycle, EVENT_APPROACHING_BLINK_INTERVAL);
+        }
+    }));
+
+    onCleanup(() => {
+        clearTimeout(blinkTimer);
+    });
 
     return (
         <div
-            class="ec-event-item"
+            class={cl('ec-event-item', {
+                tiny: width <= EVENT_MIN_BOX_SIZE,
+            })}
             style={{
                 width: `${width}px`,
                 left: `${startPosition}px`,
                 opacity: brightness() / 100,
                 'border-color': EVENT_COLORS[props.index],
-                color: EVENT_COLORS[props.index],
+                'background-color': isHighlighted() ? EVENT_COLORS[props.index] : '#000',
+                color: isHighlighted() ? '#000' : EVENT_COLORS[props.index],
             }}
         >
-            <div class={cl('ecei-time', { tiny: width <= EVENT_MIN_BOX_SIZE })}>
+            <div class="ecei-time">
                 <div>
                     {timeUtils.getTimeString(startMinutes)}
                 </div>
@@ -55,7 +97,7 @@ export default function EventItem(props: Props) {
                     {timeUtils.getTimeString(endMinutes)}
                 </div>
             </div>
-            <div class={cl('ecei-summary', { tiny: width <= EVENT_MIN_BOX_SIZE })}>
+            <div class="ecei-summary">
                 <div class="ecei-summary-text">{props.summary}</div>
             </div>
         </div>

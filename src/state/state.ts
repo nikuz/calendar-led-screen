@@ -1,6 +1,6 @@
 import { createRoot } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import { getActiveEvent } from './utils';
+import { getActiveEvent, getApproachingEvent } from './utils';
 import { CalendarStateContext, CalendarStateEvents } from './types';
 
 const calendarState = () => {
@@ -19,6 +19,7 @@ const calendarState = () => {
                 setContext({
                     time: event.time,
                     ...getActiveEvent(context.events, event.time),
+                    ...getApproachingEvent(context, context.events, event.time),
                 });
                 break;
             
@@ -27,6 +28,7 @@ const calendarState = () => {
                     time: event.time,
                     timeIsHovered: true,
                     ...getActiveEvent(context.events, event.time),
+                    ...getApproachingEvent(context, context.events, event.time),
                 });
                 break;
             
@@ -36,6 +38,7 @@ const calendarState = () => {
                     time: newTime,
                     timeIsHovered: false,
                     ...getActiveEvent(context.events, newTime),
+                    ...getApproachingEvent(context, context.events, newTime),
                 });
                 break;
             }
@@ -44,11 +47,16 @@ const calendarState = () => {
                 setContext({
                     events: event.events,
                     ...getActiveEvent(event.events, context.time),
+                    ...getApproachingEvent(context, event.events, context.time),
                 });
                 break;
             
             case 'SET_BRIGHTNESS':
                 setContext('brightness', event.value);
+                break;
+            
+            case 'CONFIRM_APPROACHING_EVENT':
+                setContext('approachingEventConfirmedIndex', context.approachingEventIndex);
                 break;
         }
     };

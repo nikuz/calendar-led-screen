@@ -5,8 +5,13 @@ export interface CalendarStateContext {
     timeIsHovered: boolean,
     
     events: CalendarEvent[],
+
     activeEvent?: CalendarEvent,
     activeEventIndex?: number,
+
+    approachingEvent?: CalendarEvent,
+    approachingEventIndex?: number,
+    approachingEventConfirmedIndex?: number, // is set when user confirms the approaching event by keyboard press
 
     brightness: number,
 }
@@ -33,9 +38,12 @@ export interface SetBrightnessEvent {
     value: number,
 }
 
+export interface ConfirmApproachingEvent { type: 'CONFIRM_APPROACHING_EVENT' }
+
 export type CalendarStateEvents =
     | SetTimeEvent
     | SetHoverTimeEvent
     | RestoreTimeEvent
     | SetEventsEvent
-    | SetBrightnessEvent;
+    | SetBrightnessEvent
+    | ConfirmApproachingEvent;
