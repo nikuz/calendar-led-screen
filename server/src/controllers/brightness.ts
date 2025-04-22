@@ -43,8 +43,8 @@ async function readSensorHandler() {
     if (prevBrightnessRead !== brightness) {
         prevBrightnessRead = brightness;
         socket.emit('brightness', brightness);
-        timer = setTimeout(readSensorHandler, 1000);
     }
+    timer = setTimeout(readSensorHandler, 1000);
 }
 
 export function startReadingTimer(socketInstance: Socket) {
