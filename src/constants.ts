@@ -39,3 +39,7 @@ export const EVENT_COLORS = [
     '#228b22',    // Forest Green
     '#800000',    // Maroon
 ];
+
+// brightness
+export const BRIGHTNESS_MIN = 0;
+export const BRIGHTNESS_MAX = 65535;

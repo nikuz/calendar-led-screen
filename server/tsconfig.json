@@ -6,7 +6,6 @@
     "skipLibCheck": true,
 
     "rewriteRelativeImportExtensions": true,
-    "erasableSyntaxOnly": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,
 

@@ -1,12 +1,16 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import type { Express } from 'express';
-import { calendarControllers } from './controllers/index.ts';
+import type { Server } from 'socket.io';
+import {
+    calendarControllers,
+    brightnessControllers,
+} from './controllers/index.ts';
 import { __DIRNAME } from './constants.ts';
 
 const UIBuildPath = path.resolve(__DIRNAME, '../../dist');
 
-export default function routes(app: Express) {
+export default function routes(app: Express, io: Server) {
     app.use(['/assets', '/favicon.*any', '/{*name}.ttf', '/{*name}.otf', '/{*name}.woff', '/{*name}.woff2'], (req, res) => {
         const assetPath = path.join(UIBuildPath, req.originalUrl);
         if (!fs.existsSync(assetPath)) {
@@ -21,4 +25,15 @@ export default function routes(app: Express) {
     });
 
     app.get('/calendar-events', calendarControllers.getCalendarEvents);
+
+    io.on('connection', (socket) => {
+        console.log('websocket user connected');
+
+        brightnessControllers.startReadingTimer(socket);
+
+        socket.on('disconnect', () => {
+            console.log('websocket user disconnected');
+            brightnessControllers.stopReadingTimer();
+        });
+    });
 }
