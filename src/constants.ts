@@ -43,5 +43,6 @@ export const EVENT_COLORS = [
 // brightness
 export const BRIGHTNESS_SENSOR_VALUE_MIN = 0;
 export const BRIGHTNESS_SENSOR_VALUE_MAX = 5000; // it can go up to 65535 under direct bright sun light
+export const NIGHT_TIME_BRIGHTNESS_SENSOR_VALUE_MAX = 100;
 export const BRIGHTNESS_MIN = 3;
 export const BRIGHTNESS_MAX = 100;

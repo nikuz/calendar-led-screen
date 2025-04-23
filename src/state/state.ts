@@ -10,7 +10,7 @@ const calendarState = () => {
         
         events: [],
 
-        brightness: 100,
+        brightness: 0,
     });
 
     const send = (event: CalendarStateEvents) => {
