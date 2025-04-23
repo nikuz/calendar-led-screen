@@ -15,8 +15,13 @@
     position: absolute;
     bottom: 0;
     height: 100%;
+    background-color: #000;
+}
+
+.ecei-content {
     display: flex;
     flex-direction: column;
+    height: 100%;
     box-sizing: border-box;
     border: 1px solid;
     border-bottom: none;

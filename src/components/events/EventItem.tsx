@@ -83,22 +83,25 @@ export default function EventItem(props: Props) {
             style={{
                 width: `${width}px`,
                 left: `${startPosition}px`,
+            }}
+        >
+            <div class="ecei-content" style={{
                 opacity: brightness() / 100,
                 'border-color': EVENT_COLORS[props.index],
                 'background-color': isHighlighted() ? EVENT_COLORS[props.index] : '#000',
                 color: isHighlighted() ? '#000' : EVENT_COLORS[props.index],
-            }}
-        >
-            <div class="ecei-time">
-                <div>
-                    {timeUtils.getTimeString(startMinutes)}
+            }}>
+                <div class="ecei-time">
+                    <div>
+                        {timeUtils.getTimeString(startMinutes)}
+                    </div>
+                    <div>
+                        {timeUtils.getTimeString(endMinutes)}
+                    </div>
                 </div>
-                <div>
-                    {timeUtils.getTimeString(endMinutes)}
+                <div class="ecei-summary">
+                    <div class="ecei-summary-text">{props.summary}</div>
                 </div>
-            </div>
-            <div class="ecei-summary">
-                <div class="ecei-summary-text">{props.summary}</div>
             </div>
         </div>
     );
