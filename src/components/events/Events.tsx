@@ -1,4 +1,4 @@
-import { createResource, createEffect, createMemo, For, Show, on } from 'solid-js';
+import { createResource, createEffect, createMemo, For, Show, on, onCleanup } from 'solid-js';
 import { getTodaysCalendarEvents } from 'src/services';
 import { calendarStateActor, useCalendarStateSelect } from 'src/state';
 import { timeUtils } from 'src/utils';
@@ -11,7 +11,10 @@ export function Events() {
     const events = useCalendarStateSelect('events');
     const time = useCalendarStateSelect('time');
     const timeIsHovered = useCalendarStateSelect('timeIsHovered');
+    let errorRefetchTimer: ReturnType<typeof setInterval> | undefined;
+
     const isNightTime = createMemo(() => timeUtils.isNightTime(time()));
+    const resourceError = createMemo(() => eventsResource.error !== undefined);
 
     createEffect(() => {
         const receivedEvents = eventsResource();
@@ -26,10 +29,22 @@ export function Events() {
     });
 
     createEffect(on([time, timeIsHovered, isNightTime], () => {
-        if (eventsResource() && !timeIsHovered() && !isNightTime()) {
+        if (!timeIsHovered() && !isNightTime()) {
             refetch();
         }
     }));
+
+    createEffect(on([resourceError], () => {
+        errorRefetchTimer = setInterval(refetch, 1000);
+    }));
+
+    createEffect(on([eventsResource], () => {
+        clearInterval(errorRefetchTimer);
+    }));
+
+    onCleanup(() => {
+        clearInterval(errorRefetchTimer);
+    });
 
     return (
         <div id="events-container">
