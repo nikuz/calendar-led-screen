@@ -1,59 +1,67 @@
+import path from 'node:path';
 import util from 'node:util';
 import { exec } from 'node:child_process';
 import type { Socket } from 'socket.io';
-import {
-    BRIGHTNESS_SENSOR_I2C_BUS_NUMBER,
-    BRIGHTNESS_SENSOR_I2C_ADDRESS,
-    BRIGHTNESS_SENSOR_I2C_READ_REGISTRY,
-    BRIGHTNESS_MAX,
-} from '../constants.ts';
+import { __DIRNAME, BRIGHTNESS_MAX } from '../../constants.ts';
 
 const execPromise = util.promisify(exec);
-let socket: Socket | undefined;
-let timer: ReturnType<typeof setTimeout> | undefined;
+const PYTHON_SCRIPT_PATH = path.join(__DIRNAME, 'read_bh1750.py');
 
-enum I2CCommand {
-    READ_ONE_TIM_HIGH_RES = '0x20',
-};
+export class BrightnessSensorReader {
+    socket: Socket | undefined;
+    timer: ReturnType<typeof setTimeout> | undefined;
+    isReading: boolean = false;
 
-let prevBrightnessRead = 0;
-
-// i2c-tools: https://www.kali.org/tools/i2c-tools/
-async function readSensorHandler() {
-    if (!socket) {
-        return;
+    constructor(socketInstance: Socket) {
+        this.socket = socketInstance;
+        this.readSensor();
     }
 
-    if (process.env.NODE_ENV === 'development') {
-        socket.emit('brightness', BRIGHTNESS_MAX);
-        return;
-    }
+    scheduleRead = () => {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(this.readSensor, 1000);
+    };
 
-    await execPromise(`/usr/sbin/i2cset -y ${BRIGHTNESS_SENSOR_I2C_BUS_NUMBER} ${BRIGHTNESS_SENSOR_I2C_ADDRESS} ${I2CCommand.READ_ONE_TIM_HIGH_RES}`);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    const { stdout, stderr } = await execPromise(`/usr/sbin/i2cget -y ${BRIGHTNESS_SENSOR_I2C_BUS_NUMBER} ${BRIGHTNESS_SENSOR_I2C_ADDRESS} ${BRIGHTNESS_SENSOR_I2C_READ_REGISTRY} w`);
+    readSensor = async () => {
+        clearTimeout(this.timer);
 
-    if (stderr !== '') {
-        console.error('stderr', stderr);
-        return;
-    }
+        if (!this.socket || this.isReading) {
+            if (!this.socket) console.log('Socket closed, stopping reads.');
+            if (this.isReading) console.log('Read already in progress, skipping.');
+            return;
+        }
 
-    const brightness = parseInt(stdout.trim(), 16);
+        if (process.env.NODE_ENV === 'development') {
+            this.socket.emit('brightness', BRIGHTNESS_MAX);
+            return;
+        }
 
-    if (prevBrightnessRead !== brightness) {
-        prevBrightnessRead = brightness;
-        socket.emit('brightness', brightness);
-    }
-    timer = setTimeout(readSensorHandler, 1000);
-}
+        this.isReading = true;
+        
+        const command = `python3 ${PYTHON_SCRIPT_PATH}`;
 
-export function startReadingTimer(socketInstance: Socket) {
-    socket = socketInstance;
-    clearTimeout(timer);
-    readSensorHandler();
-}
+        try {
+            const { stdout, stderr } = await execPromise(command);
 
-export function stopReadingTimer() {
-    socket = undefined;
-    clearTimeout(timer);
+            if (stderr && stderr.trim() !== '') {
+                console.warn('python error:', stderr);
+            }
+
+            const brightness = parseInt(stdout.trim(), 16);
+
+            this.socket.emit('brightness', brightness);
+        } catch (error) {
+            console.error('Error reading brightness sensor:', error);
+        } finally {
+            this.isReading = false;
+            if (this.socket) {
+                this.scheduleRead();
+            }
+        }
+    };
+
+    cleanup = () => {
+        clearTimeout(this.timer);
+        this.socket = undefined;
+    };
 }

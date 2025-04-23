@@ -4,7 +4,7 @@ import type { Express } from 'express';
 import type { Server } from 'socket.io';
 import {
     calendarControllers,
-    brightnessControllers,
+    BrightnessSensorReader,
 } from './controllers/index.ts';
 import { __DIRNAME } from './constants.ts';
 
@@ -29,11 +29,11 @@ export default function routes(app: Express, io: Server) {
     io.on('connection', (socket) => {
         console.log('websocket user connected');
 
-        brightnessControllers.startReadingTimer(socket);
+        const reader = new BrightnessSensorReader(socket);
 
         socket.on('disconnect', () => {
             console.log('websocket user disconnected');
-            brightnessControllers.stopReadingTimer();
+            reader.cleanup();
         });
     });
 }

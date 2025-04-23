@@ -9,16 +9,22 @@ import {
 } from 'src/constants';
 
 const socket = io(import.meta.env.VITE_API_URL);
+let prevBrightness = 0;
 
 socket.on('brightness', (value) => {
-    calendarStateActor.send({
-        type: 'SET_BRIGHTNESS',
-        value: remapValue({
-            value,
-            inMin: BRIGHTNESS_SENSOR_VALUE_MIN,
-            inMax: BRIGHTNESS_SENSOR_VALUE_MAX,
-            outMin: BRIGHTNESS_MIN,
-            outMax: BRIGHTNESS_MAX,
-        }),
-    });
+    const brightness = Math.round(remapValue({
+        value,
+        inMin: BRIGHTNESS_SENSOR_VALUE_MIN,
+        inMax: BRIGHTNESS_SENSOR_VALUE_MAX,
+        outMin: BRIGHTNESS_MIN,
+        outMax: BRIGHTNESS_MAX,
+    }));
+
+    if (brightness !== prevBrightness) {
+        prevBrightness = brightness;
+        calendarStateActor.send({
+            type: 'SET_BRIGHTNESS',
+            value: brightness,
+        });
+    }
 });
