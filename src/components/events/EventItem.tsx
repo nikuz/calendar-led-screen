@@ -9,6 +9,7 @@ import {
     EVENT_COLORS,
     EVENT_MIN_BOX_SIZE,
     EVENT_APPROACHING_BLINK_INTERVAL,
+    EVENTS_ZOOM,
 } from 'src/constants';
 import { CalendarEvent } from 'src/types';
 
@@ -29,7 +30,7 @@ export default function EventItem(props: Props) {
         inMin: DAY_START_TIME,
         inMax: DAY_END_TIME,
         outMin: 0,
-        outMax: SCREEN_WIDTH,
+        outMax: SCREEN_WIDTH * EVENTS_ZOOM,
     }));
     const endTime = new Date(props.end.dateTime);
     const endMinutes = endTime.getHours() * 60 + endTime.getMinutes();
@@ -38,7 +39,7 @@ export default function EventItem(props: Props) {
         inMin: DAY_START_TIME,
         inMax: DAY_END_TIME,
         outMin: 0,
-        outMax: SCREEN_WIDTH,
+        outMax: SCREEN_WIDTH * EVENTS_ZOOM,
     }));
     const width = endPosition - startPosition;
     let blinkTimer: ReturnType<typeof setTimeout> | undefined;
