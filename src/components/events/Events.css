@@ -36,6 +36,10 @@
     font: 8px "unscii-8";
 }
 
+.ecei-time div:first-child {
+    margin-right: 5px;
+}
+
 .ec-event-item.tiny .ecei-time {
     font: 8px "Tiny5-8";
 }

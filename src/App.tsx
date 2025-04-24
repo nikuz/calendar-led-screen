@@ -3,12 +3,7 @@ import cl from 'classnames';
 import { calendarStateActor } from 'src/state';
 import { Time, Events, TextExamples } from 'src/components';
 import { remapValue } from 'src/utils';
-import {
-    SCREEN_WIDTH,
-    SCREEN_HEIGHT,
-    DAY_START_TIME,
-    DAY_END_TIME,
-} from 'src/constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
 import './App.css';
 
 export default function App() {
@@ -19,8 +14,8 @@ export default function App() {
             value: event.clientX,
             inMin: 0,
             inMax: SCREEN_WIDTH - 1,
-            outMin: DAY_START_TIME,
-            outMax: DAY_END_TIME - 1,
+            outMin: 0,
+            outMax: 24 * 60 - 1,
         }));
         const hours = Math.floor(minutes / 60);
 

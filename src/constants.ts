@@ -2,8 +2,8 @@ export const SCREEN_WIDTH = 1024; // px
 export const SCREEN_HEIGHT = 128; // px
 export const IGNORE_EVENTS_SUMMARY = ['busy'];
 
-export const DAY_START_TIME = 0;
-export const DAY_END_TIME = 24 * 60 - 1;
+export const DAY_START_TIME = 6 * 60 + 30;
+export const DAY_END_TIME = 21 * 60;
 
 // time
 export const TIME_COLOR = '#FFF';
@@ -12,14 +12,14 @@ export const TIME_FONT_SIZE = 48; // px
 export const TIME_FONT_SIZE_NIGHT_TIME = 80; // px
 export const TIME_POINTER_WIDTH = 1; // px
 export const TIME_NIGHT_TIME_LOW = 7;
-export const TIME_NIGHT_TIME_HIGH = 18;
+export const TIME_NIGHT_TIME_HIGH = 19;
 
 // events
 export const EVENT_MIN_BOX_SIZE = 40; // px
 export const EVENT_APPROACHING_THRESHOLD = 1000 * 60; // ms
 export const EVENT_APPROACHING_BLINK_INTERVAL = 1000; // ms
 export const EVENT_OVERLAP_HEIGHT_PUNISHMENT = 20; // %
-export const EVENTS_ZOOM = 2; // times
+export const EVENTS_ZOOM = 1.3; // times
 export const EVENT_COLORS = [
     '#00ffff',    // Cyan
     '#ff4500',    // Orange Red

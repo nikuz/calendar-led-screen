@@ -1,4 +1,4 @@
-import { createSignal, createMemo, createEffect, onCleanup, on } from 'solid-js';
+import { createSignal, createMemo, createEffect, onCleanup, on, Show } from 'solid-js';
 import cl from 'classnames';
 import { useCalendarStateSelect } from 'src/state';
 import { remapValue, timeUtils } from 'src/utils';
@@ -77,34 +77,36 @@ export default function EventItem(props: Props) {
     });
 
     return (
-        <div
-            class={cl('ec-event-item', {
-                tiny: width <= EVENT_MIN_BOX_SIZE,
-            })}
-            style={{
-                width: `${width}px`,
-                height: `${props.height}%`,
-                left: `${startPosition}px`,
-            }}
-        >
-            <div class="ecei-content" style={{
-                opacity: brightness() / 100,
-                'border-color': EVENT_COLORS[props.index],
-                'background-color': isHighlighted() ? EVENT_COLORS[props.index] : '#000',
-                color: isHighlighted() ? '#000' : EVENT_COLORS[props.index],
-            }}>
-                <div class="ecei-time">
-                    <div>
-                        {timeUtils.getTimeString(startMinutes)}
+        <Show when={width > 0}>
+            <div
+                class={cl('ec-event-item', {
+                    tiny: width <= EVENT_MIN_BOX_SIZE,
+                })}
+                style={{
+                    width: `${width}px`,
+                    height: `${props.height}%`,
+                    left: `${startPosition}px`,
+                }}
+            >
+                <div class="ecei-content" style={{
+                    opacity: brightness() / 100,
+                    'border-color': EVENT_COLORS[props.index],
+                    'background-color': isHighlighted() ? EVENT_COLORS[props.index] : '#000',
+                    color: isHighlighted() ? '#000' : EVENT_COLORS[props.index],
+                }}>
+                    <div class="ecei-time">
+                        <div>
+                            {timeUtils.getTimeString(startMinutes)}
+                        </div>
+                        <div>
+                            {timeUtils.getTimeString(endMinutes)}
+                        </div>
                     </div>
-                    <div>
-                        {timeUtils.getTimeString(endMinutes)}
+                    <div class="ecei-summary">
+                        <div class="ecei-summary-text">{props.summary}</div>
                     </div>
-                </div>
-                <div class="ecei-summary">
-                    <div class="ecei-summary-text">{props.summary}</div>
                 </div>
             </div>
-        </div>
+        </Show>
     );
 }
