@@ -9,13 +9,13 @@ export function getApproachingEvent(context: CalendarStateContext, events: Calen
     for (let i = 0, l = events.length; i < l; i++) {
         const event = events[i];
         const currentTime = time.getTime();
-        const eventStart = new Date(event.start.dateTime).getTime();
-        const eventEnd = new Date(event.end.dateTime).getTime();
+        const eventStart = event.startDate.getTime();
+        const eventEnd = event.endDate.getTime();
 
         if ((eventStart - currentTime > 0 && eventStart - currentTime <= EVENT_APPROACHING_THRESHOLD) || (eventStart <= currentTime && eventEnd >= currentTime)) {
             approachingEvent = event;
             approachingEventIndex = i;
-            break;
+            // proceed to check for nested events, the last one will be considered active
         }
     }
 

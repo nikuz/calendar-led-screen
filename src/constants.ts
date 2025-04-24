@@ -18,6 +18,7 @@ export const TIME_NIGHT_TIME_HIGH = 18;
 export const EVENT_MIN_BOX_SIZE = 40; // px
 export const EVENT_APPROACHING_THRESHOLD = 1000 * 60; // ms
 export const EVENT_APPROACHING_BLINK_INTERVAL = 1000; // ms
+export const EVENT_OVERLAP_HEIGHT_PUNISHMENT = 20; // %
 export const EVENT_COLORS = [
     '#00ffff',    // Cyan
     '#ff4500',    // Orange Red
@@ -43,6 +44,6 @@ export const EVENT_COLORS = [
 // brightness
 export const BRIGHTNESS_SENSOR_VALUE_MIN = 0;
 export const BRIGHTNESS_SENSOR_VALUE_MAX = 5000; // it can go up to 65535 under direct bright sun light
-export const NIGHT_TIME_BRIGHTNESS_SENSOR_VALUE_MAX = 100;
-export const BRIGHTNESS_MIN = 3;
+export const BRIGHTNESS_MIN = 50;
+export const NIGHT_BRIGHTNESS_MIN = 20;
 export const BRIGHTNESS_MAX = 100;

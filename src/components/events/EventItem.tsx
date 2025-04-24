@@ -82,6 +82,7 @@ export default function EventItem(props: Props) {
             })}
             style={{
                 width: `${width}px`,
+                height: `${props.height}%`,
                 left: `${startPosition}px`,
             }}
         >

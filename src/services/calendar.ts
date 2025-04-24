@@ -1,5 +1,8 @@
 import { routerUtils } from 'src/utils';
-import { IGNORE_EVENTS_SUMMARY } from 'src/constants';
+import {
+    IGNORE_EVENTS_SUMMARY,
+    EVENT_OVERLAP_HEIGHT_PUNISHMENT,
+} from 'src/constants';
 import { CalendarEvent } from 'src/types';
 
 interface Props {
@@ -19,13 +22,47 @@ async function getCalendarEvents(props: Props): Promise<CalendarEvent[]> {
         throw response.status;
     }
 
-    const events = await response.json() as CalendarEvent[];
+    const events = (await response.json() as CalendarEvent[]).map(item => {
+        const now = new Date();
+        
+        const itemStartDate = new Date(item.start.dateTime);
+        const itemStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), itemStartDate.getHours(), itemStartDate.getMinutes());
 
-    events.sort((a, b) => (
-        new Date(a.start.dateTime).getTime() - new Date(b.start.dateTime).getTime()
-    ));
+        const itemEndDate = new Date(item.end.dateTime);
+        const itemEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), itemEndDate.getHours(), itemEndDate.getMinutes());
 
-    return events.filter((item) => !IGNORE_EVENTS_SUMMARY.includes(item.summary.toLowerCase()));
+        return {
+            ...item,
+            startDate: itemStart,
+            endDate: itemEnd,
+        };
+    });
+    
+    events.sort((a, b) => a.startDate.getTime() - b.startDate.getTime());
+
+    const filteredEvents = events.filter((item) => !IGNORE_EVENTS_SUMMARY.includes(item.summary.toLowerCase()));
+
+    let prevEventHeight = 100;
+
+    for (let i = 0, l = filteredEvents.length; i < l; i++) {
+        const event = filteredEvents[i];
+        const prevEvent = filteredEvents[i - 1];
+
+        if (!prevEvent) {
+            event.height = 100;
+            continue;
+        }
+
+        if (event.startDate < prevEvent.endDate) {
+            event.height = prevEventHeight - EVENT_OVERLAP_HEIGHT_PUNISHMENT;
+        } else {
+            event.height = 100;
+        }
+
+        prevEventHeight = event.height;
+    }
+
+    return filteredEvents;
 }
 
 export async function getTodaysCalendarEvents(): Promise<CalendarEvent[]> {

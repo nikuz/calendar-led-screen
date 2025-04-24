@@ -8,8 +8,8 @@ export function getActiveEvent(events: CalendarEvent[], time: Date): Partial<Cal
     for (let i = 0, l = events.length; i < l; i++) {
         const event = events[i];
         const currentTime = time.getTime();
-        const eventStart = new Date(event.start.dateTime).getTime();
-        const eventEnd = new Date(event.end.dateTime).getTime();
+        const eventStart = event.startDate.getTime();
+        const eventEnd = event.endDate.getTime();
 
         if (eventStart <= currentTime && eventEnd >= currentTime) {
             activeEvent = event;
