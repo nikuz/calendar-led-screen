@@ -3,7 +3,7 @@ import * as url from 'node:url';
 import util from 'node:util';
 import { exec } from 'node:child_process';
 import type { Socket } from 'socket.io';
-import { __DIRNAME, BRIGHTNESS_MAX } from '../../constants.ts';
+import { BRIGHTNESS_MAX } from '../../constants.ts';
 
 const execPromise = util.promisify(exec);
 const PYTHON_SCRIPT_PATH = path.join(url.fileURLToPath(new URL('.', import.meta.url)), 'read_bh1750.py');

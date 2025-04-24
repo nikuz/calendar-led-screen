@@ -2,7 +2,7 @@ import path from 'path';
 import { google } from 'googleapis';
 import { GoogleAuth } from 'google-auth-library';
 import type { Request, Response } from 'express';
-import { CALENDAR_ID } from '../calendar-id.ts';
+import calendars from '../calendar-ids.json' with { type: 'json' };
 import { __DIRNAME } from '../constants.ts';
 
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
@@ -23,11 +23,35 @@ export async function getCalendarEvents(request: Request, res: Response) {
     const from = request.query.from?.toString() ?? todayStartTime.toISOString();
     const to = request.query.to?.toString() ?? tomorrowStartTime.toISOString();
 
-    const calendarResponse = await calendar.events.list({
-        calendarId: CALENDAR_ID,
-        timeMin: from,
-        timeMax: to,
-    });
+    const eventsRequests = [];
 
-    res.status(200).send(calendarResponse.data.items);
+    for (const calendarId of calendars) {
+        eventsRequests.push(calendar.events.list({
+            calendarId,
+            timeMin: from,
+            timeMax: to,
+        }));
+    }
+
+    const eventTags = new Set();
+    const uniqueEvents = [];
+
+    const calendarResponses = await Promise.all(eventsRequests);
+
+    for (const response of calendarResponses) {
+        const events = response.data.items;
+        if (!events) {
+            continue;
+        }
+
+        for (const event of events) {
+            if (eventTags.has(event.etag)) {
+                continue;
+            }
+            eventTags.add(event.etag);
+            uniqueEvents.push(event);
+        }
+    }
+
+    res.status(200).send(uniqueEvents);
 }
