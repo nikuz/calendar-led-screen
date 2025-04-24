@@ -24,3 +24,4 @@ dist
 
 server/**/calendar-gcloud-service-account.json
 server/**/calendar-ids.json
+server/src/controllers/calendar/response.json
