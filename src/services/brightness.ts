@@ -4,6 +4,7 @@ import { remapValue, timeUtils } from 'src/utils';
 import {
     BRIGHTNESS_SENSOR_VALUE_MIN,
     BRIGHTNESS_SENSOR_VALUE_MAX,
+    NIGHT_BRIGHTNESS_SENSOR_VALUE_MAX,
     BRIGHTNESS_MIN,
     NIGHT_BRIGHTNESS_MIN,
     BRIGHTNESS_MAX,
@@ -17,7 +18,7 @@ socket.on('brightness', (value) => {
     const brightness = Math.round(remapValue({
         value,
         inMin: BRIGHTNESS_SENSOR_VALUE_MIN,
-        inMax: BRIGHTNESS_SENSOR_VALUE_MAX,
+        inMax: isNight ? NIGHT_BRIGHTNESS_SENSOR_VALUE_MAX : BRIGHTNESS_SENSOR_VALUE_MAX,
         outMin: isNight ? NIGHT_BRIGHTNESS_MIN : BRIGHTNESS_MIN,
         outMax: BRIGHTNESS_MAX,
     }));
