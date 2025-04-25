@@ -11,7 +11,17 @@ import { __DIRNAME } from './constants.ts';
 const UIBuildPath = path.resolve(__DIRNAME, '../../dist');
 
 export default function routes(app: Express, io: Server) {
-    app.use(['/assets', '/favicon.*any', '/{*name}.ttf', '/{*name}.otf', '/{*name}.woff', '/{*name}.woff2'], (req, res) => {
+    app.use([
+        '/assets',
+        '/favicon.*any',
+        '/{*name}.ttf',
+        '/{*name}.otf',
+        '/{*name}.woff',
+        '/{*name}.woff2',
+        '/{*name}.mp3',
+        '/{*name}.wav',
+        '/{*name}.m4a',
+    ], (req, res) => {
         const assetPath = path.join(UIBuildPath, req.originalUrl);
         if (!fs.existsSync(assetPath)) {
             res.status(404).send();
