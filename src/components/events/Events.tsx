@@ -92,7 +92,7 @@ export function Events() {
             </Show>
 
             <EventsShortcutsManager />
-
+            
             <EventsAlarm />
         </div>
     );

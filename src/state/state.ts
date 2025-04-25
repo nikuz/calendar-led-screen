@@ -11,6 +11,8 @@ const calendarState = () => {
         events: [],
 
         brightness: 0,
+
+        isMuted: false,
     });
 
     const send = (event: CalendarStateEvents) => {
@@ -57,6 +59,10 @@ const calendarState = () => {
             
             case 'CONFIRM_APPROACHING_EVENT':
                 setContext('approachingEventConfirmedIndex', context.approachingEventIndex);
+                break;
+            
+            case 'SET_MUTED':
+                setContext('isMuted', event.muted);
                 break;
         }
     };

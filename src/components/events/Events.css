@@ -71,3 +71,19 @@
     word-break: break-all;
     text-overflow: ellipsis;
 }
+
+.ec-event-alarm-icon {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    animation: fadeout 2s linear forwards;
+}
+
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

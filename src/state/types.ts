@@ -14,6 +14,8 @@ export interface CalendarStateContext {
     approachingEventConfirmedIndex?: number, // is set when user confirms the approaching event by keyboard press
 
     brightness: number,
+
+    isMuted: boolean,
 }
 
 export interface SetTimeEvent {
@@ -40,10 +42,16 @@ export interface SetBrightnessEvent {
 
 export interface ConfirmApproachingEvent { type: 'CONFIRM_APPROACHING_EVENT' }
 
+export interface SetMutedEvent {
+    type: 'SET_MUTED',
+    muted: boolean,
+}
+
 export type CalendarStateEvents =
     | SetTimeEvent
     | SetHoverTimeEvent
     | RestoreTimeEvent
     | SetEventsEvent
     | SetBrightnessEvent
-    | ConfirmApproachingEvent;
+    | ConfirmApproachingEvent
+    | SetMutedEvent;

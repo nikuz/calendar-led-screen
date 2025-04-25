@@ -1,10 +1,11 @@
-import { createMemo, createEffect, onCleanup } from 'solid-js';
+import { createMemo, createEffect, onCleanup, Show } from 'solid-js';
 import { useCalendarStateSelect } from 'src/state';
 
 export default function EventsAlarm() {
     const approachingEventIndex = useCalendarStateSelect('approachingEventIndex');
     const activeEventIndex = useCalendarStateSelect('activeEventIndex');
     const approachingEventConfirmedIndex = useCalendarStateSelect('approachingEventConfirmedIndex');
+    const isMuted = useCalendarStateSelect('isMuted');
     let approachingAlarmTimer: ReturnType<typeof setInterval>;
     let approachingAlarmRef: HTMLAudioElement | undefined;
     let eventAlarmTimer: ReturnType<typeof setInterval>;
@@ -17,6 +18,11 @@ export default function EventsAlarm() {
 
     const startApproachingAlarm = () => {
         clearInterval(approachingAlarmTimer);
+
+        if (isMuted()) {
+            return;
+        }
+
         approachingAlarmRef?.play();
         approachingAlarmTimer = setInterval(() => {
             approachingAlarmRef?.play();
@@ -37,6 +43,11 @@ export default function EventsAlarm() {
 
     const startAlarm = () => {
         clearInterval(eventAlarmTimer);
+
+        if (isMuted()) {
+            return;
+        }
+
         if (eventAlarmRef) {
             eventAlarmRef.volume = 0.7;
         }
@@ -76,7 +87,7 @@ export default function EventsAlarm() {
     });
 
     createEffect(() => {
-        if (approachingEventIndex() === approachingEventConfirmedIndex()) {
+        if (approachingEventIndex() === approachingEventConfirmedIndex() || isMuted()) {
             stopApproachingAlarm();
             stopAlarm();
         }
@@ -96,5 +107,11 @@ export default function EventsAlarm() {
             ref={eventAlarmRef}
             src="/event-alarm.wav"
         />
+        <Show when={isMuted()}>
+            <img src="/mute.png" class="ec-event-alarm-icon" />
+        </Show>
+        <Show when={!isMuted()}>
+            <img src="/speaker.png" class="ec-event-alarm-icon" />
+        </Show>
     </>;
 }
