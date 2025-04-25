@@ -6,7 +6,6 @@ export default function EventsAlarm() {
     const activeEventIndex = useCalendarStateSelect('activeEventIndex');
     const approachingEventConfirmedIndex = useCalendarStateSelect('approachingEventConfirmedIndex');
     const isMuted = useCalendarStateSelect('isMuted');
-    const brightness = useCalendarStateSelect('brightness');
     let approachingAlarmTimer: ReturnType<typeof setInterval>;
     let approachingAlarmRef: HTMLAudioElement | undefined;
     let eventAlarmTimer: ReturnType<typeof setInterval>;
@@ -112,14 +111,12 @@ export default function EventsAlarm() {
             <img
                 src="/mute.png"
                 class="ec-event-alarm-icon"
-                style={{ opacity: brightness() / 100 }}
             />
         </Show>
         <Show when={!isMuted()}>
             <img
                 src="/speaker.png"
                 class="ec-event-alarm-icon"
-                style={{ opacity: brightness() / 100 }}
             />
         </Show>
     </>;
