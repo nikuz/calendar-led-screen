@@ -21,6 +21,10 @@ export default function routes(app: Express, io: Server) {
         '/{*name}.mp3',
         '/{*name}.wav',
         '/{*name}.m4a',
+        '/{*name}.png',
+        '/{*name}.jpg',
+        '/{*name}.jpeg',
+        '/{*name}.svg',
     ], (req, res) => {
         const assetPath = path.join(UIBuildPath, req.originalUrl);
         if (!fs.existsSync(assetPath)) {
