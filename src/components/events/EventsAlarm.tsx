@@ -31,6 +31,9 @@ export default function EventsAlarm() {
 
     const startAlarm = () => {
         clearInterval(eventAlarmTimer);
+        if (eventAlarmRef) {
+            eventAlarmRef.volume = 0.7;
+        }
         eventAlarmRef?.play();
         eventAlarmTimer = setInterval(() => {
             eventAlarmRef?.pause();
