@@ -1,14 +1,25 @@
-import { createMemo, createEffect, onCleanup, Show } from 'solid-js';
+import { createSignal, createMemo, createEffect, onMount, onCleanup, Show } from 'solid-js';
 import { useCalendarStateSelect } from 'src/state';
+import { 
+    ALARM_APPROACHING_SRC,
+    ALARM_APPROACHING_LOOP_DURATION,
+    ALARM_APPROACHING_VOLUME,
+    ALARM_SRC,
+    ALARM_LOOP_DURATION,
+    ALARM_TOTAL_DURATION,
+    ALARM_VOLUME,
+ } from 'src/constants';
 
 export default function EventsAlarm() {
     const approachingEventIndex = useCalendarStateSelect('approachingEventIndex');
     const activeEventIndex = useCalendarStateSelect('activeEventIndex');
     const approachingEventConfirmedIndex = useCalendarStateSelect('approachingEventConfirmedIndex');
     const isMuted = useCalendarStateSelect('isMuted');
+    const [isFocused, setIsFocused] = createSignal(true);
     let approachingAlarmTimer: ReturnType<typeof setInterval>;
     let approachingAlarmRef: HTMLAudioElement | undefined;
     let eventAlarmTimer: ReturnType<typeof setInterval>;
+    let eventAlarmDuration = 0;
     let eventAlarmRef: HTMLAudioElement | undefined;
 
     const isApproaching = createMemo(() => (
@@ -23,10 +34,14 @@ export default function EventsAlarm() {
             return;
         }
 
+        if (approachingAlarmRef) {
+            approachingAlarmRef.volume = ALARM_APPROACHING_VOLUME;
+        }
+
         approachingAlarmRef?.play();
         approachingAlarmTimer = setInterval(() => {
             approachingAlarmRef?.play();
-        }, 2000);
+        }, ALARM_APPROACHING_LOOP_DURATION);
     };
 
     const stopApproachingAlarm = () => {
@@ -49,7 +64,7 @@ export default function EventsAlarm() {
         }
 
         if (eventAlarmRef) {
-            eventAlarmRef.volume = 0.7;
+            eventAlarmRef.volume = ALARM_VOLUME;
         }
         eventAlarmRef?.play();
         eventAlarmTimer = setInterval(() => {
@@ -57,8 +72,14 @@ export default function EventsAlarm() {
             if (eventAlarmRef) {
                 eventAlarmRef.currentTime = 0;
             }
-            eventAlarmRef?.play();
-        }, 7000);
+
+            eventAlarmDuration += ALARM_LOOP_DURATION;
+            if (eventAlarmDuration >= ALARM_TOTAL_DURATION) {
+                clearInterval(eventAlarmTimer);
+            } else {
+                eventAlarmRef?.play();
+            }
+        }, ALARM_LOOP_DURATION);
     }
 
     const stopAlarm = () => {
@@ -67,10 +88,19 @@ export default function EventsAlarm() {
         if (eventAlarmRef) {
             eventAlarmRef.currentTime = 0;
         }
+        eventAlarmDuration = 0;
+    }
+
+    const windowFocusHandler = () => {
+        setIsFocused(true);
+    }
+    
+    const windowBlurHandler = () => {
+        setIsFocused(false);
     }
 
     createEffect(() => {
-        if (!approachingAlarmRef || !eventAlarmRef) {
+        if (!approachingAlarmRef || !eventAlarmRef || !isFocused()) {
             return;
         }
 
@@ -87,25 +117,32 @@ export default function EventsAlarm() {
     });
 
     createEffect(() => {
-        if (approachingEventIndex() === approachingEventConfirmedIndex() || isMuted()) {
+        if (approachingEventIndex() === approachingEventConfirmedIndex() || isMuted() || !isFocused()) {
             stopApproachingAlarm();
             stopAlarm();
         }
     });
 
+    onMount(() => {
+        window.addEventListener('focus', windowFocusHandler);
+        window.addEventListener('blur', windowBlurHandler);
+    });
+
     onCleanup(() => {
         stopApproachingAlarm();
         stopAlarm();
+        window.removeEventListener('focus', windowFocusHandler);
+        window.removeEventListener('blur', windowBlurHandler);
     });
 
     return <>
         <audio
             ref={approachingAlarmRef}
-            src="/event-approaching-alarm.wav"
+            src={ALARM_APPROACHING_SRC}
         />
         <audio
             ref={eventAlarmRef}
-            src="/event-alarm.wav"
+            src={ALARM_SRC}
         />
         <Show when={isMuted()}>
             <img
