@@ -10,6 +10,7 @@ import {
 } from 'src/constants';
 import EventItem from './EventItem';
 import EventsShortcutsManager from './EventsShortcutsManager';
+import EventsAlarm from './EventsAlarm';
 import './Events.css';
 
 export function Events() {
@@ -91,6 +92,8 @@ export function Events() {
             </Show>
 
             <EventsShortcutsManager />
+
+            <EventsAlarm />
         </div>
     );
 }
