@@ -1,11 +1,53 @@
-import { createEffect } from 'solid-js';
+import { createEffect, onCleanup } from 'solid-js';
 import { useCalendarStateSelect } from 'src/state';
 
 export default function EventsAlarm() {
-    let approachingAlarmRef: HTMLAudioElement | undefined;
-    let eventAlarmRef: HTMLAudioElement | undefined;
     const approachingEventIndex = useCalendarStateSelect('approachingEventIndex');
     const activeEventIndex = useCalendarStateSelect('activeEventIndex');
+    let approachingAlarmTimer: ReturnType<typeof setInterval>;
+    let approachingAlarmRef: HTMLAudioElement | undefined;
+    let eventAlarmTimer: ReturnType<typeof setInterval>;
+    let eventAlarmRef: HTMLAudioElement | undefined;
+
+    const startApproachingAlarm = () => {
+        clearInterval(approachingAlarmTimer);
+        approachingAlarmRef?.play();
+        approachingAlarmTimer = setInterval(() => {
+            approachingAlarmRef?.play();
+        }, 2000);
+    };
+
+    const stopApproachingAlarm = () => {
+        clearInterval(approachingAlarmTimer);
+        approachingAlarmRef?.pause();
+        if (approachingAlarmRef) {
+            approachingAlarmRef?.pause();
+            if (approachingAlarmRef) {
+                approachingAlarmRef.currentTime = 0;
+            }
+            approachingAlarmRef.currentTime = 0;
+        }
+    };
+
+    const startAlarm = () => {
+        clearInterval(eventAlarmTimer);
+        eventAlarmRef?.play();
+        eventAlarmTimer = setInterval(() => {
+            eventAlarmRef?.pause();
+            if (eventAlarmRef) {
+                eventAlarmRef.currentTime = 0;
+            }
+            eventAlarmRef?.play();
+        }, 7000);
+    }
+
+    const stopAlarm = () => {
+        clearInterval(eventAlarmTimer);
+        eventAlarmRef?.pause();
+        if (eventAlarmRef) {
+            eventAlarmRef.currentTime = 0;
+        }
+    }
 
     createEffect(() => {
         if (!approachingAlarmRef || !eventAlarmRef) {
@@ -13,17 +55,20 @@ export default function EventsAlarm() {
         }
 
         if (approachingEventIndex() !== undefined && activeEventIndex() === undefined) {
-            approachingAlarmRef.play();
+            startApproachingAlarm();
+            stopAlarm();
         } else if (activeEventIndex() !== undefined) {
-            approachingAlarmRef.pause();
-            approachingAlarmRef.currentTime = 0;
-            eventAlarmRef.play();
+            stopApproachingAlarm();
+            startAlarm();
         } else if (activeEventIndex() === undefined) {
-            approachingAlarmRef.pause();
-            approachingAlarmRef.currentTime = 0;
-            eventAlarmRef.pause();
-            eventAlarmRef.currentTime = 0;
+            stopApproachingAlarm();
+            stopAlarm();
         }
+    });
+
+    onCleanup(() => {
+        stopApproachingAlarm();
+        stopAlarm();
     });
 
     return <>
@@ -33,7 +78,7 @@ export default function EventsAlarm() {
         />
         <audio
             ref={eventAlarmRef}
-            src="/event-alarm.m4a"
+            src="/event-alarm.wav"
         />
     </>;
 }
