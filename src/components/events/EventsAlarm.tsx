@@ -1,13 +1,19 @@
-import { createEffect, onCleanup } from 'solid-js';
+import { createMemo, createEffect, onCleanup } from 'solid-js';
 import { useCalendarStateSelect } from 'src/state';
 
 export default function EventsAlarm() {
     const approachingEventIndex = useCalendarStateSelect('approachingEventIndex');
     const activeEventIndex = useCalendarStateSelect('activeEventIndex');
+    const approachingEventConfirmedIndex = useCalendarStateSelect('approachingEventConfirmedIndex');
     let approachingAlarmTimer: ReturnType<typeof setInterval>;
     let approachingAlarmRef: HTMLAudioElement | undefined;
     let eventAlarmTimer: ReturnType<typeof setInterval>;
     let eventAlarmRef: HTMLAudioElement | undefined;
+
+    const isApproaching = createMemo(() => (
+        approachingEventIndex() !== undefined
+        && approachingEventIndex() !== approachingEventConfirmedIndex()
+    ));
 
     const startApproachingAlarm = () => {
         clearInterval(approachingAlarmTimer);
@@ -57,13 +63,20 @@ export default function EventsAlarm() {
             return;
         }
 
-        if (approachingEventIndex() !== undefined && activeEventIndex() === undefined) {
+        if (isApproaching() && activeEventIndex() === undefined) {
             startApproachingAlarm();
             stopAlarm();
-        } else if (activeEventIndex() !== undefined) {
+        } else if (isApproaching() && activeEventIndex() !== undefined) {
             stopApproachingAlarm();
             startAlarm();
         } else if (activeEventIndex() === undefined) {
+            stopApproachingAlarm();
+            stopAlarm();
+        }
+    });
+
+    createEffect(() => {
+        if (approachingEventIndex() === approachingEventConfirmedIndex()) {
             stopApproachingAlarm();
             stopAlarm();
         }
