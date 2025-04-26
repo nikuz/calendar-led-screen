@@ -1,3 +1,11 @@
+#events-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50%;
+}
+
 #ec-events {
     position: relative;
     height: 100%;

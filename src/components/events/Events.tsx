@@ -11,6 +11,7 @@ import {
 import EventItem from './EventItem';
 import EventsShortcutsManager from './EventsShortcutsManager';
 import EventsAlarm from './EventsAlarm';
+import EventsEffect from './EventsEffect';
 import './Events.css';
 
 export function Events() {
@@ -63,8 +64,8 @@ export function Events() {
         clearInterval(errorRefetchTimer);
     });
 
-    return (
-        <div>
+    return <>
+        <div id="events-container">
             <Show when={!isNightTime() && !eventsResource.error && events().length}>
                 <div
                     id="ec-events"
@@ -95,5 +96,7 @@ export function Events() {
             
             <EventsAlarm />
         </div>
-    );
+
+        <EventsEffect />
+    </>;
 }
