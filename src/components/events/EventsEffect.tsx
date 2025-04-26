@@ -35,8 +35,8 @@ export default function EventsEffect() {
         // Constants for wave calculation
         const waveSpeed = 0.4;
         const centerY = height - 20;
-        const maxRadius = Math.sqrt(width * width + height * height) / 2;
-        const waveCount = 20;
+        const maxRadius = Math.sqrt(width * width + height * height);
+        const waveCount = 35;
         const waveSpacing = maxRadius / waveCount;
         const lineWidth = 2;
 
