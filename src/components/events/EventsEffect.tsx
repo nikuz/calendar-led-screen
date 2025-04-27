@@ -16,7 +16,7 @@ export default function EventsEffect() {
     const approachingEventConfirmedIndex = useCalendarStateSelect('approachingEventConfirmedIndex');
     const time = useCalendarStateSelect('time');
     const [effectPosition, setEffectPosition] = createSignal(0);
-    const [effectColor, setEffectColor] = createSignal("#FFF");
+    const [effectColor, setEffectColor] = createSignal('#FFF');
     let canvasElRef: HTMLCanvasElement | undefined;
     let animationFrameId: ReturnType<typeof requestAnimationFrame>;
     let offset = 0;
@@ -109,7 +109,7 @@ export default function EventsEffect() {
         setEffectColor(EVENT_COLORS[eventIndex]);
 
         animationFrameId = requestAnimationFrame(animate);
-    }
+    };
 
     const hideEffect = () => {
         cancelAnimationFrame(animationFrameId);
@@ -117,7 +117,7 @@ export default function EventsEffect() {
         if (canvasElRef && ctx) {
             ctx.clearRect(0, 0, canvasElRef.clientWidth, canvasElRef.clientHeight);
         }
-    }
+    };
 
     createEffect(() => {
         if (activeEvent() && activeEventIndex() !== approachingEventConfirmedIndex()) {

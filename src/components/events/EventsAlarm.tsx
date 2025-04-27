@@ -8,7 +8,7 @@ import {
     ALARM_LOOP_DURATION,
     ALARM_TOTAL_DURATION,
     ALARM_VOLUME,
- } from 'src/constants';
+} from 'src/constants';
 
 export default function EventsAlarm() {
     const approachingEventIndex = useCalendarStateSelect('approachingEventIndex');
@@ -80,7 +80,7 @@ export default function EventsAlarm() {
                 eventAlarmRef?.play();
             }
         }, ALARM_LOOP_DURATION);
-    }
+    };
 
     const stopAlarm = () => {
         clearInterval(eventAlarmTimer);
@@ -89,15 +89,15 @@ export default function EventsAlarm() {
             eventAlarmRef.currentTime = 0;
         }
         eventAlarmDuration = 0;
-    }
+    };
 
     const windowFocusHandler = () => {
         setIsFocused(true);
-    }
+    };
     
     const windowBlurHandler = () => {
         setIsFocused(false);
-    }
+    };
 
     createEffect(() => {
         if (!approachingAlarmRef || !eventAlarmRef || !isFocused()) {
