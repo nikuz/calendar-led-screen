@@ -3,7 +3,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 50%;
+    height: 44%;
 }
 
 #ec-events {
@@ -24,6 +24,7 @@
     position: absolute;
     bottom: 0;
     background-color: #000;
+    border-radius: 5px 5px 0 0;
 }
 
 .ecei-content {
@@ -33,6 +34,65 @@
     box-sizing: border-box;
     border: 1px solid;
     border-bottom: none;
+    
+    clip-path: polygon(0px 100%,
+            100% 100%,
+            100% 2px,
+            calc(100% - 1px) 2px,
+            calc(100% - 1px) 1px,
+            calc(100% - 2px) 1px,
+            calc(100% - 2px) 0px,
+            2px 0px,
+            2px 1px,
+            1px 1px,
+            1px 2px,
+            0px 2px);
+    position: relative;
+    padding: 1px;
+
+    --pixel-border-color: #0099ff;
+}
+
+.ecei-content::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: -1px;
+    display: block;
+    background: var(--pixel-border-color);
+    clip-path: polygon(0px 100%,
+            100% 100%,
+            100% 2px,
+            calc(100% - 1px) 2px,
+            calc(100% - 1px) 1px,
+            calc(100% - 2px) 1px,
+            calc(100% - 2px) 0px,
+            2px 0px,
+            2px 1px,
+            1px 1px,
+            1px 2px,
+            0px 2px,
+            0px 50%,
+            1px 50%,
+            1px 2px,
+            2px 2px,
+            2px 1px,
+            calc(100% - 2px) 1px,
+            calc(100% - 2px) 2px,
+            calc(100% - 1px) 2px,
+            calc(100% - 1px) 100%,
+            calc(100% - 2px) 100%,
+            calc(100% - 2px) 100%,
+            2px 100%,
+            2px 100%,
+            1px 100%,
+            1px 50%,
+            0px 50%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 .ecei-time {

@@ -90,9 +90,9 @@ export default function EventItem(props: Props) {
             >
                 <div class="ecei-content" style={{
                     opacity: brightness() / 100,
-                    'border-color': EVENT_COLORS[props.index],
                     'background-color': isHighlighted() ? EVENT_COLORS[props.index] : '#000',
                     color: isHighlighted() ? '#000' : EVENT_COLORS[props.index],
+                    '--pixel-border-color': EVENT_COLORS[props.index],
                 }}>
                     <div class="ecei-time">
                         <div>
