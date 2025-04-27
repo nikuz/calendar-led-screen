@@ -2,6 +2,8 @@ import { routerUtils } from 'src/utils';
 import {
     IGNORE_EVENTS_SUMMARY,
     EVENT_OVERLAP_HEIGHT_PUNISHMENT,
+    DAY_START_TIME,
+    DAY_END_TIME,
 } from 'src/constants';
 import { CalendarEvent } from 'src/types';
 
@@ -40,7 +42,12 @@ async function getCalendarEvents(props: Props): Promise<CalendarEvent[]> {
     
     events.sort((a, b) => a.startDate.getTime() - b.startDate.getTime());
 
-    const filteredEvents = events.filter((item) => !IGNORE_EVENTS_SUMMARY.includes(item.summary.toLowerCase()));
+    const filteredEvents = events.filter((item) => {
+        const eventStartTime = item.startDate.getHours() * 60 + item.startDate.getMinutes();
+        return !IGNORE_EVENTS_SUMMARY.includes(item.summary.toLowerCase())
+            && eventStartTime > DAY_START_TIME
+            && eventStartTime < DAY_END_TIME;
+    });
 
     let prevEventHeight = 100;
 
