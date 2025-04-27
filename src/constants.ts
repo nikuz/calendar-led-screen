@@ -58,3 +58,6 @@ export const ALARM_SRC = '/sounds/event-alarm.wav';
 export const ALARM_LOOP_DURATION = 7000; // ms
 export const ALARM_TOTAL_DURATION = 60 * 1000; // ms
 export const ALARM_VOLUME = 0.7;
+
+// background
+export const CALENDAR_BACKGROUND_IMAGE = '/images/mountains-night.jpg';

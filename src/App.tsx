@@ -1,13 +1,21 @@
-import { createSignal, onMount, onCleanup, Show } from 'solid-js';
+import { createSignal, createMemo, onMount, onCleanup, Show } from 'solid-js';
 import cl from 'classnames';
-import { calendarStateActor } from 'src/state';
 import { Time, Events, TextExamples } from 'src/components';
-import { remapValue } from 'src/utils';
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
+import { calendarStateActor, useCalendarStateSelect } from 'src/state';
+import { remapValue, timeUtils } from 'src/utils';
+import {
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    CALENDAR_BACKGROUND_IMAGE,
+} from 'src/constants';
 import './App.css';
 
 export default function App() {
+    const time = useCalendarStateSelect('time');
     const [testModeIsOn, setTestModeIsOn] = createSignal(false);
+    const [imageBackgroundIsOn, setImageBackgroundIsOn] = createSignal(false);
+    const isNightTime = createMemo(() => timeUtils.isNightTime(time()));
+
     const mouseMoveHandler = (event: MouseEvent) => {
         const now = new Date();
         const minutes = Math.round(remapValue({
@@ -39,6 +47,9 @@ export default function App() {
         if (event.code === 'KeyT') {
             setTestModeIsOn(!testModeIsOn());
         }
+        if (event.code === 'KeyB') {
+            setImageBackgroundIsOn(!imageBackgroundIsOn());
+        }
     };
 
     onMount(() => {
@@ -56,6 +67,7 @@ export default function App() {
             style={{
                 width: `${SCREEN_WIDTH}px`,
                 height: `${SCREEN_HEIGHT}px`,
+                'background-image': imageBackgroundIsOn() && !isNightTime() ? `url(${CALENDAR_BACKGROUND_IMAGE})` : 'none',
             }}
             onMouseMove={mouseMoveHandler}
             onMouseLeave={mouseLeaveHandler}
