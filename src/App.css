@@ -1,8 +1,8 @@
 #app-container {
     position: relative;
     overflow: hidden;
-    /* background: #000 url(/mountains.jpg); */
-    background: #000;
+    background: #000 url(/mountains-night.jpg);
+    /* background: #000; */
 }
 
 #app-container.full-screen {
