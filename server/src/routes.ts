@@ -14,17 +14,10 @@ export default function routes(app: Express, io: Server) {
     app.use([
         '/assets',
         '/favicon.*any',
-        '/{*name}.ttf',
-        '/{*name}.otf',
-        '/{*name}.woff',
-        '/{*name}.woff2',
-        '/{*name}.mp3',
-        '/{*name}.wav',
-        '/{*name}.m4a',
-        '/{*name}.png',
-        '/{*name}.jpg',
-        '/{*name}.jpeg',
-        '/{*name}.svg',
+        '/fonts/*name',
+        '/sounds/*name',
+        '/icons/*name',
+        '/images/*name',
     ], (req, res) => {
         const assetPath = path.join(UIBuildPath, req.originalUrl);
         if (!fs.existsSync(assetPath)) {

@@ -51,10 +51,10 @@ export const NIGHT_BRIGHTNESS_MIN = 20;
 export const BRIGHTNESS_MAX = 100;
 
 // alarm
-export const ALARM_APPROACHING_SRC = '/event-approaching-alarm.wav';
+export const ALARM_APPROACHING_SRC = '/sounds/event-approaching-alarm.wav';
 export const ALARM_APPROACHING_LOOP_DURATION = 2000; // ms
 export const ALARM_APPROACHING_VOLUME = 1;
-export const ALARM_SRC = '/event-alarm.wav';
+export const ALARM_SRC = '/sounds/event-alarm.wav';
 export const ALARM_LOOP_DURATION = 7000; // ms
 export const ALARM_TOTAL_DURATION = 60 * 1000; // ms
 export const ALARM_VOLUME = 0.7;

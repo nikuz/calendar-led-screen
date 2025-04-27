@@ -146,13 +146,13 @@ export default function EventsAlarm() {
         />
         <Show when={isMuted()}>
             <img
-                src="/mute.png"
+                src="/icons/mute.png"
                 class="ec-event-alarm-icon"
             />
         </Show>
         <Show when={!isMuted()}>
             <img
-                src="/speaker.png"
+                src="/icons/speaker.png"
                 class="ec-event-alarm-icon"
             />
         </Show>
