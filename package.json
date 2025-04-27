@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "npm run start-server & vite",
     "start-server": "npm run dev --prefix server",
-    "build": "tsc -b && vite build",
+    "tsc": "tsc -b",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint ."
   },
