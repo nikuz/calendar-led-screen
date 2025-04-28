@@ -16,6 +16,9 @@ export interface CalendarStateContext {
     brightness: number,
 
     isMuted: boolean,
+
+    backgroundImageEnabled: boolean,
+    backgroundImageNightOverwriteEnabled?: boolean,
 }
 
 export interface SetTimeEvent {
@@ -47,6 +50,16 @@ export interface SetMutedEvent {
     muted: boolean,
 }
 
+export interface SetBackgroundImageEnabledEvent {
+    type: 'SET_BACKGROUND_IMAGE_ENABLED',
+    enabled: boolean,
+}
+
+export interface SetBackgroundImageNightOverwriteEnabledEvent {
+    type: 'SET_BACKGROUND_IMAGE_NIGHT_OVERWRITE_ENABLED',
+    enabled?: boolean,
+}
+
 export type CalendarStateEvents =
     | SetTimeEvent
     | SetHoverTimeEvent
@@ -54,4 +67,6 @@ export type CalendarStateEvents =
     | SetEventsEvent
     | SetBrightnessEvent
     | ConfirmApproachingEvent
-    | SetMutedEvent;
+    | SetMutedEvent
+    | SetBackgroundImageEnabledEvent
+    | SetBackgroundImageNightOverwriteEnabledEvent;

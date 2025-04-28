@@ -13,6 +13,8 @@ const calendarState = () => {
         brightness: 0,
 
         isMuted: false,
+
+        backgroundImageEnabled: true,
     });
 
     const send = (event: CalendarStateEvents) => {
@@ -63,6 +65,14 @@ const calendarState = () => {
             
             case 'SET_MUTED':
                 setContext('isMuted', event.muted);
+                break;
+            
+            case 'SET_BACKGROUND_IMAGE_ENABLED':
+                setContext('backgroundImageEnabled', event.enabled);
+                break;
+            
+            case 'SET_BACKGROUND_IMAGE_NIGHT_OVERWRITE_ENABLED':
+                setContext('backgroundImageNightOverwriteEnabled', event.enabled);
                 break;
         }
     };

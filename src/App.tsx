@@ -1,20 +1,17 @@
-import { createSignal, createMemo, onMount, onCleanup, Show } from 'solid-js';
-import cl from 'classnames';
-import { Time, Events, TextExamples } from 'src/components';
-import { calendarStateActor, useCalendarStateSelect } from 'src/state';
-import { remapValue, timeUtils } from 'src/utils';
+import { createSignal, onMount, onCleanup, Show } from 'solid-js';
 import {
-    SCREEN_WIDTH,
-    SCREEN_HEIGHT,
-    CALENDAR_BACKGROUND_IMAGE,
-} from 'src/constants';
+    Time,
+    Events,
+    TextExamples,
+    Background,
+} from 'src/components';
+import { calendarStateActor } from 'src/state';
+import { remapValue } from 'src/utils';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
 import './App.css';
 
 export default function App() {
-    const time = useCalendarStateSelect('time');
     const [testModeIsOn, setTestModeIsOn] = createSignal(false);
-    const [imageBackgroundIsOn, setImageBackgroundIsOn] = createSignal(false);
-    const isNightTime = createMemo(() => timeUtils.isNightTime(time()));
 
     const mouseMoveHandler = (event: MouseEvent) => {
         const now = new Date();
@@ -47,9 +44,6 @@ export default function App() {
         if (event.code === 'KeyT') {
             setTestModeIsOn(!testModeIsOn());
         }
-        if (event.code === 'KeyB') {
-            setImageBackgroundIsOn(!imageBackgroundIsOn());
-        }
     };
 
     onMount(() => {
@@ -63,15 +57,14 @@ export default function App() {
     return (
         <div
             id="app-container"
-            class={cl({ 'full-screen': testModeIsOn() })}
             style={{
                 width: `${SCREEN_WIDTH}px`,
                 height: `${SCREEN_HEIGHT}px`,
-                'background-image': imageBackgroundIsOn() && !isNightTime() ? `url(${CALENDAR_BACKGROUND_IMAGE})` : 'none',
             }}
             onMouseMove={mouseMoveHandler}
             onMouseLeave={mouseLeaveHandler}
         >
+            <Background />
             <Show when={!testModeIsOn()} fallback={<TextExamples />}>
                 <Time />
                 <Events />
