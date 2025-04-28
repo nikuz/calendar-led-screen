@@ -136,7 +136,8 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     line-clamp: 4;
-    word-break: break-all;
+    overflow-wrap: break-word;
+    hyphens: auto;
     text-overflow: ellipsis;
 }
 
