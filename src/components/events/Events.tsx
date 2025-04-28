@@ -65,6 +65,8 @@ export function Events() {
     });
 
     return <>
+        <EventsEffect />
+        
         <div id="events-container">
             <Show when={!isNightTime() && !eventsResource.error && events().length}>
                 <div
@@ -96,7 +98,5 @@ export function Events() {
             
             <EventsAlarm />
         </div>
-
-        <EventsEffect />
     </>;
 }

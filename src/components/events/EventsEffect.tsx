@@ -133,6 +133,7 @@ export default function EventsEffect() {
 
     return (
         <canvas
+            class="ec-event-effect-canvas"
             ref={canvasElRef}
             width={SCREEN_WIDTH}
             height={SCREEN_HEIGHT}

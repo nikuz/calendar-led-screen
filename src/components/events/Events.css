@@ -156,3 +156,9 @@
         opacity: 0;
     }
 }
+
+.ec-event-effect-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
