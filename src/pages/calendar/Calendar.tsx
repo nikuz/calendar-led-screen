@@ -1,13 +1,13 @@
 import { createSignal, onMount, onCleanup, Show } from 'solid-js';
+import { remapValue } from 'src/utils';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
 import {
     Time,
     Events,
     TextExamples,
     Background,
-} from 'src/components';
-import { calendarStateActor } from 'src/state';
-import { remapValue } from 'src/utils';
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
+} from '@calendar/components';
+import { calendarStateActor } from '@calendar/state';
 import './App.css';
 
 export default function App() {

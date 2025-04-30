@@ -1,8 +1,3 @@
-import {
-    TIME_NIGHT_TIME_LOW,
-    TIME_NIGHT_TIME_HIGH,
-} from 'src/constants';
-
 export function getTimeString(minutes: number): string {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
@@ -27,9 +22,4 @@ export function formatTimeRange(minutesFrom: number, minutesTo: number) {
 
 export function padTimeNumber(value: number | string) {
     return String(value).padStart(2, '0');
-}
-
-export function isNightTime(time: Date) {
-    const hours = time.getHours();
-    return hours < TIME_NIGHT_TIME_LOW || hours > TIME_NIGHT_TIME_HIGH;
 }

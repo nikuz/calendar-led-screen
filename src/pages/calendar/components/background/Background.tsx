@@ -1,11 +1,8 @@
 import { createMemo, createEffect, onMount, onCleanup } from 'solid-js';
-import { calendarStateActor, useCalendarStateSelect } from 'src/state';
-import { timeUtils } from 'src/utils';
-import {
-    SCREEN_WIDTH,
-    SCREEN_HEIGHT,
-    CALENDAR_BACKGROUND_IMAGE,
-} from 'src/constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
+import { calendarStateActor, useCalendarStateSelect } from '@calendar/state';
+import { isNightTime } from '@calendar/utils';
+import { CALENDAR_BACKGROUND_IMAGE } from '@calendar/constants';
 import './Background.css';
 
 export function Background() {
@@ -13,7 +10,7 @@ export function Background() {
     const backgroundImageEnabled = useCalendarStateSelect('backgroundImageEnabled');
     const backgroundImageNightOverwriteEnabled = useCalendarStateSelect('backgroundImageNightOverwriteEnabled');
 
-    const isNightTime = createMemo(() => timeUtils.isNightTime(time()));
+    const isNight = createMemo(() => isNightTime(time()));
 
     const backgroundImage = createMemo(() => {
         let cssImageProp = 'none';
@@ -48,12 +45,12 @@ export function Background() {
     };
 
     createEffect(() => {
-        if (isNightTime() && backgroundImageEnabled()) {
+        if (isNight() && backgroundImageEnabled()) {
             calendarStateActor.send({
                 type: 'SET_BACKGROUND_IMAGE_ENABLED',
                 enabled: false,
             });
-        } else if (!isNightTime() && !backgroundImageEnabled()) {
+        } else if (!isNight() && !backgroundImageEnabled()) {
             calendarStateActor.send({
                 type: 'SET_BACKGROUND_IMAGE_ENABLED',
                 enabled: true,

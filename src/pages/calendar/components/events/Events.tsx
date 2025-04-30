@@ -1,13 +1,14 @@
 import { createResource, createEffect, createMemo, For, Show, on, onCleanup } from 'solid-js';
-import { getTodaysCalendarEvents } from 'src/services';
-import { calendarStateActor, useCalendarStateSelect } from 'src/state';
-import { remapValue, timeUtils } from 'src/utils';
-import {
-    SCREEN_WIDTH,
+import { remapValue } from 'src/utils';
+import { SCREEN_WIDTH } from 'src/constants';
+import { getTodaysCalendarEvents } from '@calendar/services';
+import { calendarStateActor, useCalendarStateSelect } from '@calendar/state';
+import { isNightTime } from '@calendar/utils';
+import { 
     DAY_START_TIME,
     DAY_END_TIME,
     EVENTS_ZOOM,
-} from 'src/constants';
+} from '@calendar/constants';
 import EventItem from './EventItem';
 import EventsShortcutsManager from './EventsShortcutsManager';
 import EventsAlarm from './EventsAlarm';
@@ -21,7 +22,7 @@ export function Events() {
     const timeIsHovered = useCalendarStateSelect('timeIsHovered');
     let errorRefetchTimer: ReturnType<typeof setInterval> | undefined;
 
-    const isNightTime = createMemo(() => timeUtils.isNightTime(time()));
+    const isNight = createMemo(() => isNightTime(time()));
     const resourceError = createMemo(() => eventsResource.error !== undefined);
 
     const marginLeft = createMemo(() => (
@@ -46,8 +47,8 @@ export function Events() {
         });
     });
 
-    createEffect(on([time, timeIsHovered, isNightTime], () => {
-        if (!timeIsHovered() && !isNightTime()) {
+    createEffect(on([time, timeIsHovered, isNight], () => {
+        if (!timeIsHovered() && !isNight()) {
             refetch();
         }
     }));
@@ -68,7 +69,7 @@ export function Events() {
         <EventsEffect />
         
         <div id="events-container">
-            <Show when={!isNightTime() && !eventsResource.error && events().length}>
+            <Show when={!isNight() && !eventsResource.error && events().length}>
                 <div
                     id="ec-events"
                     style={{
@@ -85,7 +86,7 @@ export function Events() {
                 </div>
             </Show>
 
-            <Show when={!isNightTime() && eventsResource.error}>
+            <Show when={!isNight() && eventsResource.error}>
                 <div id="ec-error">
                     Can't load events
                     <pre>

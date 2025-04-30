@@ -1,5 +1,5 @@
 import { onMount, onCleanup } from 'solid-js';
-import { calendarStateActor, useCalendarStateSelect } from 'src/state';
+import { calendarStateActor, useCalendarStateSelect } from '@calendar/state';
 
 export default function EventsShortcutsManager() {
     const approachingEventIndex = useCalendarStateSelect('approachingEventIndex');

@@ -4,8 +4,8 @@ import {
     EVENT_OVERLAP_HEIGHT_PUNISHMENT,
     DAY_START_TIME,
     DAY_END_TIME,
-} from 'src/constants';
-import { CalendarEvent } from 'src/types';
+} from '@calendar/constants';
+import { CalendarEvent } from '@calendar/types';
 
 interface Props {
     from: string,

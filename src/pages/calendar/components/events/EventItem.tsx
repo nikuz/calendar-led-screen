@@ -1,17 +1,17 @@
 import { createSignal, createMemo, createEffect, onCleanup, on, Show } from 'solid-js';
 import cl from 'classnames';
-import { useCalendarStateSelect } from 'src/state';
 import { remapValue, timeUtils } from 'src/utils';
+import { SCREEN_WIDTH } from 'src/constants';
+import { useCalendarStateSelect } from '@calendar/state';
 import {
-    SCREEN_WIDTH,
     DAY_START_TIME,
     DAY_END_TIME,
     EVENT_COLORS,
     EVENT_MIN_BOX_SIZE,
     EVENT_APPROACHING_BLINK_INTERVAL,
     EVENTS_ZOOM,
-} from 'src/constants';
-import { CalendarEvent } from 'src/types';
+} from '@calendar/constants';
+import { CalendarEvent } from '@calendar/types';
 
 interface Props extends CalendarEvent {
     index: number,

@@ -1,5 +1,5 @@
 import { createSignal, createMemo, createEffect, onMount, onCleanup, Show } from 'solid-js';
-import { useCalendarStateSelect } from 'src/state';
+import { useCalendarStateSelect } from '@calendar/state';
 import { 
     ALARM_APPROACHING_SRC,
     ALARM_APPROACHING_LOOP_DURATION,
@@ -8,7 +8,7 @@ import {
     ALARM_LOOP_DURATION,
     ALARM_TOTAL_DURATION,
     ALARM_VOLUME,
-} from 'src/constants';
+} from '@calendar/constants';
 
 export default function EventsAlarm() {
     const approachingEventIndex = useCalendarStateSelect('approachingEventIndex');

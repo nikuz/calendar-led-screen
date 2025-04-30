@@ -1,5 +1,5 @@
-import { CalendarEvent } from 'src/types';
-import { EVENT_APPROACHING_THRESHOLD } from 'src/constants';
+import { EVENT_APPROACHING_THRESHOLD } from '@calendar/constants';
+import { CalendarEvent } from '@calendar/types';
 import { CalendarStateContext } from '../types';
 
 export function getApproachingEvent(context: CalendarStateContext, events: CalendarEvent[], time: Date): Partial<CalendarStateContext> {

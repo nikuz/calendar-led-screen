@@ -11,6 +11,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@solidjs/router": "^0.15.3",
     "classnames": "^2.5.1",
     "socket.io-client": "^4.8.1",
     "solid-js": "^1.9.5"

@@ -1,9 +1,9 @@
 import { createEffect, createMemo, onCleanup, on } from 'solid-js';
-import { calendarStateActor, useCalendarStateSelect } from 'src/state';
 import { remapValue, timeUtils } from 'src/utils';
-import {
-    SCREEN_WIDTH,
-    SCREEN_HEIGHT,
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
+import { calendarStateActor, useCalendarStateSelect } from '@calendar/state';
+import { isNightTime } from '@calendar/utils';
+import { 
     DAY_START_TIME,
     DAY_END_TIME,
     TIME_COLOR,
@@ -12,7 +12,7 @@ import {
     TIME_FONT_SIZE,
     TIME_FONT_SIZE_NIGHT_TIME,
     EVENT_COLORS,
-} from 'src/constants';
+} from '@calendar/constants';
 import './Time.css';
 
 export function Time() {
@@ -32,7 +32,7 @@ export function Time() {
     let minutesElRef: HTMLDivElement | undefined;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
-    const isNightTime = createMemo(() => timeUtils.isNightTime(time()));
+    const isNight = createMemo(() => isNightTime(time()));
 
     const hours = createMemo(() => {
         let hours = time().getHours();
@@ -45,7 +45,7 @@ export function Time() {
     });
 
     const color = createMemo(() => {
-        if (isNightTime()) {
+        if (isNight()) {
             return TIME_NIGHT_COLOR;
         }
 
@@ -73,7 +73,7 @@ export function Time() {
         timer = setTimeout(updateTime, (60 - now.getSeconds()) * 1000);
     }));
 
-    createEffect(on([timePointerPosition, isNightTime], () => {
+    createEffect(on([timePointerPosition, isNight], () => {
         if (timeValueElRef && hoursElRef && minutesElRef) {
             const timeValueHalfSize = timeValueElRef.getBoundingClientRect().width / 2;
             const hoursSize = hoursElRef.getBoundingClientRect().width;
@@ -101,7 +101,7 @@ export function Time() {
                 ref={timeValueElRef}
                 style={{
                     color: color(),
-                    'font-size': `${isNightTime() ? TIME_FONT_SIZE_NIGHT_TIME : TIME_FONT_SIZE}px`,
+                    'font-size': `${isNight() ? TIME_FONT_SIZE_NIGHT_TIME : TIME_FONT_SIZE}px`,
                     transition: timeIsHovered() ? 'none' : 'left 100ms linear',
                 }}
             >
