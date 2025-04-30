@@ -1,4 +1,4 @@
-import { CalendarEvent } from 'src/types';
+import { CalendarEvent } from '@calendar/types';
 import { CalendarStateContext } from '../types';
 
 export function getActiveEvent(events: CalendarEvent[], time: Date): Partial<CalendarStateContext> {

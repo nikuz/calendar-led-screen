@@ -1,1 +1,0 @@
-export * from './is-night-time';

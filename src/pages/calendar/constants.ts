@@ -1,8 +1,5 @@
 export const IGNORE_EVENTS_SUMMARY = ['busy'];
 
-export const DAY_START_TIME = 6 * 60 + 30;
-export const DAY_END_TIME = 21 * 60;
-
 // time
 export const TIME_COLOR = '#FFF';
 export const TIME_NIGHT_COLOR = '#F00';

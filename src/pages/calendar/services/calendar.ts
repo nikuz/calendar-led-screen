@@ -1,9 +1,8 @@
 import { routerUtils } from 'src/utils';
+import { DAY_START_TIME, DAY_END_TIME } from 'src/constants';
 import {
     IGNORE_EVENTS_SUMMARY,
     EVENT_OVERLAP_HEIGHT_PUNISHMENT,
-    DAY_START_TIME,
-    DAY_END_TIME,
 } from '@calendar/constants';
 import { CalendarEvent } from '@calendar/types';
 

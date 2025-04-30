@@ -1,11 +1,10 @@
 import { createSignal, createMemo, createEffect, onCleanup, on, Show } from 'solid-js';
 import cl from 'classnames';
+import { useAppStateSelect } from 'src/state';
 import { remapValue, timeUtils } from 'src/utils';
-import { SCREEN_WIDTH } from 'src/constants';
+import { SCREEN_WIDTH, DAY_START_TIME, DAY_END_TIME } from 'src/constants';
 import { useCalendarStateSelect } from '@calendar/state';
 import {
-    DAY_START_TIME,
-    DAY_END_TIME,
     EVENT_COLORS,
     EVENT_MIN_BOX_SIZE,
     EVENT_APPROACHING_BLINK_INTERVAL,
@@ -18,7 +17,7 @@ interface Props extends CalendarEvent {
 }
 
 export default function EventItem(props: Props) {
-    const brightness = useCalendarStateSelect('brightness');
+    const brightness = useAppStateSelect('brightness');
     const activeEventIndex = useCalendarStateSelect('activeEventIndex');
     const approachingEventIndex = useCalendarStateSelect('approachingEventIndex');
     const approachingEventConfirmedIndex = useCalendarStateSelect('approachingEventConfirmedIndex');

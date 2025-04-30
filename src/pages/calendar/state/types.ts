@@ -1,4 +1,4 @@
-import { CalendarEvent } from 'src/types';
+import { CalendarEvent } from '@calendar/types';
 
 export interface CalendarStateContext {
     time: Date,
@@ -12,8 +12,6 @@ export interface CalendarStateContext {
     approachingEvent?: CalendarEvent,
     approachingEventIndex?: number,
     approachingEventConfirmedIndex?: number, // is set when user confirms the approaching event by keyboard press
-
-    brightness: number,
 
     isMuted: boolean,
 
@@ -38,11 +36,6 @@ export interface SetEventsEvent {
     events: CalendarEvent[],
 }
 
-export interface SetBrightnessEvent {
-    type: 'SET_BRIGHTNESS',
-    value: number,
-}
-
 export interface ConfirmApproachingEvent { type: 'CONFIRM_APPROACHING_EVENT' }
 
 export interface SetMutedEvent {
@@ -65,7 +58,6 @@ export type CalendarStateEvents =
     | SetHoverTimeEvent
     | RestoreTimeEvent
     | SetEventsEvent
-    | SetBrightnessEvent
     | ConfirmApproachingEvent
     | SetMutedEvent
     | SetBackgroundImageEnabledEvent

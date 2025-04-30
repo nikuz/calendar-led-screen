@@ -1,7 +1,7 @@
 import { createMemo, createEffect, onMount, onCleanup } from 'solid-js';
+import { timeUtils } from 'src/utils';
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
 import { calendarStateActor, useCalendarStateSelect } from '@calendar/state';
-import { isNightTime } from '@calendar/utils';
 import { CALENDAR_BACKGROUND_IMAGE } from '@calendar/constants';
 import './Background.css';
 
@@ -10,7 +10,7 @@ export function Background() {
     const backgroundImageEnabled = useCalendarStateSelect('backgroundImageEnabled');
     const backgroundImageNightOverwriteEnabled = useCalendarStateSelect('backgroundImageNightOverwriteEnabled');
 
-    const isNight = createMemo(() => isNightTime(time()));
+    const isNight = createMemo(() => timeUtils.isNightTime(time()));
 
     const backgroundImage = createMemo(() => {
         let cssImageProp = 'none';

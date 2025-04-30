@@ -1,11 +1,14 @@
 import { createEffect, createMemo, onCleanup, on } from 'solid-js';
+import { useAppStateSelect } from 'src/state';
 import { remapValue, timeUtils } from 'src/utils';
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
-import { calendarStateActor, useCalendarStateSelect } from '@calendar/state';
-import { isNightTime } from '@calendar/utils';
-import { 
+import {
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
     DAY_START_TIME,
     DAY_END_TIME,
+} from 'src/constants';
+import { calendarStateActor, useCalendarStateSelect } from '@calendar/state';
+import { 
     TIME_COLOR,
     TIME_NIGHT_COLOR,
     TIME_POINTER_WIDTH,
@@ -16,9 +19,9 @@ import {
 import './Time.css';
 
 export function Time() {
+    const brightness = useAppStateSelect('brightness');
     const time = useCalendarStateSelect('time');
     const timeIsHovered = useCalendarStateSelect('timeIsHovered');
-    const brightness = useCalendarStateSelect('brightness');
     const activeEventIndex = useCalendarStateSelect('activeEventIndex');
     const timePointerPosition = createMemo(() => Math.round(remapValue({
         value: time().getHours() * 60 + time().getMinutes(),
@@ -32,7 +35,7 @@ export function Time() {
     let minutesElRef: HTMLDivElement | undefined;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
-    const isNight = createMemo(() => isNightTime(time()));
+    const isNight = createMemo(() => timeUtils.isNightTime(time()));
 
     const hours = createMemo(() => {
         let hours = time().getHours();

@@ -8,9 +8,8 @@ import {
     Background,
 } from '@calendar/components';
 import { calendarStateActor } from '@calendar/state';
-import './App.css';
 
-export default function App() {
+export default function Calendar() {
     const [testModeIsOn, setTestModeIsOn] = createSignal(false);
 
     const mouseMoveHandler = (event: MouseEvent) => {
@@ -56,7 +55,6 @@ export default function App() {
 
     return (
         <div
-            id="app-container"
             style={{
                 width: `${SCREEN_WIDTH}px`,
                 height: `${SCREEN_HEIGHT}px`,

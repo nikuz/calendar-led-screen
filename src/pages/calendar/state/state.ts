@@ -10,8 +10,6 @@ const calendarState = () => {
         
         events: [],
 
-        brightness: 0,
-
         isMuted: false,
 
         backgroundImageEnabled: true,
@@ -53,10 +51,6 @@ const calendarState = () => {
                     ...getActiveEvent(event.events, context.time),
                     ...getApproachingEvent(context, event.events, context.time),
                 });
-                break;
-            
-            case 'SET_BRIGHTNESS':
-                setContext('brightness', event.value);
                 break;
             
             case 'CONFIRM_APPROACHING_EVENT':

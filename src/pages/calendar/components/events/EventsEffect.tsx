@@ -1,13 +1,13 @@
 import { createSignal, createEffect, onCleanup } from 'solid-js';
 import { remapValue } from 'src/utils';
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
-import { useCalendarStateSelect } from '@calendar/state';
-import { 
+import {
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
     DAY_START_TIME,
     DAY_END_TIME,
-    EVENTS_ZOOM,
-    EVENT_COLORS,
-} from '@calendar/constants';
+} from 'src/constants';
+import { useCalendarStateSelect } from '@calendar/state';
+import { EVENTS_ZOOM, EVENT_COLORS } from '@calendar/constants';
 
 export default function EventsEffect() {
     const activeEvent = useCalendarStateSelect('activeEvent');

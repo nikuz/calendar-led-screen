@@ -7,8 +7,8 @@ export default defineConfig({
     resolve: {
         alias: {
             src: path.resolve(__dirname, 'src'),
-            calendar: path.resolve(__dirname, 'src/pages/calendar'),
-            game: path.resolve(__dirname, 'src/pages/game'),
+            '@calendar': path.resolve(__dirname, 'src/pages/calendar'),
+            '@game': path.resolve(__dirname, 'src/pages/game'),
         },
     },
 });

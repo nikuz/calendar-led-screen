@@ -1,14 +1,9 @@
 import { createResource, createEffect, createMemo, For, Show, on, onCleanup } from 'solid-js';
-import { remapValue } from 'src/utils';
-import { SCREEN_WIDTH } from 'src/constants';
+import { remapValue, timeUtils } from 'src/utils';
+import { SCREEN_WIDTH, DAY_START_TIME, DAY_END_TIME } from 'src/constants';
 import { getTodaysCalendarEvents } from '@calendar/services';
 import { calendarStateActor, useCalendarStateSelect } from '@calendar/state';
-import { isNightTime } from '@calendar/utils';
-import { 
-    DAY_START_TIME,
-    DAY_END_TIME,
-    EVENTS_ZOOM,
-} from '@calendar/constants';
+import { EVENTS_ZOOM } from '@calendar/constants';
 import EventItem from './EventItem';
 import EventsShortcutsManager from './EventsShortcutsManager';
 import EventsAlarm from './EventsAlarm';
@@ -22,7 +17,7 @@ export function Events() {
     const timeIsHovered = useCalendarStateSelect('timeIsHovered');
     let errorRefetchTimer: ReturnType<typeof setInterval> | undefined;
 
-    const isNight = createMemo(() => isNightTime(time()));
+    const isNight = createMemo(() => timeUtils.isNightTime(time()));
     const resourceError = createMemo(() => eventsResource.error !== undefined);
 
     const marginLeft = createMemo(() => (
