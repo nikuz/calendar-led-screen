@@ -1,6 +1,11 @@
 import { createSignal, onMount, onCleanup, Show } from 'solid-js';
+import { useNavigate } from '@solidjs/router';
 import { remapValue } from 'src/utils';
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from 'src/constants';
+import {
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    ROUTER_GAME,
+} from 'src/constants';
 import {
     Time,
     Events,
@@ -9,8 +14,9 @@ import {
 } from '@calendar/components';
 import { calendarStateActor } from '@calendar/state';
 
-export default function Calendar() {
+export default function CalendarPage() {
     const [testModeIsOn, setTestModeIsOn] = createSignal(false);
+    const navigate = useNavigate();
 
     const mouseMoveHandler = (event: MouseEvent) => {
         const now = new Date();
@@ -42,6 +48,9 @@ export default function Calendar() {
     const keydownHandler = (event: KeyboardEvent) => {
         if (event.code === 'KeyT') {
             setTestModeIsOn(!testModeIsOn());
+        }
+        if (event.code === 'KeyG') {
+            navigate(ROUTER_GAME);
         }
     };
 
