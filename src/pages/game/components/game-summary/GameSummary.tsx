@@ -22,7 +22,9 @@ export function GameSummary() {
     };
 
     onMount(() => {
-        restartBtnEl?.focus();
+        requestAnimationFrame(() => {
+            restartBtnEl?.focus();
+        });
     });
     
     return (
