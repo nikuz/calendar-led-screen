@@ -5,6 +5,13 @@ export interface GameStateContext {
     selectedSampleIndex?: number,
 
     sampleCreatorIsOpen: boolean,
+
+    hitCharacters: Map<number, boolean>,
+    missCharacters: Map<number, boolean>,
+
+    gameStartTime: number,
+    gameStopTime: number,
+    gameOver: boolean,
 }
 
 export interface OpenSampleCreatorEvent { type: 'OPEN_SAMPLE_CREATOR' }
@@ -25,10 +32,28 @@ export interface AddSampleEvent {
     sample: string,
 }
 
+export interface HitCharacterEvent {
+    type: 'HIT_CHARACTER',
+    index: number,
+}
+
+export interface MissCharacterEvent {
+    type: 'MISS_CHARACTER',
+    index: number,
+}
+
+export interface GameOverEvent { type: 'GAME_OVER' }
+
+export interface RestartEvent { type: 'RESTART' }
+
 export type GameStateEvents =
     | OpenSampleCreatorEvent
     | CloseSampleCreatorEvent
     | FocusPrevSampleEvent
     | FocusNextSampleEvent
     | SelectSampleEvent
-    | AddSampleEvent;
+    | AddSampleEvent
+    | HitCharacterEvent
+    | MissCharacterEvent
+    | GameOverEvent
+    | RestartEvent;

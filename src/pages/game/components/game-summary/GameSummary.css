@@ -1,0 +1,24 @@
+.game-summary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gsc-stats {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100px;
+    margin: 10px 0 15px;
+    padding: 0;
+}
+
+.gsc-stats dt {
+    flex: 1;
+}
+
+.gsc-stats dd {
+    margin-bottom: 10px;
+}
+.gsc-stats dd:last-child {
+    margin-bottom: 0;
+}

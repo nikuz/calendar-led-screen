@@ -24,6 +24,12 @@ export function SampleCreator() {
         setPromptInput(target.value);
     };
     
+    const promptKeyDownHandler = (event: KeyboardEvent) => {
+        if (event.code === 'Escape') {
+            gameStateActor.send({ type: 'CLOSE_SAMPLE_CREATOR' });
+        }
+    };
+    
     const previewChangeHandler = (event: InputEvent) => {
         const target = event.target as HTMLInputElement;
         const cursorPosition = target.selectionStart;
@@ -63,6 +69,12 @@ export function SampleCreator() {
         }
     });
     
+    createEffect(() => {
+        if (!newTypingSample()) {
+            promptElRef?.focus();
+        }
+    });
+    
     return (
         <div class="sample-creator-container">
             <Show when={newTypingSample()}>
@@ -88,6 +100,7 @@ export function SampleCreator() {
                         autocomplete="off"
                         spellcheck="false"
                         autofocus
+                        onKeyDown={promptKeyDownHandler}
                         onInput={promptChangeHandler}
                     >
                         {promptInput()}

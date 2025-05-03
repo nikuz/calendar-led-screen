@@ -5,6 +5,7 @@ import {
     SampleCreator,
     TypingSamples,
     Game,
+    GameSummary,
 } from './components';
 import {
     SCREEN_WIDTH,
@@ -16,11 +17,11 @@ import './GamePage.css';
 export default function GamePage() {
     const sampleCreatorIsOpen = useGameStateSelect('sampleCreatorIsOpen');
     const selectedSampleIndex = useGameStateSelect('selectedSampleIndex');
+    const gameOver = useGameStateSelect('gameOver');
     const navigate = useNavigate();
 
     const keydownHandler = (event: KeyboardEvent) => {
-        const activeElement = document.activeElement;
-        if (event.code === 'KeyG' && (!activeElement || activeElement.nodeName !== 'TEXTAREA')) {
+        if (event.code === 'KeyG' && selectedSampleIndex() === undefined && !sampleCreatorIsOpen() && !gameOver()) {
             navigate(ROUTER_HOME);
         }
     };
@@ -40,14 +41,17 @@ export default function GamePage() {
                 height: `${SCREEN_HEIGHT}px`,
             }}
         >
-            <Show when={selectedSampleIndex() === undefined && sampleCreatorIsOpen()}>
+            <Show when={selectedSampleIndex() === undefined && sampleCreatorIsOpen() && !gameOver()}>
                 <SampleCreator /> 
             </Show>
-            <Show when={selectedSampleIndex() === undefined && !sampleCreatorIsOpen()}>
+            <Show when={selectedSampleIndex() === undefined && !sampleCreatorIsOpen() && !gameOver()}>
                 <TypingSamples />
             </Show>
-            <Show when={selectedSampleIndex() !== undefined}>
+            <Show when={selectedSampleIndex() !== undefined && !gameOver()}>
                 <Game />
+            </Show>
+            <Show when={gameOver()}>
+                <GameSummary />
             </Show>
         </div>
     );

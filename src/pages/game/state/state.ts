@@ -11,6 +11,13 @@ const gameState = (input: string[]) => {
         focusedSampleIndex: 0,
 
         sampleCreatorIsOpen: false,
+
+        hitCharacters: new Map(),
+        missCharacters: new Map(),
+
+        gameStartTime: 0,
+        gameStopTime: 0,
+        gameOver: false,
     });
 
     const send = (event: GameStateEvents) => {
@@ -20,7 +27,10 @@ const gameState = (input: string[]) => {
                 break;
             
             case 'CLOSE_SAMPLE_CREATOR':
-                setContext('sampleCreatorIsOpen', false);
+                setContext({
+                    sampleCreatorIsOpen: false,
+                    focusedSampleIndex: 0,
+                });
                 break;
             
             case 'FOCUS_PREV_SAMPLE': {
@@ -46,7 +56,10 @@ const gameState = (input: string[]) => {
             }
                 
             case 'SELECT_SAMPLE':
-                setContext('selectedSampleIndex', event.sampleIndex);
+                setContext({
+                    selectedSampleIndex: event.sampleIndex,
+                    gameStartTime: Date.now(),
+                });
                 break;
             
             case 'ADD_SAMPLE': {
@@ -58,6 +71,38 @@ const gameState = (input: string[]) => {
                 storeTypingSamples(samples);
                 break;
             }
+            
+            case 'HIT_CHARACTER': {
+                const hitCharacters = new Map(context.hitCharacters);
+                hitCharacters.set(event.index, true);
+                setContext('hitCharacters', hitCharacters);
+                break;
+            }
+                
+            case 'MISS_CHARACTER': {
+                const missCharacters = new Map(context.missCharacters);
+                missCharacters.set(event.index, true);
+                setContext('missCharacters', missCharacters);
+                break;
+            }
+                
+            case 'GAME_OVER':
+                setContext({
+                    gameOver: true,
+                    gameStopTime: Date.now(),
+                });
+                break;
+            
+            case 'RESTART':
+                setContext({
+                    gameOver: false,
+                    selectedSampleIndex: undefined,
+                    hitCharacters: new Map(),
+                    missCharacters: new Map(),
+                    gameStartTime: 0,
+                    gameStopTime: 0,
+                });
+                break;
         }
     };
 

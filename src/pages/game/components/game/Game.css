@@ -1,0 +1,72 @@
+.game-container {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.gc-fade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 5;
+}
+
+.gc-separator {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background-color: #FFF;
+}
+
+.gc-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font-family: "unscii-16";
+    color: #FFF;
+}
+
+.gc-character {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.gc-character.isSmall {
+    font-size: 32px;
+    vertical-align: text-top;
+}
+
+.gc-character.isSpace {
+    height: 2ch;
+    opacity: 0.5;
+}
+
+.gc-character.isHit {
+    color: #0FF;
+}
+
+.gc-character.isMiss {
+    color: #F00;
+}
+
+.gc-character.isSpace.isHit {
+    background-color: #0FF;
+}
+
+.gc-character.isSpace.isMiss {
+    background-color: #F00;
+}
+
+.gc-counter {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    z-index: 6;
+}
