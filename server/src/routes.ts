@@ -28,13 +28,13 @@ export default function routes(app: Express, io: Server) {
         }
     });
 
-    app.use(['/', '/game', '/index.html'], (_, res) => {
-        res.sendFile(path.resolve(UIBuildPath, 'index.html'));
-    });
-
     app.get('/calendar/events', calendarControllers.getCalendarEvents);
 
     app.get('/game/typing-sample', gameControllers.getTypingSample);
+
+    app.use(['/', '/game', '/index.html'], (_, res) => {
+        res.sendFile(path.resolve(UIBuildPath, 'index.html'));
+    });
 
     io.on('connection', (socket) => {
         console.log('websocket user connected');

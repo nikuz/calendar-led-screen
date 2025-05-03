@@ -67,6 +67,7 @@ const gameState = (input: string[]) => {
                 setContext({
                     typingSamples: samples,
                     selectedSampleIndex: 0,
+                    sampleCreatorIsOpen: false,
                 });
                 storeTypingSamples(samples);
                 break;
