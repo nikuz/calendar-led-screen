@@ -1,4 +1,4 @@
-import { createMemo, onMount } from 'solid-js';
+import { createMemo } from 'solid-js';
 import { gameStateActor, useGameStateSelect } from '@game/state';
 import { GAME_CHARACTERS_PER_WORD } from '@game/constants';
 import './GameSummary.css';
@@ -8,8 +8,7 @@ export function GameSummary() {
     const missCharacters = useGameStateSelect('missCharacters');
     const gameStartTime = useGameStateSelect('gameStartTime');
     const gameStopTime = useGameStateSelect('gameStopTime');
-    let restartBtnEl: HTMLButtonElement | undefined;
-
+    
     const gameDurationMin = createMemo(() => (gameStopTime() - gameStartTime()) / 1000 / 60);
 
     const wpm = createMemo(() => {
@@ -21,12 +20,6 @@ export function GameSummary() {
         gameStateActor.send({ type: 'RESTART' });
     };
 
-    onMount(() => {
-        requestAnimationFrame(() => {
-            restartBtnEl?.focus();
-        });
-    });
-    
     return (
         <div class="game-summary-container">
             <dl class="gsc-stats">
@@ -41,7 +34,6 @@ export function GameSummary() {
             </dl>
 
             <button
-                ref={restartBtnEl}
                 class="game-btn"
                 onClick={restartHandler}
             >
