@@ -7,17 +7,22 @@
 .gsc-stats {
     display: flex;
     flex-wrap: wrap;
-    max-width: 100px;
+    max-width: 150px;
     margin: 10px 0 15px;
     padding: 0;
 }
 
 .gsc-stats dt {
-    flex: 1;
+    width: 50%;
+    margin: 0;
+    padding: 0;
 }
 
 .gsc-stats dd {
-    margin-bottom: 10px;
+    width: 49%;
+    margin: 0 0 10px;
+    padding: 0;
+    text-align: right;
 }
 .gsc-stats dd:last-child {
     margin-bottom: 0;
