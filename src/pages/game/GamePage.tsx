@@ -1,16 +1,26 @@
-import { onMount, onCleanup } from 'solid-js';
+import { onMount, onCleanup, Show } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
+import { useGameStateSelect } from './state';
+import {
+    SampleCreator,
+    TypingSamples,
+    Game,
+} from './components';
 import {
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     ROUTER_HOME,
 } from 'src/constants';
+import './GamePage.css';
 
 export default function GamePage() {
+    const sampleCreatorIsOpen = useGameStateSelect('sampleCreatorIsOpen');
+    const selectedSampleIndex = useGameStateSelect('selectedSampleIndex');
     const navigate = useNavigate();
-    
+
     const keydownHandler = (event: KeyboardEvent) => {
-        if (event.code === 'KeyG') {
+        const activeElement = document.activeElement;
+        if (event.code === 'KeyG' && (!activeElement || activeElement.nodeName !== 'TEXTAREA')) {
             navigate(ROUTER_HOME);
         }
     };
@@ -30,7 +40,15 @@ export default function GamePage() {
                 height: `${SCREEN_HEIGHT}px`,
             }}
         >
-            Game page
+            <Show when={sampleCreatorIsOpen()}>
+                <SampleCreator /> 
+            </Show>
+            <Show when={selectedSampleIndex() === undefined && !sampleCreatorIsOpen()}>
+                <TypingSamples />
+            </Show>
+            <Show when={selectedSampleIndex() !== undefined}>
+                <Game />
+            </Show>
         </div>
     );
 }

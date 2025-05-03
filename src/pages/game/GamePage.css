@@ -1,0 +1,20 @@
+.game-btn {
+    padding: 5px 10px;
+    border: 1px solid #FFF;
+    border-radius: 0;
+    background: #333;
+    font: 8px "unscii-8";
+    color: #FFF;
+}
+
+.game-btn:focus,
+.game-btn.focused {
+    border-color: bisque;
+    background: #555;
+    outline: none;
+}
+
+.game-btn:active {
+    transform: translateY(1px);
+    box-shadow: 1px 1px 0 bisque;
+}

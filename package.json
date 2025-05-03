@@ -14,17 +14,17 @@
     "@solidjs/router": "^0.15.3",
     "classnames": "^2.5.1",
     "socket.io-client": "^4.8.1",
-    "solid-js": "^1.9.5"
+    "solid-js": "^1.9.6"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "@typescript-eslint/eslint-plugin": "^8.29.0",
-    "@typescript-eslint/parser": "^8.29.0",
-    "eslint": "^9.24.0",
+    "@types/node": "^22.15.3",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.26.0",
     "eslint-plugin-solid": "^0.14.5",
     "globals": "^16.0.0",
     "typescript": "^5.8.3",
-    "vite": "^6.3.2",
+    "vite": "^6.3.4",
     "vite-plugin-solid": "^2.11.6"
   }
 }

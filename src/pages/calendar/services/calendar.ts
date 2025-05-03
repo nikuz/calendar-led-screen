@@ -17,7 +17,7 @@ async function getCalendarEvents(props: Props): Promise<CalendarEvent[]> {
         to: props.to,
     });
 
-    const response = await fetch(routerUtils.withApiUrl(`/calendar-events?${queryParams}`));
+    const response = await fetch(routerUtils.withApiUrl(`/calendar/events?${queryParams}`));
 
     if (!response.ok) {
         throw response.status;

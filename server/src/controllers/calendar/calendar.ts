@@ -18,12 +18,12 @@ const calendar = google.calendar({
     auth,
 });
 
-export async function getCalendarEvents(request: Request, res: Response) {
+export async function getCalendarEvents(req: Request, res: Response) {
     const now = new Date();
     const todayStartTime = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const tomorrowStartTime = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-    const from = request.query.from?.toString() ?? todayStartTime.toISOString();
-    const to = request.query.to?.toString() ?? tomorrowStartTime.toISOString();
+    const from = req.query.from?.toString() ?? todayStartTime.toISOString();
+    const to = req.query.to?.toString() ?? tomorrowStartTime.toISOString();
 
     if (process.env.NODE_ENV === 'development') {
         const responseFilePath = path.join(url.fileURLToPath(new URL('.', import.meta.url)), 'response.json');

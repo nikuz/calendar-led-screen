@@ -1,7 +1,7 @@
 import { Router, Route } from '@solidjs/router';
 import App from './App';
-import CalendarPage from '@calendar/Calendar';
-import GamePage from '@game/Game';
+import CalendarPage from '@calendar/CalendarPage';
+import GamePage from '@game/GamePage';
 import {
     ROUTER_HOME,
     ROUTER_GAME,
