@@ -28,7 +28,7 @@ export default function routes(app: Express, io: Server) {
         }
     });
 
-    app.use(['/', '/index.html'], (_, res) => {
+    app.use(['/', '/game', '/index.html'], (_, res) => {
         res.sendFile(path.resolve(UIBuildPath, 'index.html'));
     });
 
