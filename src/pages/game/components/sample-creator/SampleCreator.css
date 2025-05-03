@@ -1,3 +1,7 @@
+.sample-creator-container {
+    height: 100%;
+}
+
 .scc-prompt-container {
     display: flex;
     flex-direction: column;
@@ -16,10 +20,33 @@
     background: #333;
     font: 16px "unscii-16";
     color: #FFF;
+    resize: none;
+    scrollbar-width: thin;
+    scrollbar-color: #555 #333;
 }
 
 .scc-prompt-field:focus {
     background: #555;
-    resize: none;
+    scrollbar-color: #333 #555;
+    outline: none;
+}
+
+.scc-preview-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.scc-preview {
+    width: calc(100% - 22px);
+    padding: 5px 10px;
+    background: none;
+    border: 1px solid #FFF;
+    font: 16px "unscii-16";
+    color: #FFF;
+}
+
+.scc-preview:focus {
     outline: none;
 }

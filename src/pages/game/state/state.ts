@@ -1,6 +1,7 @@
 import { createRoot } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import { retrieveStoredTypingSamples } from '@game/utils';
+import { retrieveStoredTypingSamples, storeTypingSamples } from '@game/utils';
+import { GAME_TYPING_SAMPLE_MAX_AMOUNT } from '@game/constants';
 import { GameStateContext, GameStateEvents } from './types';
 
 const gameState = (input: string[]) => {
@@ -47,6 +48,16 @@ const gameState = (input: string[]) => {
             case 'SELECT_SAMPLE':
                 setContext('selectedSampleIndex', event.sampleIndex);
                 break;
+            
+            case 'ADD_SAMPLE': {
+                const samples = [event.sample, ...context.typingSamples].slice(0, GAME_TYPING_SAMPLE_MAX_AMOUNT);
+                setContext({
+                    typingSamples: samples,
+                    selectedSampleIndex: 0,
+                });
+                storeTypingSamples(samples);
+                break;
+            }
         }
     };
 
@@ -57,9 +68,3 @@ const gameState = (input: string[]) => {
 };
 
 export const gameStateActor = createRoot(() => gameState(retrieveStoredTypingSamples()));
-// export const gameStateActor = createRoot(() => gameState([
-//     "```javascript↵// Function to calculate the area of a rectangle.↵function calculateRectangleArea(length, width) {↵  // Check if the inputs are valid numbers.↵  if (typeof length !== 'number' || typeof width !== 'number') {↵    return",
-//     "```javascript↵// Function to calculate the area of a rectangle.↵function calculateRectangleArea(length, width) {↵  // Check if the inputs are valid numbers.↵  if (typeof length !== 'number' || typeof width !== 'number') {↵    return",
-//     "```javascript↵// Function to calculate the area of a rectangle.↵function calculateRectangleArea(length, width) {↵  // Check if the inputs are valid numbers.↵  if (typeof length !== 'number' || typeof width !== 'number') {↵    return",
-//     "```javascript↵// Function to calculate the area of a rectangle.↵function calculateRectangleArea(length, width) {↵  // Check if the inputs are valid numbers.↵  if (typeof length !== 'number' || typeof width !== 'number') {↵    return",
-// ]));

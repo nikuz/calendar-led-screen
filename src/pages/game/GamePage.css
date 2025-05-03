@@ -14,7 +14,11 @@
     outline: none;
 }
 
-.game-btn:active {
+.game-btn:active:not(:disabled) {
     transform: translateY(1px);
     box-shadow: 1px 1px 0 bisque;
+}
+
+.game-btn:disabled {
+    opacity: 0.5;
 }

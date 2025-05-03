@@ -20,9 +20,15 @@ export interface SelectSampleEvent {
     sampleIndex: number,
 }
 
+export interface AddSampleEvent {
+    type: 'ADD_SAMPLE',
+    sample: string,
+}
+
 export type GameStateEvents =
     | OpenSampleCreatorEvent
     | CloseSampleCreatorEvent
     | FocusPrevSampleEvent
     | FocusNextSampleEvent
-    | SelectSampleEvent;
+    | SelectSampleEvent
+    | AddSampleEvent;

@@ -40,7 +40,7 @@ export default function GamePage() {
                 height: `${SCREEN_HEIGHT}px`,
             }}
         >
-            <Show when={sampleCreatorIsOpen()}>
+            <Show when={selectedSampleIndex() === undefined && sampleCreatorIsOpen()}>
                 <SampleCreator /> 
             </Show>
             <Show when={selectedSampleIndex() === undefined && !sampleCreatorIsOpen()}>
