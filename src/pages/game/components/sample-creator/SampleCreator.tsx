@@ -37,10 +37,6 @@ export function SampleCreator() {
         target.setSelectionRange(cursorPosition, cursorPosition);
     };
     
-    const previewBlurHandler = () => {
-        previewElRef?.focus();
-    };
-    
     const previewKeyDownHandler = (event: KeyboardEvent) => {
         switch (event.code) {
             case 'Enter':
@@ -83,9 +79,8 @@ export function SampleCreator() {
                         ref={previewElRef}
                         type='text'
                         value={revealInvisibleCharacters(newTypingSample())}
-                        class="scc-preview"
+                        class="game-input scc-preview"
                         autofocus
-                        onBlur={previewBlurHandler}
                         onInput={previewChangeHandler}
                         onKeyDown={previewKeyDownHandler}
                     />
@@ -95,7 +90,7 @@ export function SampleCreator() {
                 <div class="scc-prompt-container">
                     <textarea
                         ref={promptElRef}
-                        class="scc-prompt-field"
+                        class="game-input scc-prompt-field"
                         placeholder="What would you like to practice today?"
                         autocomplete="off"
                         spellcheck="false"

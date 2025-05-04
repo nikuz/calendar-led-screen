@@ -68,6 +68,7 @@ const gameState = (input: string[]) => {
                     typingSamples: samples,
                     selectedSampleIndex: 0,
                     sampleCreatorIsOpen: false,
+                    gameStartTime: Date.now(),
                 });
                 storeTypingSamples(samples);
                 break;

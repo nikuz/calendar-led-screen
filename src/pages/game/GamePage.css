@@ -22,3 +22,21 @@
 .game-btn:disabled {
     opacity: 0.5;
 }
+
+.game-input {
+    padding: 5px 10px;
+    border: 1px solid #FFF;
+    border-radius: 0;
+    background: #333;
+    font: 16px "unscii-16";
+    color: #FFF;
+    resize: none;
+    scrollbar-width: thin;
+    scrollbar-color: #555 #333;
+}
+
+.game-input:focus {
+    background: #555;
+    scrollbar-color: #333 #555;
+    outline: none;
+}
