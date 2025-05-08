@@ -64,11 +64,11 @@ export function Game() {
                 index: nextIndex,
             });
         } else {
-            setNextSymbolIndex(nextIndex + 1);
-            gameStateActor.send({
-                type: 'MISS_CHARACTER',
-                index: nextIndex,
-            });
+            // setNextSymbolIndex(nextIndex + 1);
+            // gameStateActor.send({
+            //     type: 'MISS_CHARACTER',
+            //     index: nextIndex,
+            // });
         }
     };
 
