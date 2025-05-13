@@ -98,7 +98,13 @@ export function Time() {
     });
 
     return (
-        <div id="time-container" style={{ opacity: brightness() / 100 }}>
+        <div
+            id="time-container"
+            style={{
+                opacity: brightness() / 100,
+                'z-index': activeEventIndex(),
+            }}
+        >
             <div
                 id="tc-clock"
                 ref={timeValueElRef}

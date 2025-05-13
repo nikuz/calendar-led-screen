@@ -85,6 +85,7 @@ export default function EventItem(props: Props) {
                     width: `${width}px`,
                     height: `${props.height}%`,
                     left: `${startPosition}px`,
+                    'z-index': props.index,
                 }}
             >
                 <div class="ecei-content" style={{
