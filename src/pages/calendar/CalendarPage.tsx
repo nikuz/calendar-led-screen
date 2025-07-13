@@ -67,6 +67,7 @@ export default function CalendarPage() {
             style={{
                 width: `${SCREEN_WIDTH}px`,
                 height: `${SCREEN_HEIGHT}px`,
+                cursor: 'none',
             }}
             onMouseMove={mouseMoveHandler}
             onMouseLeave={mouseLeaveHandler}
