@@ -8,6 +8,8 @@ export interface CalendarEvent {
         email: string,
     },
     height: number,
+    status: string,
+    transparency: string,
 }
 
 export interface CalendarTime {

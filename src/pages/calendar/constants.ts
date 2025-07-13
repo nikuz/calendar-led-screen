@@ -1,4 +1,6 @@
 export const IGNORE_EVENTS_SUMMARY = ['busy'];
+export const IGNORE_EVENTS_STATUS = ['canceled'];
+export const IGNORE_EVENTS_TRANSPARENCY = ['transparent'];
 
 // time
 export const TIME_COLOR = '#FFF';

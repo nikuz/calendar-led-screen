@@ -2,6 +2,8 @@ import { routerUtils } from 'src/utils';
 import { DAY_START_TIME, DAY_END_TIME } from 'src/constants';
 import {
     IGNORE_EVENTS_SUMMARY,
+    IGNORE_EVENTS_STATUS,
+    IGNORE_EVENTS_TRANSPARENCY,
     EVENT_OVERLAP_HEIGHT_PUNISHMENT,
 } from '@calendar/constants';
 import { CalendarEvent } from '@calendar/types';
@@ -43,7 +45,9 @@ async function getCalendarEvents(props: Props): Promise<CalendarEvent[]> {
 
     const filteredEvents = events.filter((item) => {
         const eventStartTime = item.startDate.getHours() * 60 + item.startDate.getMinutes();
-        return !IGNORE_EVENTS_SUMMARY.includes(item.summary.toLowerCase())
+        return !IGNORE_EVENTS_SUMMARY.includes(item.summary?.toLowerCase())
+            && !IGNORE_EVENTS_STATUS.includes(item.status?.toLowerCase())
+            && !IGNORE_EVENTS_TRANSPARENCY.includes(item.transparency?.toLowerCase())
             && eventStartTime > DAY_START_TIME
             && eventStartTime < DAY_END_TIME;
     });
