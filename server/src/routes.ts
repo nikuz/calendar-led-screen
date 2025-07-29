@@ -14,6 +14,7 @@ const UIBuildPath = path.resolve(__DIRNAME, '../../dist');
 export default function routes(app: Express, io: Server) {
     app.use([
         '/assets',
+        '/static',
         '/favicon.*any',
         '/fonts/*name',
         '/sounds/*name',
