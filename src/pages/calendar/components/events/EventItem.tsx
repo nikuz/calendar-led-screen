@@ -41,6 +41,7 @@ export default function EventItem(props: Props) {
         outMax: SCREEN_WIDTH * EVENTS_ZOOM,
     }));
     const width = endPosition - startPosition;
+    const summary = props.summary.replace(/\p{Extended_Pictographic}/gu, '');
     let blinkTimer: ReturnType<typeof setTimeout> | undefined;
 
     const isActive = createMemo(() => activeEventIndex() === props.index);
@@ -103,7 +104,7 @@ export default function EventItem(props: Props) {
                         </div>
                     </div>
                     <div class="ecei-summary">
-                        <div class="ecei-summary-text">{props.summary}</div>
+                        <div class="ecei-summary-text">{summary}</div>
                     </div>
                 </div>
             </div>
