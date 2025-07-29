@@ -13,7 +13,7 @@ import {
 let socket: Socket | undefined;
 
 export function brightnessInitiateConnection() {
-    socket = io(import.meta.env.VITE_API_URL);
+    socket = io(import.meta.env.PUBLIC_API_URL);
     let prevBrightness = 0;
 
     socket.on('brightness', (value) => {

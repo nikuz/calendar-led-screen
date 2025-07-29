@@ -2,19 +2,19 @@
   font-family: "unscii-8";
   font-style: normal;
   font-weight: normal;
-  src: url(/fonts/unscii-8.woff) format(woff);
+  src: url(/public/fonts/unscii-8.woff) format(woff);
 }
 
 @font-face {
   font-family: "unscii-16";
   font-style: normal;
   font-weight: normal;
-  src: url(/fonts/unscii-16.woff) format(woff);
+  src: url(/public/fonts/unscii-16.woff) format(woff);
 }
 
 @font-face {
   font-family: "Tiny5-8";
   font-style: normal;
   font-weight: normal;
-  src: url(/fonts/Tiny5.ttf);
+  src: url(/public/fonts/Tiny5.ttf);
 }

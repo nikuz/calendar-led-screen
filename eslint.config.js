@@ -39,7 +39,7 @@ export default [
         },
     },
     {
-        files: ['vite.config.ts'],
+        files: ['rsbuild.config.ts'],
         languageOptions: {
             parserOptions: {
                 project: './tsconfig.node.json',

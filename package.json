@@ -3,11 +3,11 @@
   "version": "0.0.2",
   "type": "module",
   "scripts": {
-    "dev": "npm run start-server & vite",
+    "dev": "npm run start-server & rsbuild dev",
     "start-server": "npm run dev --prefix server",
     "tsc": "tsc -b",
-    "build": "vite build",
-    "preview": "vite preview",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -17,14 +17,15 @@
     "solid-js": "^1.9.7"
   },
   "devDependencies": {
+    "@rsbuild/core": "^1.4.11",
+    "@rsbuild/plugin-babel": "^1.0.5",
+    "@rsbuild/plugin-solid": "^1.0.5",
     "@types/node": "^24.1.0",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.38.0",
     "eslint": "^9.32.0",
     "eslint-plugin-solid": "^0.14.5",
     "globals": "^16.3.0",
-    "typescript": "^5.8.3",
-    "vite": "^7.0.6",
-    "vite-plugin-solid": "^2.11.8"
+    "typescript": "^5.8.3"
   }
 }
