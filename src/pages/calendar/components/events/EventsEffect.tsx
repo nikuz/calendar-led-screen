@@ -119,7 +119,10 @@ export default function EventsEffect() {
     };
 
     createEffect(() => {
-        if (activeEvent() && activeEventIndex() !== approachingEventConfirmedIndex()) {
+        const eventIndex = activeEventIndex();
+        const approachingEventIndex = approachingEventConfirmedIndex();
+
+        if (activeEvent() && eventIndex !== undefined && (approachingEventIndex === undefined || eventIndex > approachingEventIndex)) {
             showEffect();
         } else {
             hideEffect();
