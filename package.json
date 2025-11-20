@@ -5,27 +5,29 @@
   "scripts": {
     "dev": "npm run start-server & rsbuild dev",
     "start-server": "npm run dev --prefix server",
+    "sandbox": "npm run start-sandbox-server & rsbuild dev",
+    "start-sandbox-server": "npm run sandbox --prefix server",
     "tsc": "tsc -b",
     "build": "rsbuild build",
     "preview": "rsbuild preview",
     "lint": "eslint ."
   },
   "dependencies": {
-    "@solidjs/router": "^0.15.3",
+    "@solidjs/router": "^0.15.4",
     "classnames": "^2.5.1",
     "socket.io-client": "^4.8.1",
-    "solid-js": "^1.9.7"
+    "solid-js": "^1.9.10"
   },
   "devDependencies": {
-    "@rsbuild/core": "^1.4.11",
-    "@rsbuild/plugin-babel": "^1.0.5",
-    "@rsbuild/plugin-solid": "^1.0.5",
-    "@types/node": "^24.1.0",
-    "@typescript-eslint/eslint-plugin": "^8.38.0",
-    "@typescript-eslint/parser": "^8.38.0",
-    "eslint": "^9.32.0",
+    "@rsbuild/core": "^1.6.7",
+    "@rsbuild/plugin-babel": "^1.0.6",
+    "@rsbuild/plugin-solid": "^1.0.6",
+    "@types/node": "^24.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.47.0",
+    "eslint": "^9.39.1",
     "eslint-plugin-solid": "^0.14.5",
-    "globals": "^16.3.0",
-    "typescript": "^5.8.3"
+    "globals": "^16.5.0",
+    "typescript": "^5.9.3"
   }
 }
