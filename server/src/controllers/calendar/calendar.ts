@@ -25,7 +25,7 @@ export async function getCalendarEvents(req: Request, res: Response) {
     const from = req.query.from?.toString() ?? todayStartTime.toISOString();
     const to = req.query.to?.toString() ?? tomorrowStartTime.toISOString();
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development-sandbox') {
         const responseFilePath = path.join(url.fileURLToPath(new URL('.', import.meta.url)), 'response.json');
         res.status(200).send(fs.readFileSync(responseFilePath));
         return;
@@ -39,7 +39,18 @@ export async function getCalendarEvents(req: Request, res: Response) {
             timeMax: to,
         }));
     }
-    const calendarResponses = await Promise.all(eventsRequests);
+    const calendarResults = await Promise.allSettled(eventsRequests);
+
+    // Log any failed calendar requests
+    calendarResults.forEach((result, index) => {
+        if (result.status === 'rejected') {
+            console.error('Failed to fetch events from calendar:', calendars[index]);
+        }
+    });
+
+    const calendarResponses = calendarResults
+        .filter((result) => result.status === 'fulfilled')
+        .map((result) => result.value);
 
     const eventTags = new Set();
     const uniqueEvents = [];
@@ -51,6 +62,11 @@ export async function getCalendarEvents(req: Request, res: Response) {
         }
 
         for (const event of events) {
+            // Skip cancelled events (e.g., deleted instances of recurring events)
+            if (event.status === 'cancelled') {
+                continue;
+            }
+
             if (eventTags.has(event.etag)) {
                 continue;
             }

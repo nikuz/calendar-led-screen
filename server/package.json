@@ -4,17 +4,18 @@
     "type": "module",
     "scripts": {
         "dev": "NODE_ENV=development nodemon --exec node --experimental-transform-types src/index.ts",
+        "sandbox": "NODE_ENV=development-sandbox nodemon --exec node --experimental-transform-types src/index.ts",
         "start": "node --experimental-transform-types src/index.ts",
         "lint": "eslint .",
         "build": "tsc"
     },
     "dependencies": {
-        "@google/genai": "^1.11.0",
+        "@google/genai": "^1.30.0",
         "cors": "^2.8.5",
-        "dotenv": "^17.2.1",
+        "dotenv": "^17.2.3",
         "express": "^5.1.0",
-        "google-auth-library": "^10.2.0",
-        "googleapis": "^154.1.0",
+        "google-auth-library": "^10.5.0",
+        "googleapis": "^166.0.0",
         "socket.io": "^4.8.1"
     },
     "devDependencies": {
@@ -23,7 +24,7 @@
         "@typescript-eslint/eslint-plugin": "^8.38.0",
         "@typescript-eslint/parser": "^8.38.0",
         "eslint": "^9.32.0",
-        "nodemon": "^3.1.10",
+        "nodemon": "^3.1.11",
         "typescript": "^5.8.3"
     }
 }

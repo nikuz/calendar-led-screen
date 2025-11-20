@@ -32,7 +32,7 @@ export class BrightnessSensorReader {
             return;
         }
 
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'development-sandbox') {
             this.socket.emit('brightness', BRIGHTNESS_MAX);
             return;
         }
