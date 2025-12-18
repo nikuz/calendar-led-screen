@@ -1,7 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import * as url from 'node:url';
-import { google } from 'googleapis';
+import { google, calendar_v3 } from 'googleapis';
 import { GoogleAuth } from 'google-auth-library';
 import type { Request, Response } from 'express';
 import calendars from '../../calendar-ids.json' with { type: 'json' };
@@ -53,17 +53,27 @@ export async function getCalendarEvents(req: Request, res: Response) {
         .map((result) => result.value);
 
     const eventTags = new Set();
+    const canceledEvents = new Set();
     const uniqueEvents = [];
 
     for (const response of calendarResponses) {
-        const events = response.data.items;
+        const events = response.data.items?.toSorted((a, b) => {
+            if (isCancelled(a) && !isCancelled(b)) {
+                return -1;
+            } else if (!isCancelled(a) && isCancelled(b)) {
+                return 1;
+            }
+
+            return 0;
+        });
         if (!events) {
             continue;
         }
 
         for (const event of events) {
             // Skip cancelled events (e.g., deleted instances of recurring events)
-            if (event.status === 'cancelled') {
+            if (isCancelled(event) || canceledEvents.has(event.etag)) {
+                canceledEvents.add(event.etag);
                 continue;
             }
 
@@ -76,4 +86,8 @@ export async function getCalendarEvents(req: Request, res: Response) {
     }
 
     res.status(200).send(uniqueEvents);
+}
+
+function isCancelled(event: calendar_v3.Schema$Event) {
+    return event.status === 'cancelled';
 }
