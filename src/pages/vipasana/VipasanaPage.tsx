@@ -166,6 +166,9 @@ export default function VipasanaPage() {
                 <img
                     src="/icons/play.png"
                     class="vipasana-play-icon"
+                    style={{
+                        opacity: brightness() / 100,
+                    }}
                 />
             </Show>
         </div>
