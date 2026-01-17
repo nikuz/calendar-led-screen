@@ -110,7 +110,7 @@ export default function VipasanaPage() {
         >
             <Time
                 position={timePosition()}
-                positionMin={0}
+                positionMin={1}
                 positionMax={timePositionMax()}
                 forceNight
             />
