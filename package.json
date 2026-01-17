@@ -15,19 +15,19 @@
   "dependencies": {
     "@solidjs/router": "^0.15.4",
     "classnames": "^2.5.1",
-    "socket.io-client": "^4.8.1",
+    "socket.io-client": "^4.8.3",
     "solid-js": "^1.9.10"
   },
   "devDependencies": {
-    "@rsbuild/core": "^1.6.7",
-    "@rsbuild/plugin-babel": "^1.0.6",
-    "@rsbuild/plugin-solid": "^1.0.6",
-    "@types/node": "^24.10.1",
-    "@typescript-eslint/eslint-plugin": "^8.47.0",
-    "@typescript-eslint/parser": "^8.47.0",
-    "eslint": "^9.39.1",
+    "@rsbuild/core": "^1.7.2",
+    "@rsbuild/plugin-babel": "^1.0.7",
+    "@rsbuild/plugin-solid": "^1.0.7",
+    "@types/node": "^25.0.9",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "eslint": "^9.39.2",
     "eslint-plugin-solid": "^0.14.5",
-    "globals": "^16.5.0",
+    "globals": "^17.0.0",
     "typescript": "^5.9.3"
   }
 }

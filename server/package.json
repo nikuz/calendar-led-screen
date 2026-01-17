@@ -10,21 +10,21 @@
         "build": "tsc"
     },
     "dependencies": {
-        "@google/genai": "^1.30.0",
+        "@google/genai": "^1.37.0",
         "cors": "^2.8.5",
         "dotenv": "^17.2.3",
-        "express": "^5.1.0",
+        "express": "^5.2.1",
         "google-auth-library": "^10.5.0",
-        "googleapis": "^166.0.0",
-        "socket.io": "^4.8.1"
+        "googleapis": "^170.1.0",
+        "socket.io": "^4.8.3"
     },
     "devDependencies": {
         "@types/cors": "^2.8.19",
-        "@types/express": "^5.0.3",
-        "@typescript-eslint/eslint-plugin": "^8.38.0",
-        "@typescript-eslint/parser": "^8.38.0",
-        "eslint": "^9.32.0",
+        "@types/express": "^5.0.6",
+        "@typescript-eslint/eslint-plugin": "^8.53.0",
+        "@typescript-eslint/parser": "^8.53.0",
+        "eslint": "^9.39.2",
         "nodemon": "^3.1.11",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     }
 }
