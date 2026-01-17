@@ -8,14 +8,17 @@ import {
     SCREEN_HEIGHT,
     ROUTER_HOME,
 } from 'src/constants';
-import { VOLUME_VISIBILITY_TIMEOUT } from './constants';
+import {
+    VOLUME_VISIBILITY_TIMEOUT,
+    DEFAULT_VOLUME,
+} from './constants';
 import './VipasanaPage.css';
 
 export default function VipasanaPage() {
     const [timePosition, setTimePosition] = createSignal(0);
     const [timePositionMin] = createSignal(0.01);
     const [timePositionMax, setTimePositionMax] = createSignal(0);
-    const [volume, setVolume] = createSignal(0.5);
+    const [volume, setVolume] = createSignal(DEFAULT_VOLUME);
     const [isVolumeVisible, setIsVolumeVisible] = createSignal(false);
     const [paused, setPaused] = createSignal(false);
     const brightness = useAppStateSelect('brightness');
@@ -132,6 +135,13 @@ export default function VipasanaPage() {
                 cursor: 'none',
             }}
         >
+            <img
+                src="/vipasana/logo.png"
+                class="vipasana-logo"
+                style={{
+                    opacity: Math.min(brightness() / 100, 0.5),
+                }}
+            />
             <Time
                 position={timePosition()}
                 positionMin={timePositionMin()}
