@@ -20,6 +20,7 @@ export default function routes(app: Express, io: Server) {
         '/sounds/*name',
         '/icons/*name',
         '/images/*name',
+        '/vipasana/*name',
     ], (req, res) => {
         const assetPath = path.join(UIBuildPath, req.originalUrl);
         if (!fs.existsSync(assetPath)) {
