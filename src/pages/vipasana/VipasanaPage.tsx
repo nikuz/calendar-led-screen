@@ -1,5 +1,6 @@
-import { createSignal, onMount, onCleanup, Show } from 'solid-js';
+import { createSignal, createMemo, createEffect, onMount, onCleanup, For, Show, on } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
+import cl from 'classnames';
 import { useAppStateSelect } from 'src/state';
 import { Time } from '@calendar/components';
 import {
@@ -7,15 +8,28 @@ import {
     SCREEN_HEIGHT,
     ROUTER_HOME,
 } from 'src/constants';
+import { VOLUME_VISIBILITY_TIMEOUT } from './constants';
 import './VipasanaPage.css';
 
 export default function VipasanaPage() {
     const [timePosition, setTimePosition] = createSignal(0);
+    const [timePositionMin] = createSignal(0.01);
     const [timePositionMax, setTimePositionMax] = createSignal(0);
+    const [volume, setVolume] = createSignal(0.5);
+    const [isVolumeVisible, setIsVolumeVisible] = createSignal(false);
     const [paused, setPaused] = createSignal(false);
     const brightness = useAppStateSelect('brightness');
     const navigate = useNavigate();
     let playerElRef: HTMLAudioElement | undefined;
+    let volumeVisibilityTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const volumeBars = createMemo(() => {
+        const bars = new Array<boolean>(10);
+        for (let i = 1; i <= 10; i++) {
+            bars[10 - i] = volume() * 10 >= i;
+        }
+        return bars;
+    });
 
     const timeUpdateHandler = (event: Event) => {
         const target = event.target as HTMLAudioElement;
@@ -53,11 +67,21 @@ export default function VipasanaPage() {
         if (!playerElRef) {
             return;
         }
-        playerElRef.volume = Math.min(
-            Math.max(playerElRef.volume + volumeStep, 0.1),
-            1
-        );
+        const roundedVolume = Number((playerElRef.volume + volumeStep).toFixed(1));
+        const newVolume = Math.min(Math.max(roundedVolume, 0.1), 1);
+        playerElRef.volume = newVolume;
+        setVolume(newVolume);
+        setIsVolumeVisible(true);
     };
+
+    createEffect(on([volume, isVolumeVisible], () => {
+        clearTimeout(volumeVisibilityTimer);
+        if (isVolumeVisible()) {
+            volumeVisibilityTimer = setTimeout(() => {
+                setIsVolumeVisible(false);
+            }, VOLUME_VISIBILITY_TIMEOUT);
+        }
+    }));
     
     const navigateToCalendarHandler = () => {
         navigate(ROUTER_HOME);
@@ -92,7 +116,7 @@ export default function VipasanaPage() {
     onMount(() => {
         document.addEventListener('keydown', keydownHandler);
         if (playerElRef) {
-            playerElRef.volume = 0.5;
+            playerElRef.volume = volume();
         }
     });
 
@@ -105,12 +129,12 @@ export default function VipasanaPage() {
             style={{
                 width: `${SCREEN_WIDTH}px`,
                 height: `${SCREEN_HEIGHT}px`,
-                opacity: brightness() / 100,
+                cursor: 'none',
             }}
         >
             <Time
                 position={timePosition()}
-                positionMin={1}
+                positionMin={timePositionMin()}
                 positionMax={timePositionMax()}
                 forceNight
             />
@@ -121,6 +145,23 @@ export default function VipasanaPage() {
                 onTimeUpdate={timeUpdateHandler}
                 onEnded={navigateToCalendarHandler}
             />
+            <div class={cl('vipasana-volume-bars', {
+                visible: isVolumeVisible(),
+                fading: !isVolumeVisible(),
+            })}>
+                <For each={volumeBars()}>
+                    {(item) => (
+                        <div
+                            class={cl('vipasana-volume-bar-item', {
+                                filled: item === true,
+                            })}
+                            style={{
+                                opacity: brightness() / 100,
+                            }}
+                        />
+                    )}
+                </For>
+            </div>
             <Show when={paused()}>
                 <img
                     src="/icons/play.png"

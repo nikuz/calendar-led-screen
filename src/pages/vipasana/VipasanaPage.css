@@ -4,3 +4,27 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
+.vipasana-volume-bars {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 25px;
+    opacity: 0;
+}
+
+.vipasana-volume-bars.visible {
+    opacity: 1;
+}
+
+.vipasana-volume-bars.fading {
+    animation: fadeout 1s linear forwards;
+}
+
+.vipasana-volume-bar-item {
+    height: 12px;
+    margin-top: 1px;
+}
+.vipasana-volume-bar-item.filled {
+    background: #FFF;
+}

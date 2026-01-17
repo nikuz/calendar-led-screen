@@ -1,0 +1,1 @@
+export const VOLUME_VISIBILITY_TIMEOUT = 1000; // ms
