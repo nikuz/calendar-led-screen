@@ -5,6 +5,7 @@ import {
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     ROUTER_GAME,
+    ROUTER_VIPASANA,
 } from 'src/constants';
 import {
     Time,
@@ -51,6 +52,10 @@ export default function CalendarPage() {
         }
         if (event.code === 'KeyG') {
             navigate(ROUTER_GAME);
+        }
+        if (event.code === 'KeyV') {
+            calendarStateActor.send({ type: 'RESTORE_TIME' });
+            navigate(ROUTER_VIPASANA);
         }
     };
 

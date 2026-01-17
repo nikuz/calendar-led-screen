@@ -33,7 +33,7 @@ export default function routes(app: Express, io: Server) {
 
     app.get('/game/typing-sample', gameControllers.getTypingSample);
 
-    app.use(['/', '/game', '/index.html'], (_, res) => {
+    app.use(['/', '/game', '/vipasana', '/index.html'], (_, res) => {
         res.sendFile(path.resolve(UIBuildPath, 'index.html'));
     });
 

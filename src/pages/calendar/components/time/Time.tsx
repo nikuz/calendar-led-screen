@@ -18,24 +18,44 @@ import {
 } from '@calendar/constants';
 import './Time.css';
 
-export function Time() {
+interface Props {
+    forceNight?: boolean,
+    position?: number,
+    positionMin?: number,
+    positionMax?: number,
+}
+
+export function Time(props: Props) {
     const brightness = useAppStateSelect('brightness');
     const time = useCalendarStateSelect('time');
     const timeIsHovered = useCalendarStateSelect('timeIsHovered');
     const activeEventIndex = useCalendarStateSelect('activeEventIndex');
-    const timePointerPosition = createMemo(() => Math.round(remapValue({
-        value: time().getHours() * 60 + time().getMinutes(),
-        inMin: DAY_START_TIME,
-        inMax: DAY_END_TIME,
-        outMin: 0,
-        outMax: SCREEN_WIDTH - TIME_POINTER_WIDTH,
-    })));
     let timeValueElRef: HTMLDivElement | undefined;
     let hoursElRef: HTMLDivElement | undefined;
     let minutesElRef: HTMLDivElement | undefined;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
-    const isNight = createMemo(() => timeUtils.isNightTime(time()));
+    const timePointerPosition = createMemo(() => {
+        let value = props.position;
+        let inMin = props.positionMin;
+        let inMax = props.positionMax;
+
+        if (value === undefined || inMin === undefined || inMax === undefined) {
+            value = time().getHours() * 60 + time().getMinutes();
+            inMin = DAY_START_TIME;
+            inMax = DAY_END_TIME;
+        }
+
+        return Math.round(remapValue({
+            value,
+            inMin,
+            inMax,
+            outMin: 0,
+            outMax: SCREEN_WIDTH - TIME_POINTER_WIDTH,
+        }));
+    });
+
+    const isNight = createMemo(() => props.forceNight || timeUtils.isNightTime(time()));
 
     const hours = createMemo(() => {
         let hours = time().getHours();

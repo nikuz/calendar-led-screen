@@ -23,7 +23,7 @@ export default function GamePage() {
     const navigate = useNavigate();
 
     const keydownHandler = (event: KeyboardEvent) => {
-        if (event.code === 'KeyG' && selectedSampleIndex() === undefined && !sampleCreatorIsOpen() && !gameOver()) {
+        if ((event.code === 'KeyG' || event.code === 'Escape') && selectedSampleIndex() === undefined && !sampleCreatorIsOpen() && !gameOver()) {
             navigate(ROUTER_HOME);
         }
     };

@@ -1,6 +1,7 @@
 // router
 export const ROUTER_HOME = '/';
 export const ROUTER_GAME = '/game';
+export const ROUTER_VIPASANA = '/vipasana';
 
 export const SCREEN_WIDTH = 1024; // px
 export const SCREEN_HEIGHT = 128; // px

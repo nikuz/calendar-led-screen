@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@calendar/*": ["./src/pages/calendar/*"],
-      "@game/*": ["./src/pages/game/*"]
+      "@game/*": ["./src/pages/game/*"],
+      "@vipasana/*": ["./src/pages/vipasana/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ESNext",
