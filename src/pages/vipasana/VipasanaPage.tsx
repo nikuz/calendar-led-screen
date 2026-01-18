@@ -139,7 +139,7 @@ export default function VipasanaPage() {
                 src="/vipasana/logo.png"
                 class="vipasana-logo"
                 style={{
-                    opacity: Math.min(brightness() / 100, 0.5),
+                    opacity: Math.min(brightness() / 100, 0.2),
                 }}
             />
             <Time
