@@ -76,8 +76,10 @@ export async function getCalendarEvents(req: Request, res: Response) {
                 canceledEvents.add(event.etag);
                 continue;
             }
-
             if (eventTags.has(event.etag)) {
+                continue;
+            }
+            if (isOutdated(event)) {
                 continue;
             }
             eventTags.add(event.etag);
@@ -88,6 +90,21 @@ export async function getCalendarEvents(req: Request, res: Response) {
     res.status(200).send(uniqueEvents);
 }
 
-function isCancelled(event: calendar_v3.Schema$Event) {
+function isCancelled(event: calendar_v3.Schema$Event): boolean {
     return event.status === 'cancelled';
+}
+
+function isOutdated(event: calendar_v3.Schema$Event): boolean {
+    if (!event.end || !event.end.dateTime) {
+        return false;
+    }
+    let eventEndDate = new Date(event.end.dateTime);
+    if (event.end.timeZone) {
+        eventEndDate = new Date(eventEndDate.toLocaleString('en-US', { timeZone: event.end.timeZone }));
+    }
+
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+
+    return startOfToday > eventEndDate;
 }
