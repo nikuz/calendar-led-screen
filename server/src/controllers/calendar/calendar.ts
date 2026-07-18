@@ -71,7 +71,6 @@ export async function getCalendarEvents(req: Request, res: Response) {
             continue;
         }
 
-        console.log(events);
         for (const event of events) {
             // Skip cancelled events (e.g., deleted instances of recurring events)
             if (isCancelled(event) || canceledEvents.has(event.etag)) {
