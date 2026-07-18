@@ -3,28 +3,28 @@
     "version": "0.0.1",
     "type": "module",
     "scripts": {
-        "dev": "NODE_ENV=development nodemon --exec node --experimental-transform-types src/index.ts",
-        "sandbox": "NODE_ENV=development-sandbox nodemon --exec node --experimental-transform-types src/index.ts",
-        "start": "node --experimental-transform-types src/index.ts",
+        "dev": "NODE_ENV=development nodemon --exec node src/index.ts",
+        "sandbox": "NODE_ENV=development-sandbox nodemon --exec node src/index.ts",
+        "start": "node src/index.ts",
         "lint": "eslint .",
         "build": "tsc"
     },
     "dependencies": {
-        "@google/genai": "^1.37.0",
-        "cors": "^2.8.5",
-        "dotenv": "^17.2.3",
-        "express": "^5.2.1",
-        "google-auth-library": "^10.5.0",
-        "googleapis": "^170.1.0",
-        "socket.io": "^4.8.3"
+        "@google/genai": "2.12.0",
+        "cors": "2.8.6",
+        "dotenv": "17.4.2",
+        "express": "5.2.1",
+        "google-auth-library": "10.9.0",
+        "googleapis": "173.0.0",
+        "socket.io": "4.8.3"
     },
     "devDependencies": {
-        "@types/cors": "^2.8.19",
-        "@types/express": "^5.0.6",
-        "@typescript-eslint/eslint-plugin": "^8.53.0",
-        "@typescript-eslint/parser": "^8.53.0",
-        "eslint": "^9.39.2",
-        "nodemon": "^3.1.11",
-        "typescript": "^5.9.3"
+        "@types/cors": "2.8.19",
+        "@types/express": "5.0.6",
+        "@typescript-eslint/eslint-plugin": "8.64.0",
+        "@typescript-eslint/parser": "8.64.0",
+        "eslint": "10.7.0",
+        "nodemon": "3.1.14",
+        "typescript": "6.0.3"
     }
 }
